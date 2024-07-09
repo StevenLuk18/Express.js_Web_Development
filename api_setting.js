@@ -17,4 +17,5 @@ module.exports = [
     { route: '/register', file: './routes/register' },
     { route: '/privacy', file: './routes/privacy' },
     { route: '/404', file: './routes/404' },
+    { route: '/cms-admin-api', file: './routes/cms-admin-api'}
   ];
