@@ -25,7 +25,7 @@ router.get('/', (req,res, next) => {
             req.session.authUser = [data._id, data.mpname ,data.mpusername, data.mpemail, data.mppswd, data.mpgender];
 
             req.session.userCities = [data.mpchina , data.mpjapan, data.mpkorean, data.mptaiwan, data.mpeurope, data.mpusa, data.mpengland, data.mpcanada, data.mpcntyother, data.mpcntyothdesc];
-
+            
             req.session.userTrans = [data.mpairplan, data.mpcruise, data.mptrain, data.mprail, data.mptranother, data.mptranothdesc, data.mpimagepath];
             
             console.log(req.session.authUser);
