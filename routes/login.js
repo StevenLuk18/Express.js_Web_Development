@@ -22,7 +22,12 @@ router.get('/', (req,res, next) => {
        
         data = await client.db("travel").collection('member').findOne({mpemail:NameOrEmail, mppswd:mppswd});
         if (data) {
-            req.session.authUser = [data._id, data.mpname ,data.mpusername ,data.mppswd];
+            req.session.authUser = [data._id, data.mpname ,data.mpusername, data.mpemail, data.mppswd, data.mpgender];
+
+            req.session.userCities = [data.mpchina , data.mpjapan, data.mpkorean, data.mptaiwan, data.mpeurope, data.mpusa, data.mpengland, data.mpcanada, data.mpcntyother, data.mpcntyothdesc];
+
+            req.session.userTrans = [data.mpairplan, data.mpcruise, data.mptrain, data.mprail, data.mptranother, data.mptranothdesc, data.mpimagepath];
+            
             console.log(req.session.authUser);
             res.redirect('/login');
         } 
@@ -35,6 +40,22 @@ router.get('/', (req,res, next) => {
     }} finally {
         await client.close();
     }
-});
+}).get('/get-auth-user', (req, res) => {
 
-module.exports = router
+    if (req.session.authUser) {
+
+        res.json({
+            authUser: req.session.authUser,
+            userCities: req.session.userCities,
+            userTrans: req.session.userTrans
+          });
+      /*   res.json(req.session.userCities);
+        res.json(req.session.userTrans); */
+
+    } else {
+
+        res.status(401).json({ error: 'Unauthorized' });
+
+    }});
+
+module.exports = router;
