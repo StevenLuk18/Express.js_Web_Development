@@ -9,10 +9,7 @@ const client = new MongoClient(url);
 
 
 router.get('/', (req,res, next) => {
-    if (req.session.authUser) res.redirect('/'); //redirect a api
-    else res.redirect('/');
-        /* let msg = "Your Email or Password is incorrect~! Please login again ~"
-        res.render('loginForm', {wrongLogPW : msg});} */ 
+    res.redirect('/');
 }).post('/', async (req, res , next) => {
 
     const {NameOrEmail , mppswd} = req.body
@@ -27,17 +24,17 @@ router.get('/', (req,res, next) => {
             req.session.userCities = [data.mpchina , data.mpjapan, data.mpkorean, data.mptaiwan, data.mpeurope, data.mpusa, data.mpengland, data.mpcanada, data.mpcntyother, data.mpcntyothdesc];
             
             req.session.userTrans = [data.mpairplan, data.mpcruise, data.mptrain, data.mprail, data.mptranother, data.mptranothdesc, data.mpimagepath];
-            
-            console.log(req.session.authUser);
+                        
             res.redirect('/login');
-        } 
+        } else {
         
-    return res.sendFile(path.join(__dirname,'..','public','404_login.html'));
+            res.sendFile(path.join(__dirname,'..','public','404_login.html'));
+        }
 
-    } catch {(err) => {
+    } catch (err) {
         console.log(err.name, err.message)
         return next(err)
-    }} finally {
+    } finally {
         await client.close();
     }
 }).get('/get-auth-user', (req, res) => {
