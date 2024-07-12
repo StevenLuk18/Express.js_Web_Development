@@ -1,7 +1,6 @@
 var express = require('express');
 var router = express.Router();
 var path = require('path');
-const urlModule = require('url');
 
 /* create db entries. */
 const MongoClient = require('mongodb').MongoClient;
@@ -14,11 +13,36 @@ router.use((req, res, next) => {
     next();
 });
 
-router.get('/', (req, res, next) => {
+router.get('/', async (req, res, next) => {
     user_name = req.session.authUser //set variable as the session
+    console.log("base");
 
-    if (!user_name) res.sendFile(path.join(__dirname,'..','public','testimonial.html'));
-    else res.render(path.join('','mb','testimonial_mb'), {u_name : user_name[2]}); //Must add {u_name : req.session.user[2]}
+    if (!user_name) {
+      res.redirect("/login");
+      return;
+    }
+    else {
+/*      try {
+        await client.connect();
+        let data = await client.db("travel").collection('testimonial').find({tmname: req.session.authUser[3]}).toArray();
+        console.log('-----------------', data);
+        res.render(path.join('', 'mb', 'mytestimonial_mb'), 
+          { 
+            u_name : user_name[2],
+            u_email : user_name[3],
+            u_testimonial : data
+          });
+      }
+      catch (err) {
+        console.log(err.name, err.message);
+        return next(err);
+      }
+      finally {
+        await client.close();
+      } */
+      res.render(path.join('','mb','mytestimonial_mb'), { u_name : user_name[2] }); 
+    }
+
 }).get('/getOwnTestimonial', async (req, res, next) => {
     if (req.session.authUser==null) { res.redirect("/login"); return; }
     try {
@@ -140,6 +164,17 @@ router.get('/', (req, res, next) => {
     return next(err);      
   } finally {
     await client.close();
+  }
+}).get('/*', (req, res, next) => {
+  user_name = req.session.authUser //set variable as the session
+  console.log("other get");
+
+  if (!user_name) {
+    res.redirect("/login");
+    return;
+  }
+  else {
+    res.render(path.join('','mb','testimonial_mb'), {u_name : user_name[2]}); 
   }
 });
 
