@@ -17,5 +17,11 @@ module.exports = [
     { route: '/register', file: './routes/register' },
     { route: '/privacy', file: './routes/privacy' },
     { route: '/404', file: './routes/404' },
-    { route: '/cms-admin-api', file: './routes/cms-admin-api'}
+    { route: '/cms-admin-api', file: './routes/cms-admin-api'},
+    { route: '/cms-admin-api-authUser', file: './routes/cms-admin-api-authUser'},
+    { route: '/cms-admin-api-member', file: './routes/cms-admin-api-member'},
+    { route: '/cms-admin-api-enquiry', file: './routes/cms-admin-api-enquiry'},
+    { route: '/cms-admin-api-package', file: './routes/cms-admin-api-package'},
+    { route: '/cms-admin-api-subscription', file: './routes/cms-admin-api-subscription'},
+    { route: '/cms-admin-api-company', file: './routes/cms-admin-api-company'}
   ];
