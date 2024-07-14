@@ -1,5 +1,4 @@
 var express = require('express');
-const { ClientEncryption } = require('mongodb');
 var router = express.Router();
 var path = require('path');
 
@@ -17,32 +16,12 @@ router.get('/', (req, res, next) => {
   user_name = req.session.authCmsUser //set variable as the session
 
   if (!user_name) res.sendFile(path.join(__dirname,'..','public','CMSAdminLogin.html'));
-  else res.sendFile(path.join(__dirname,'..','private_web','CMSAdminApi_main.html'));
+  else res.sendFile(path.join(__dirname,'..','private_web','CMSAdminApi_package.html'));
 
-}).post('/', async (req, res, next) => {
-
-  const {acname, pw} = req.body
-
-  try{
-    await client.connect()
-      
-    data = await client.db("travel").collection('sysoperator').findOne({sysopname:acname, sysoppswd:pw});
-
-  if (data) {
-    req.session.authCmsUser = [data._id, data.sysopname ,data.sysoppswd];
-    console.log(req.session.authCmsUser);
-    res.redirect('/cms-admin-api');
-  } else {
-      res.send('<script>history.back(); alert("Sorry, you entered incorrect username / password");</script>');}
-
-  } finally {
-    await client.close();
-  }
 }).get('/get-auth-user', (req, res) => {
 
   if (req.session.authCmsUser) {
     res.json(req.session.authCmsUser);
-  
   } else {
     res.status(401).json({ error: 'Unauthorized' });
   }

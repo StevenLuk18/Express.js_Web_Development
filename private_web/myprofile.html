@@ -31,6 +31,8 @@
 
     <!-- Template Stylesheet -->
     <link href="css/style.css" rel="stylesheet">
+    <link href="css/loginForm.css" rel="stylesheet">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <!-- <link rel="stylesheet" href="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css"> -->
 
     <!-- add the js/nav-data.js to company information   1/7/2024  -->
@@ -67,9 +69,9 @@
                     <a class="btn btn-sm btn-outline-light btn-sm-square rounded-circle me-2" href="https://www.instagram.com"><i class="fab fa-instagram fw-normal"></i></a>
                     <a class="btn btn-sm btn-outline-light btn-sm-square rounded-circle me-2" href="https://www.youtube.com"><i class="fab fa-youtube fw-normal"></i></a>
                     <div class="nav-right">
-                        <a href="login.html" id="login-btn" class="btn"><i class="fas fa-sign-in-alt"></i> Login</a>
+                        <button id="login-btn" class="btn" onclick="openForm()" ><i class="fas fa-sign-in-alt"></i> Login / Sign up</a>
                         <span id="member-name" class="hidden"></span>
-                        <a href="logout.html" id="logout-btn" class="btn hidden"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                        <button id="logout-btn" class="btn hidden"><i class="fas fa-sign-out-alt"></i> Logout</a>
                     </div>    
                 </div>
             </div>
@@ -78,6 +80,66 @@
 
 
     <!-- Topbar End -->
+
+    <!-- Pop-up Login Form -->
+    <div class="form-wrapper" id="myForm" style="display: none;">
+        <span id="closWin" onclick="closeForm()">&times;</span>  
+        <div class="form-container">
+            <div class="inside-container login">
+                <form action="/login" method="post">
+                    <h1>Login</h1>
+
+                    <div class="input-box">
+                        <input type="text" placeholder="Enter Email" name="NameOrEmail" required> <i class='bx bx-user'></i>
+                    </div>
+
+                    <div class="input-box">
+                        <input type="password" placeholder="Enter Password" name="mppswd" required> <i class='bx bxs-lock-alt'></i> 
+                    </div>
+
+                    <div class="remeber-forgot">
+                        <label><input type="checkbox">Remember me</label>
+                        <a href="#" class="link-hover">Forgot password ?</a>
+                    </div>
+                
+                    <button type="submit" class="btn">Login</button>
+
+                    <div class="register-link">
+                        <p>Don't have an account?<a href="#" class="link-hover">Register</a></p>
+                    </div>
+                </form>
+            </div>
+
+        <!-- Pop-up Register Form -->
+            <div class="inside-container register">
+                <form action="/register" method="post">
+                    <h1>Registration</h1>
+                    <p class="error-msg"></p>
+                    <div class="input-box">
+                        <input type="text" placeholder="Enter UserName" name="mpusername" required> <i class='bx bx-user'></i>
+                    </div>
+
+                    <div class="input-box">
+                        <input type="text" placeholder="Enter Email" name="mpemail" required> <i class='bx bx-envelope' ></i>
+                    </div>
+
+                    <div class="input-box">
+                        <input type="password" placeholder="Enter Password" name="mppswd" required> <i class='bx bxs-lock-alt'></i> 
+                    </div>
+
+                    <div class="agree-term">
+                        <label><input type="checkbox" required>Agree to the terms and conditions</label>
+                    </div>
+                
+                    <button type="submit" class="btn">Register</button>
+
+                    <div class="login-link">
+                        <p>Have an account?<a href="#" class="link-hover">Login</a></p>
+                    </div>
+                </form>
+            </div>
+        </div> 
+    </div>
 
 
     <!-- Navbar & Hero Start -->
@@ -303,10 +365,14 @@
                 <div class="col-lg-3 col-md-6">
                     <h4 class="text-white mb-3">Newsletter</h4>
                     <p>To keep our latest information of Travel, </p>
-                    <div class="position-relative mx-auto" style="max-width: 400vw;">
-                        <input class="form-control border-primary w-100 py-3 ps-2 pe-5" type="text" placeholder="Please enter your email">
-                        <button type="button" class="btn btn-primary py-2 position-absolute top-0 end-0 mt-2 me-2">Subscribe</button>
-                    </div>
+                    <form action="/contact/subNews" method="post"> <!-- Add a form tag with action and method -->
+                        <div class="position-relative mx-auto" style="max-width: 400vw;">
+                            <!-- Add name='' and required code for prevent empty input -->
+                            <input class="form-control border-primary w-100 py-3 ps-2 pe-5" type="text" placeholder="Please enter your email" name="sbemail" required>
+                            <button type="submit" class="btn btn-primary py-2 position-absolute top-0 end-0 mt-2 me-2">Subscribe</button>
+                            <!-- button type changed to submit to activate tag action -->
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
@@ -333,7 +399,8 @@
 
     <!-- Template Javascript -->
     <script src="js/main.js"></script>
-    <script src="/script.js"></script>      
+    <script src="js/script.js"></script>
+    <script src="js/loginForm.js"></script>     
 </body>
 
 </html>

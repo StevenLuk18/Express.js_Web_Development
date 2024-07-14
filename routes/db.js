@@ -6,7 +6,7 @@ const MongoClient = require('mongodb').MongoClient;
 const ObjectId = require('mongodb').ObjectId;  // 1
 const client = new MongoClient("mongodb://localhost:27017/");         // define which drive of database or primary/secondly server etc.
 
-router.get('/createcomp', async (req, res, next) => {
+router.get('/createcompany', async (req, res, next) => {
     try {
         await client.connect();
         const db = client.db("travel");                // use great travel agency company profile
@@ -28,11 +28,27 @@ router.get('/createcomp', async (req, res, next) => {
         const kln = db.collection("sysoperator");
         await kln.insertMany([
             {sysopname:"admin",
-             sysoppswd:"12345678"},
+             sysoppswd:"12345678",
+             syslevel:"A"},
             {sysopname:"superisor",
-             sysoppswd:"12345678"},
+             sysoppswd:"12345678",
+             syslevel:"S"},
             {sysopname:"operator",
-             sysoppswd:"12345678"}
+             sysoppswd:"12345678",
+             syslevel:"O"
+            },
+            {sysopname:"Tom",
+            sysoppswd:"12345678",
+            syslevel:"A"
+            },
+            {sysopname:"Jack",
+            sysoppswd:"12345678",
+            syslevel:"S"
+            },
+            {sysopname:"Mary",
+            sysoppswd:"12345678",
+            syslevel:"O"
+            },
         ]);
         res.send("Done system operators");
     } finally {
@@ -66,7 +82,7 @@ router.get('/createcomp', async (req, res, next) => {
              mprail:"T",
              mptranother:"T",
              mptranothdesc:"annaabcdefg456",
-             mpimagepath:"T",
+             mpimagepath:"/images/member/annachan@gmail.com.jpg",
             },
             {mpemail:"paulho@gmail.com",
              mppswd:"12345678",
@@ -90,7 +106,7 @@ router.get('/createcomp', async (req, res, next) => {
              mprail:"T",
              mptranother:"T",
              mptranothdesc:"paulabcdefg456",
-             mpimagepath:"T",
+             mpimagepath:"/images/member/paulho@gmail.com.jpg",
             },
             {mpemail:"elaineng@gmail.com",
              mppswd:"12345678",
@@ -114,7 +130,7 @@ router.get('/createcomp', async (req, res, next) => {
              mprail:"T",
              mptranother:"T",
              mptranothdesc:"elaineabcdefg456",
-             mpimagepath:"T",
+             mpimagepath:"/images/member/elaineng@gmail.com.jpg",
             },
             {mpemail:"appleli@gmail.com",
              mppswd:"12345678",
@@ -138,7 +154,7 @@ router.get('/createcomp', async (req, res, next) => {
              mprail:"T",
              mptranother:"T",
              mptranothdesc:"appleabcdefg456",
-             mpimagepath:"T",
+             mpimagepath:"/images/member/appleli@gmail.com.jpg",
             }            
         ]);
         res.send("Done member profile");
@@ -172,33 +188,26 @@ router.get('/createcomp', async (req, res, next) => {
         const db = client.db("travel");                          // use end user 
         const kln = db.collection("enduser");
         await kln.insertMany([
-            {eulogin:"peterlaw",
-             eupswd:"12345678",
-             euname:"25_Law Pui Ming Peter",
-             euprofile:"aabbcc",
-             eucrdate:new Date("2024-05-01"),
-             euimage:"/images/enduser/peterlaw.jpg",            
-            },
             {eulogin:"stevenluk",
              eupswd:"12345678",
              euname:"10_Luk Ka Chun Steven",
-             euprofile:"ffgghh",
+             euprofile:"Japan Lover",
              eucrdate:new Date("2024-05-01"),
-             euimage:"/images/enduser/stevenluk.jpg",            
+             euimage:"/images/enduser/stevenluk@gmail.com.png",            
             },
             {eulogin:"wongkafai",
              eupswd:"12345678",
              euname:"24_Wong Ka Fai",
-             euprofile:"hhKkLl",
+             euprofile:"Europe Lover",
              eucrdate:new Date("2024-05-01"),
-             euimage:"/images/enduser/wongkafai.jpg",            
+             euimage:"/images/enduser/wongkafai@gmail.com.png",            
             },
-            {eulogin:"enduser",
+            {eulogin:"peterlaw",
              eupswd:"12345678",
-             euname:"Dummy end user",
-             euprofile:"Dummy xxyyzz",
+             euname:"25_Law Pui Ming Peter",
+             euprofile:"Love Round the World",
              eucrdate:new Date("2024-05-01"),
-             euimage:"/images/enuser/enduser.jpg",            
+             euimage:"/images/enduser/peterlaw@gmail.com.png",            
             }
         ]);
         res.send("Done system enduser");
