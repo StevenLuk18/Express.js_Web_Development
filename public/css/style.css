@@ -443,6 +443,7 @@
 }
 
 
+/* ********************** */
 /*  for member input form */
 :root {
     --primary-color: #e0e5ec;
@@ -452,7 +453,7 @@
     --accent-color: #4a90e2;
   }
   
-body {
+  body {
     font-family: 'Roboto', sans-serif;
     background-color: var(--primary-color);
     color: var(--text-color);
@@ -492,8 +493,9 @@ body {
   }
   
   input[type="email"],
-  input[type="text"],
   input[type="acname"],
+  input[type="nickname"],
+  input[type="text"],
   input[type="password"],
   input[type="password1"],
   input[type="password2"],
@@ -510,10 +512,13 @@ body {
   }
   
   input[type="email"]:focus,
-  input[type="text"]:focus,
   input[type="acname"]:focus,
+  input[type="nickname"]:focus,
+  input[type="text"]:focus,
+  input[type="password"]:focus,
   input[type="password1"]:focus,
-  input[type="password2"]:focus {
+  input[type="password2"]:focus,
+  input[type="file"]:focus {
     outline: none;
     box-shadow: 
       inset 5px 5px 8px var(--shadow-dark),
@@ -628,8 +633,9 @@ body {
     }
   
     input[type="email"],
-    input[type="text"],
     input[type="acname"],
+    input[type="nickname"],
+    input[type="text"],
     input[type="password1"],
     input[type="password2"],
     input[type="file"] {
@@ -669,8 +675,8 @@ body {
     }
   
     input[type="email"],
+    input[type="nickname"],
     input[type="text"],
-    input[type="acname"],
     input[type="password1"],
     input[type="password2"],
     input[type="file"] {
@@ -690,6 +696,9 @@ body {
       font-size: 14px;
     }
   }
+
+/*  end of myprofile input form  */  
+/* ***************************** */
 
 /* logout display */
 #logout-btn{
