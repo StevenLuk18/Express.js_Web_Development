@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Great Travel Agency</title>
+    <link rel="stylesheet" href="css/cms_main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+</head>
+<body>
+    <header>
+        <nav class="top-bar">
+            <button class="list-btn" id="toggle-left-bar">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+            <h1>Great Travel Agency</h1>
+            <div class="user-info">
+                <span>Username:<strong id="cms-username"></strong></span>
+                <i class="fa-solid fa-user"></i>
+                <button><a href="/CMSAdminLogin.html">Logout</a></button>
+            </div>
+        </nav>
+    </header>
+
+    <aside class="left-bar">
+        <ul>
+            <li><a href="/cms-admin-api">Dashboard</a></li>
+            <li><a href="/cms-admin-api-authUser">Auth-User</a></li>
+            <li><a href="/cms-admin-api-member">Member</a></li>
+            <li><a href="/cms-admin-api-subscription">Subscription</a></li>
+            <li><a href="/cms-admin-api-enquiry">Enquiry</a></li>
+            <li><a href="/cms-admin-api-package">Package</a></li>
+            <li><a href="/cms-admin-api-company">Company</a></li>
+        </ul>
+    </aside>
+    <main>
+        <div class="dashboard-wrapper">
+            <!-- Show members info -->
+            <div class="dashboard-container">
+                <div class="cms-member searchAllMbs">
+                    <h3><strong>All Active Members:</strong></h3>
+                    <p id="cms-allMbs"></p>
+                </div>
+            </div>
+
+            <br/>
+
+            <div class="dashboard-container">
+                <div class="cms-member search">
+                    <h3><strong>Search Member Here:</strong></h3>
+                    <form id="member-search">
+                        <label>Search With:</label><br/>
+                        <label for="member-search-email">Email</label>
+                        <input type="checkbox" id="member-search-email" value="email">
+                        &nbsp;
+                        <label for="member-search-id">_id</label>
+                        <input type="checkbox" id="member-search-id" value="email">
+                        <br/>
+                        <br/>
+                        <label>Email</label>
+                        <input type="email" name="searchEmail" placeholder="Member's Email">
+                        &nbsp;
+                        <label>_id</label>
+                        <input type="text" name="searchId" placeholder="Member's Database _id">
+                        &nbsp;
+                        <button type="submit" name="search-submit">submit</button>
+                    </form>
+                    <br/>
+                    <p id="searchResult"></p>
+                </div>
+            </div>
+
+            <br/>
+
+            <div class="dashboard-container mbInfoUpdate">
+                <div class="cms-update member">
+                    <h3><strong>Update Member Info:</strong></h3>
+                    <form>
+
+                    </form>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <script>
+        document.getElementById('toggle-left-bar').addEventListener('click', function() {
+            document.querySelector('.left-bar').classList.toggle('active');
+        });
+    </script>
+
+    <script src="js/cms-nav-data_member.js"></script>
+    <script src="js/fetch_cmsUser.js"></script>
+
+</body>
+</html>
