@@ -71,7 +71,7 @@
                              <% if (!u_name) { %>
                              <button id="login-btn" class="btn"><i class="fas fa-sign-in-alt"></i> Login / Sign up</a>
                              <% } else { %>
-                             <button id="logout-btn" class="btn hidden" type="button" style="display: inline-block;"><i class="fas fa-sign-out-alt"></i> Logout</a>   
+                             <button id="logout-btn" class="btn hidden" type="button" style="display: inline-block;"><i class="fas fa-sign-out-alt"></i> Logout</button>   
                              <% } %>
                     </div>    
                 </div>
@@ -187,9 +187,9 @@
                 <input type="file" id="imagePath" name="myfile" accept="image/*"
                     onchange="document.getElementById('blah').src=window.URL.createObjectURL(this.files[0])"> -->
                     
-                <input type="file" accept="image/*" name="mbImageUp" onchange="loadFile(event)">
-                    <img id="output" max-width=100% height=auto />
-                    <script>
+                <input type="file" accept="image/*" name="mbImageUp" onchange="loadFile(event)"> 
+                    <img id="output" max-width=100% height=auto src=""/>
+                    <!-- <script>
                     var loadFile = function(event) {
                         var output = document.getElementById('output');
                         output.src = URL.createObjectURL(event.target.files[0]);
@@ -197,8 +197,8 @@
                         URL.revokeObjectURL(output.src)        // free memory
                         }
                     };
-                    </script>  
-            
+                    </script>   -->
+
             <!-- 4th way 
                 <input type="file" accept="image/*" onchange="loadFile(event)">
                     <img id="output" width=100% height=auto/>
