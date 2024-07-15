@@ -3,13 +3,17 @@ fetch('/login/get-auth-user')
   .then(response => response.json())
   .then(data => {
     console.log(data)
-    //let session = data
+    
     document.querySelector('.acname').value = data.authUser[1]; 
     document.querySelector('.email').value = data.authUser[3];
     document.querySelector('.nickname').value = data.authUser[2];
     document.querySelector('#pw1').value = data.authUser[4];
     
-    /* sessionStorage.getItem('') */
+    
+    //show profile image
+    imageInput = document.querySelector('input[type="file"]').value
+    if (!imageInput){document.getElementById('output').src = data.imagePath[0];}
+    
     
     // Fill gender radio
     let maleRadioValue = document.querySelector('#male').value

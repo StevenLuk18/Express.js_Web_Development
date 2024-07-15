@@ -32,7 +32,7 @@ document.addEventListener('DOMContentLoaded', () => {
             // handle image FormData
             const fileInput = document.querySelector('input[name="mbImageUp"]');
             if (fileInput.files.length > 0) {
-            formData.append('image', fileInput.files[0]);
+            formData.append('mbImageUp', fileInput.files[0]);
             }
         
             try {
