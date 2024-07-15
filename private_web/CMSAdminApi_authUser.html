@@ -17,20 +17,20 @@
             <div class="user-info">
                 <span>Username:<strong id="cms-username"></strong></span>
                 <i class="fa-solid fa-user"></i>
-                <button><a href="/CMSAdminLogin.html">Logout</a></button>
+                <button id="logout-btn" type="button" style="display: inline-block;"><i class="fas fa-sign-out-alt"></i> Logout</button>
             </div>
         </nav>
     </header>
 
     <aside class="left-bar">
         <ul>
-            <li><a href="/cms-admin-api">Dashboard</a></li>
-            <li><a href="/cms-admin-api-authUser">Auth-User</a></li>
-            <li><a href="/cms-admin-api-member">Member</a></li>
-            <li><a href="/cms-admin-api-subscription">Subscription</a></li>
-            <li><a href="/cms-admin-api-enquiry">Enquiry</a></li>
-            <li><a href="/cms-admin-api-package">Package</a></li>
-            <li><a href="/cms-admin-api-company">Company</a></li>
+            <li id="aside-dashboard"><a href="/cms-admin-api">Dashboard</a></li>
+            <li id="aside-authUser"><a href="/cms-admin-api-authUser">Auth-User</a></li>
+            <li id="aside-member"><a href="/cms-admin-api-member">Member</a></li>
+            <li id="aside-subscription"><a href="/cms-admin-api-subscription">Subscription</a></li>
+            <li id="aside-enquiry"><a href="/cms-admin-api-enquiry">Enquiry</a></li>
+            <li id="aside-package"><a href="/cms-admin-api-package">Package</a></li>
+            <li id="aside-company"><a href="/cms-admin-api-company">Company</a></li>
         </ul>
     </aside>
     <main>
@@ -53,9 +53,9 @@
                             &nbsp;
                             <label>System level</label>
                             <select name="searchLevel" required>
-                                <option value="A">Admin</option>
-                                <option value="S">Supervisor</option>
-                                <option value="O">Operator</option>
+                                <option class="authUser-op-a" value="A">Admin</option>
+                                <option class="authUser-op-s" value="S">Supervisor</option>
+                                <option class="authUser-op-o" value="O">Operator</option>
                             </select>
                             &nbsp;
                             <button type="submit" name="search-submit">submit</button>
@@ -81,9 +81,9 @@
                             &nbsp;
                             <label>System level</label>
                             <select name="updateLevel" required>
-                                <option value="A">Admin</option>
-                                <option value="S">Supervisor</option>
-                                <option value="O">Operator</option>
+                                <option class="authUser-op-a" value="A">Admin</option>
+                                <option class="authUser-op-s" value="S">Supervisor</option>
+                                <option class="authUser-op-o" value="O">Operator</option>
                             </select>
 
                             <br/>
@@ -96,9 +96,9 @@
                             &nbsp;
                             <label>System level</label>
                             <select name="updateLevelComf" required>
-                                <option value="A">Admin</option>
-                                <option value="S">Supervisor</option>
-                                <option value="O">Operator</option>
+                                <option class="authUser-op-a" value="A">Admin</option>
+                                <option class="authUser-op-s" value="S">Supervisor</option>
+                                <option class="authUser-op-o" value="O">Operator</option>
                             </select>
 
                             <br/>
@@ -111,9 +111,9 @@
                             &nbsp;
                             <label>System level</label>
                             <select name="updateLevelReal" required>
-                                <option value="A">Admin</option>
-                                <option value="S">Supervisor</option>
-                                <option value="O">Operator</option>
+                                <option class="authUser-op-a" value="A">Admin</option>
+                                <option class="authUser-op-s" value="S">Supervisor</option>
+                                <option class="authUser-op-o" value="O">Operator</option>
                             </select>
                             &nbsp;
                             <button type="submit" name="update-submit">submit</button>
@@ -145,9 +145,9 @@
                             &nbsp;
                             <label>System level</label>
                             <select name="addordelLevel" required>
-                                <option value="A">Admin</option>
-                                <option value="S">Supervisor</option>
-                                <option value="O">Operator</option>
+                                <option class="authUser-op-a" value="A">Admin</option>
+                                <option class="authUser-op-s" value="S">Supervisor</option>
+                                <option class="authUser-op-o" value="O">Operator</option>
                             </select>
                             <br/>
                             <h4>Confirmation</h4>
@@ -159,9 +159,9 @@
                             &nbsp;
                             <label>System level</label>
                             <select name="addordelLevelComf" required>
-                                <option value="A">Admin</option>
-                                <option value="S">Supervisor</option>
-                                <option value="O">Operator</option>
+                                <option class="authUser-op-a" value="A">Admin</option>
+                                <option class="authUser-op-s" value="S">Supervisor</option>
+                                <option class="authUser-op-o" value="O">Operator</option>
                             </select>
                             <br/>
                             <h4 id="addordelAutoShow"></h4>
@@ -173,9 +173,9 @@
                             &nbsp;
                             <label>System level</label>
                             <select name="addordelLevelReal" required>
-                                <option value="A">Admin</option>
-                                <option value="S">Supervisor</option>
-                                <option value="O">Operator</option>
+                                <option class="authUser-op-a" value="A">Admin</option>
+                                <option class="authUser-op-s" value="S">Supervisor</option>
+                                <option class="authUser-op-o" value="O">Operator</option>
                             </select>
                             &nbsp;
                             <button type="submit" name="addordel-submit">submit</button>
@@ -196,6 +196,7 @@
 
     <script src="js/cms-nav-data_authUser.js"></script>
     <script src="js/fetch_cmsUser.js"></script>
+    <script src="js/fetch_logout_cms.js"></script>
 
 </body>
 </html>
