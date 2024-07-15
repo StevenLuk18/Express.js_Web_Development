@@ -29,7 +29,7 @@ router.get('/', (req, res, next) => {
     data = await client.db("travel").collection('sysoperator').findOne({sysopname:acname, sysoppswd:pw});
 
   if (data) {
-    req.session.authCmsUser = [data._id, data.sysopname ,data.sysoppswd];
+    req.session.authCmsUser = [data._id, data.sysopname ,data.sysoppswd, data.syslevel];
     console.log(req.session.authCmsUser);
     res.redirect('/cms-admin-api');
   } else {
@@ -45,6 +45,26 @@ router.get('/', (req, res, next) => {
   
   } else {
     res.status(401).json({ error: 'Unauthorized' });
+  }
+}).get('/logout', async (req, res, next) => {
+  // CMS user logout func
+
+  if(req.session.authCmsUser) {
+
+    console.log(`${req.session.authCmsUser[1]} is logging out!`)
+    // del user info from session
+    await delete req.session.authCmsUser
+    // destory session
+    req.session.destroy((err) => {
+      if (err) {
+        console.error('Error destroying session:', err);
+        res.status(500).send('Error logging out');
+      } else {
+        res.redirect('/cms-admin-api');
+      }
+    })
+  } else {
+    res.redirect('/cms-admin-api');
   }
 })
 
