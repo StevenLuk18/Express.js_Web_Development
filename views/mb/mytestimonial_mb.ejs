@@ -39,20 +39,7 @@
     <!-- Handsontable -->
     <link href="https://cdn.jsdelivr.net/npm/handsontable/dist/handsontable.full.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/handsontable/dist/handsontable.full.min.js"></script>
-  
-    <style>
-        .action-buttons {
-          display: flex;
-        }
-        
-        .handsontable td {
-            padding: 4px 8px; 
-            height: auto;
-            /* line-height: 0; */
-            vertical-align: middle;
-            word-wrap: break-word;
-        }
-      </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
 </head>
 
     <!-- Spinner Start -->
@@ -156,16 +143,15 @@
         <div class="container">
             <div class="text-center">
                 <h6 class="section-title bg-white text-center text-primary px-3">My Testimonial</h6>
-                <h1 class="mb-5">Welcome Back <%= u_name %>! 6:23pm</h1>
+                <h1 class="mb-5">Welcome Back <%= u_name %>!</h1>
             </div>
         </div>
     </div>
     <!-- Registration End -->
 
-    <p>Data is:</p>
-    <div id="TestimonialHandsonTable"></div>
+    <div id="TestimonialHandsonTable" class="testimonial-container"></div>
     <!-- Please see below for script for filling up handonstable -->
-
+    <div>&nbsp;</div>
     <!-- modify the input form layout and css dated 07/07/2024 -->
      <main> 
 
@@ -357,7 +343,13 @@
     <script src="js/main.js"></script>
     <script src="/script.js"></script> 
     <script src="js/fetch_logout.js"></script>   
-    <script>    
+    <script>
+        // Add this function before creating the Handsontable instance
+        function dateFormatter(value, format) {
+            if (!value) return '';
+            const date = moment(value, 'YYYY-MM-DD', true);
+            return date.isValid() ? date.format(format) : value;
+        }
         fetch('/testimonial/getOwnTestimonial')
             .then(response => response.json())
             .then(data => {
@@ -375,30 +367,102 @@
 
                         const deleteBtn = td.querySelector('.delete-btn');
                         deleteBtn.addEventListener('click', () => {
-                            instance.data.splice(row, 1);
-                            instance.render();
+                            const rowData = instance.getDataAtRow(row);
+                            const testimonialId = rowData[1];
+                            alert(`Deleting row with ID: ${testimonialId}`);
+                            fetch('/testimonial/deleteOwnTestimonial', { 
+                                method: 'DELETE',
+                                headers: {
+                                    'Content-Type': 'application/json'
+                                },
+                                body: JSON.stringify({
+                                    testimonialId: testimonialId
+                                })
+                            })
+                            .then(response => response.json())
+                            .then(result => {
+                                if (result.success) {
+                                    instance.alter('remove_row', row);
+                                    alert(`Deleted selected testimonial successfully`);
+                                }
+                                else {
+                                    alter(`Failed to delete selected testimonial : `, result.message);
+                                }
+                            })
+                            .catch(error => console.log('Error: ', error));
                         });
 
                         const updateBtn = td.querySelector('.update-btn');
                         updateBtn.addEventListener('click', () => {
-                            // Implement your update logic here
-                            console.log(`Updating row ${row}: ${JSON.stringify(instance.getDataAtRow(row))}`);
+                            const rowData = instance.getDataAtRow(row);
+                            const testimonialId = rowData[1];
+                            const newTravelDate = rowData[2];
+                            const updatedTestimonial = rowData[3]; 
+                            alert(`Updating row with ID: ${testimonialId}`);
+                            fetch('/testimonial/updateOwnTestimonial', {
+                                method: 'PATCH',
+                                headers: {
+                                    'Content-Type': 'application/json'
+                                },
+                                body: JSON.stringify({
+                                    testimonialId: testimonialId,
+                                    newTravelDate: newTravelDate,
+                                    updatedTestimonial: updatedTestimonial
+                                })
+                            })
+                            .then(response => response.json())
+                            .then(result => {
+                                if (result.success) {
+                                    alert('Testiminoial updated');
+                                }
+                                else {
+                                    console.error('Failed to update testimonial: ', result.message);
+                                }
+                            })
+                            .catch(error => console.error('Error: ', error));
                         });
                     }
+                });
+
+                // Format the tmdate column
+                data.forEach(item => {
+                    const date = new Date(item.tmdate);
+                    item.tmdate = `${date.getFullYear()}-${(date.getMonth() + 1).toString().padStart(2, '0')}-${date.getDate().toString().padStart(2, '0')}`;
                 });
 
                 // Create the Handsontable instance
                 const container = document.getElementById('TestimonialHandsonTable');
                 const hot = new Handsontable(container, {
+                    width: 700,
                     data: data,
                     rowHeaders: true,
-                    colHeaders: ['Actions', 'Travel Date', 'Testimonial'],
+                    colHeaders: [ 'Actions', 'ID', 'Travel Date (yyyy-MM-dd)', 'Testimonial' ],
+                    hiddenColumns: { columns: [1] },  // hide the ID column
                     columns: [
-                        { type: 'actions' },
-                        { data: 'tmdate'  },
-                        { data: 'tmtest', width: 300 }
+                        { type: 'actions', readonly: true },
+                        { data: '_id' },
+                        { 
+                            data: 'tmdate', 
+                            type: 'date', 
+                            dateFormat: 'YYYY-MM-DD',
+                            correctFormat: true,
+                            datePickerConfig: {
+                                firstDay: 1,
+                                numberOfMonths: 1,
+                                disableDayFn: false,
+                                format: 'YYYY-MM-DD'
+                            },
+                            renderer: function(instance, td, row, col, prop, value, cellProperties) {
+                                td.innerHTML = dateFormatter(value, 'YYYY-MM-DD');
+                                return td;
+                            }
+                        },
+                        { data: 'tmtest', width: 400, type: 'text', editor: 'text' }
                     ],
-                    licenseKey: 'non-commercial-and-evaluation'
+                    licenseKey: 'non-commercial-and-evaluation',
+                    stretchH: 'all', // Add this to make columns stretch to fit the container width
+                    autoRowSize: true, // Add this to automatically adjust row heights
+                    autoColumnSize: true // Add this to automatically adjust column widths
                 });
             })
             .catch(error => console.log('Error fetching testimonials:', error));

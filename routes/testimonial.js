@@ -6,7 +6,7 @@ var path = require('path');
 const MongoClient = require('mongodb').MongoClient;
 const url = "mongodb://localhost:27017/";
 const client = new MongoClient(url);
-const ObjectId = require('mongodb').ObjectId;
+const { ObjectId } = require('mongodb');
 
 router.use((req, res, next) => {
     res.locals.currUser = req.session.authUser;
@@ -14,93 +14,79 @@ router.use((req, res, next) => {
 });
 
 router.get('/', async (req, res, next) => {
-    user_name = req.session.authUser //set variable as the session
-    console.log("base");
+    const user_name = req.session.authUser //set variable as the session
 
     if (!user_name) {
       res.redirect("/login");
       return;
     }
     else {
-/*      try {
-        await client.connect();
-        let data = await client.db("travel").collection('testimonial').find({tmname: req.session.authUser[3]}).toArray();
-        console.log('-----------------', data);
-        res.render(path.join('', 'mb', 'mytestimonial_mb'), 
-          { 
-            u_name : user_name[2],
-            u_email : user_name[3],
-            u_testimonial : data
-          });
-      }
-      catch (err) {
-        console.log(err.name, err.message);
-        return next(err);
-      }
-      finally {
-        await client.close();
-      } */
       res.render(path.join('','mb','mytestimonial_mb'), { u_name : user_name[2] }); 
     }
 
 }).get('/getOwnTestimonial', async (req, res, next) => {
-    if (req.session.authUser==null) { res.redirect("/login"); return; }
-    try {
-      await client.connect();
-      // authUser[3] = email address.
-      data = await client.db("travel").collection('testimonial').find({tmname: req.session.authUser[3]}).toArray();
-      res.send(data);
-    } catch (err) {
-      console.log(err.name, err.message);
-      return next(err);
-    } finally {
-      await client.close();
-    }
-}).get('/getOwnTestimonialwithParam', async (req, res, next) => {
-    const email = req.query.email;
-    console.log("------ ", email);
-    try {
-      await client.connect();
-      // authUser[3] = email address.
-      data = await client.db("travel").collection('testimonial').find({tmname: email}).toArray();
-      console.log(data);
-      res.send(data);
-    } catch (err) {
-      console.log(err.name, err.message);
-      return next(err);
-    } finally {
-      await client.close();
-    }
-}).post('/updateTestimonialwithParam', async (req, res, next) => {
-    const testimonialId = req.body.testimonialId;
-    const email = req.body.email;
-    const newTestimonial  = req.body.newTestimonial;
-    
-    try {
-      await client.connect();
-      data = await client.db("travel").collection("testimonial").findOne(
-        {_id: new ObjectId(testimonialId)}
-      );
+    if (req.session.authUser == null) { res.redirect("/login"); return; }
 
-      console.log("Data  ============ ", data === null? "Cannot find any value" : data);
-      console.log("Id = ", testimonialId);
-      console.log("email = ", email);
-      console.log("newTestimonial = ", newTestimonial);
-
-      if (data === null)
-        res.send("No data found");
-      else {
-        await client.db("travel").collection("testimonial").updateOne(
-          { _id: new ObjectId(testimonialId) },
-          { $set: { 'tmtest': newTestimonial, tmcrdate: new Date()} }
-        );
-        res.send("Updated");
-      }
+    try {
+        await client.connect();
+        // authUser[3] = email address.
+        data = await client.db("travel").collection('testimonial').find({
+            tmname: req.session.authUser[3]
+        }).toArray();
+        res.send(data);
     } catch (err) {
-      console.log(err.name, err.message);
-      return next(err);      
+        console.log(err.name, err.message);
+        return next(err);
     } finally {
-      await client.close();
+        await client.close();
+    }
+}).patch('/updateOwnTestimonial', async (req, res, next) => {
+    if (req.session.authUser == null) { res.redirect("/login"); return; }
+
+    try {
+        const { testimonialId, newTravelDate, updatedTestimonial } = req.body;
+        console.log("Id = ", testimonialId, ", new travel date = ", newTravelDate, ", new test = ", updatedTestimonial);
+        if (!testimonialId || !newTravelDate || !updatedTestimonial) {
+            res.status(400).json({ success: false, 
+                message: "Please supply ID of selected testimonial, date of travel, and updated testimonial." });
+            return;
+        }
+
+        await client.connect();
+        const data = await client.db("travel").collection("testimonial").findOne({
+            _id: new ObjectId(testimonialId),
+            tmname: req.session.authUser[3]
+        });
+
+        if (data === null) {
+            console.log("Cannot find such testimonial");
+            res.status(404).json({ success: false, message: "Testimonial not found" });
+        }
+            
+        else {
+            console.log("Found such record")
+            const result = await client.db("travel").collection("testimonial").updateOne({ 
+                _id: new ObjectId(testimonialId),
+                tmname: req.session.authUser[3]
+            },
+            { $set: { 'tmdate': newTravelDate, 'tmtest': updatedTestimonial, tmcrdate: new Date()} }
+            );
+            
+            if (result.matchedCount == 1) {
+                console.log("Update success");
+                res.json({ success: true, message: "Testimonial upated successfully"});
+            }
+            else {
+                console.log("Cannot udpate");
+                res.status(404).json({ success: false, message: "Cannot delete. Maybe authorization problem."});
+            }
+        }
+    } catch (err) {
+        console.log("catch error ==== ", err.name, err.message);
+        res.status(500).json({ success: false, message: "An error occured while updating the testimonial"});
+        return next(err);      
+    } finally {
+        await client.close();
     }
 }).post('/insertTestimonialwithParam', async (req, res, next) => {
   const email = req.body.email;
@@ -135,36 +121,45 @@ router.get('/', async (req, res, next) => {
   } finally {
     await client.close();
   }
-}).post('/deleteTestimonialwithParam', async (req, res, next) => {
-  const testimonialId = req.body.testimonialId;
-  
-  console.log("Input =======", req.body );
+}).delete('/deleteOwnTestimonial', async (req, res, next) => {
+    if (req.session.authUser == null) { res.redirect("/login"); return; }
 
-  try {
-    await client.connect();
-    data = await client.db("travel").collection("testimonial").findOne(
-      { _id: new ObjectId(testimonialId) }
-    );
+    try {
+		const { id: testimonialId } = req.body;
+		if (!testimonialId) {
+			res.status(400).json({ success: false, message: "Please supply ID of selected testimonial." });
+			return;
+		}
+		
+        await client.connect();
+        const data = await client.db("travel").collection("testimonial").findOne({ 
+            _id: ObjectId(testimonialId) 
+        });
 
-    console.log("Data  ============ ", data);
-    
-    if (data === null) {
-      console.log("No delete - no such record exist");
-      res.send("No delete - no such record exist");
+        if (data == null) {
+            res.status(404).json({ success: false, message: "Testimonial not found" });
+        }
+        else {
+            const result = await client.db("travel").collection("testimonial").deleteOne({ 
+                _id: ObjectId(testimonialId)
+            });
+
+            if (result.deletedCount == 1) {
+                console.log("Delete successfully");
+                res.json({ success: true, message: "Testimonial deleted successfully" });
+            }
+            else {
+                res.status(404).json({ success: false, message: "Cannot delete. Maybe authorization problem."});
+            }
+        }
+    } catch (err) {
+        console.log(err.name, err.message);
+        res.status(500).json({ success: false, message: "An error occured while deleting the testimonial" });
+        return next(err);      
+    } finally {
+        await client.close();
     }
-    else {
-      await client.db("travel").collection("testimonial").deleteOne(
-        { _id: new ObjectId(testimonialId) }
-      );
-      console.log("Deleted")
-      res.send("Deleted");
-    }
-  } catch (err) {
-    console.log(err.name, err.message);
-    return next(err);      
-  } finally {
-    await client.close();
-  }
+
 }).get('/*', (req, res, next) => {
   user_name = req.session.authUser //set variable as the session
   console.log("other get");

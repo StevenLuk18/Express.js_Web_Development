@@ -461,7 +461,29 @@ body {
     padding: 0rem;
     margin: 0;
   }
+
+  /* For the testimonial in mytestimonial_mb.ejs */
+  .testimonial-container {
+    margin: 0 auto;
+    background: var(--primary-color);
+  }
   
+  .action-buttons {
+    display: flex;
+  }
+  
+  .handsontable th {
+      vertical-align: middle;
+  }
+
+  .handsontable td {
+      padding: 4px 8px; 
+      height: auto;
+      vertical-align: middle;
+      word-wrap: break-word;
+  }
+  /* Stop: mytestimonial_mb.ejs */
+
   .creatAC-form-container {
     max-width: 600px;
     margin: 0 auto;
