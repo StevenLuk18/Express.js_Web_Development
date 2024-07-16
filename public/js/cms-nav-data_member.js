@@ -70,3 +70,32 @@ document.addEventListener('DOMContentLoaded', () => {
         
     });
     })
+    
+    
+//checkbox display
+function radio_showHide() {
+  let email_radio = document.getElementById('member-search-email');
+  let id_radio = document.getElementById('member-search-id');
+
+
+  email_radio.addEventListener('change', function() {
+    if (this.checked) {
+      document.getElementById('memberId').style.display= 'none'
+      document.getElementById('memberId-label').style.display= 'none'
+      document.getElementById('memberEmail').style.display= 'inline-block'
+      document.getElementById('memberEmail-label').style.display= 'inline-block'
+    } 
+  });
+
+  id_radio.addEventListener('change', function() {
+    if (this.checked) {
+        document.getElementById('memberEmail').style.display= 'none'
+        document.getElementById('memberEmail-label').style.display= 'none'
+        document.getElementById('memberId').style.display= 'inline-block'
+        document.getElementById('memberId-label').style.display= 'inline-block'
+    } 
+    })
+
+}
+
+radio_showHide();

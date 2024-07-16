@@ -27,6 +27,8 @@ router.get('/', (req,res, next) => {
             req.session.userCities = [{'China': data.mpchina} , {'Japan':data.mpjapan}, {'Korea':data.mpkorean}, {'Taiwan':data.mptaiwan}, {'Europe':data.mpeurope}, {'USA': data.mpusa}, {'England': data.mpengland}, {'Canada':data.mpcanada}, {'Others': data.mpcntyother}, data.mpcntyothdesc];
 
             req.session.userTrans = [{'Airplan': data.mpairplan}, {'Cruise': data.mpcruise}, {'Train': data.mptrain}, {'High-speed rail':data.mprail}, {'Others': data.mptranother}, data.mptranothdesc];
+
+            req.session.imagePath = [data.mpimagepath]
             
             res.redirect('/login');
         } else {
@@ -46,7 +48,8 @@ router.get('/', (req,res, next) => {
         res.json({
             authUser: req.session.authUser,
             userCities: req.session.userCities,
-            userTrans: req.session.userTrans
+            userTrans: req.session.userTrans,
+            imagePath: req.session.imagePath
           });
         
       /*   res.json(req.session.userCities);

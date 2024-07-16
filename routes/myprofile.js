@@ -21,11 +21,17 @@ router.get('/', (req, res, next) => {
     if (!user_name) res.redirect('/');
     else res.render(path.join('','mb','myprofile_mb'), {u_name : user_name[2]}); //Must add {u_name : req.session.user[2]}
 
-}).post('/infoUpdate', upload.single('image'),async (req, res, next) => {
+}).post('/infoUpdate', upload.array('mbImageUp'), async (req, res, next) => {
 
+  /* const encodeEmail = encodeURIComponent(req.body.email) */
+  /* ${email} */
+  /* const email = req.body.email; */
+
+  console.log('information updating ~')
     try {
-      // handle image upload
+      // handle image upload //
     let newFileName;
+    
     if (req.file) {
       const fileExtension = path.extname(req.file.originalname);
       newFileName = `test${fileExtension}`;

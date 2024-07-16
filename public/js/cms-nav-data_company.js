@@ -39,3 +39,50 @@ document.addEventListener('DOMContentLoaded', () => {
         
     });
     })
+
+
+// Handle checkbox show hide
+
+const name_input = document.getElementById('companyName')
+const email_input =  document.getElementById('companyEmail')
+const tel_input = document.getElementById('companyTel')
+
+const checkbox = document.querySelectorAll('input[type="checkbox"]');
+
+checkbox.forEach( boxes => {
+    boxes.addEventListener('change', checkIfchecked);
+})
+
+
+
+function checkIfchecked (){
+    const name_ckbox = document.getElementById('company-search-name')
+    const email_ckbox =  document.getElementById('company-search-email')
+    const tel_ckbox = document.getElementById('company-search-tel')
+
+    
+    name_input.classList.toggle('hidden' , !name_ckbox.checked);
+    email_input.classList.toggle('hidden' , !email_ckbox.checked);
+    tel_input.classList.toggle('hidden', !tel_ckbox.checked);
+}
+
+//handle submit 
+
+checkbox.forEach( boxes => {
+    boxes.addEventListener('change',buttonShow);
+})
+
+function buttonShow () {
+
+    const submitBtn = document.querySelector('button[name="search-submit"]');
+
+    const name_ckbox = document.getElementById('company-search-name')
+    const email_ckbox =  document.getElementById('company-search-email')
+    const tel_ckbox = document.getElementById('company-search-tel')
+
+    if (email_ckbox.checked || tel_ckbox.checked || name_ckbox.checked) {
+        submitBtn.classList.remove('hidden');
+    } else {
+        submitBtn.classList.add('hidden');
+    }
+    }

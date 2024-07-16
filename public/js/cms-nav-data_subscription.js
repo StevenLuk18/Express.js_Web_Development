@@ -36,3 +36,31 @@ document.addEventListener('DOMContentLoaded', () => {
         
     });
     })
+
+//checkbox display
+function radio_showHide() {
+    let email_radio = document.getElementById('subscription-search-email');
+    let id_radio = document.getElementById('subscription-search-id');
+  
+  
+    email_radio.addEventListener('change', function() {
+      if (this.checked) {
+        document.getElementById('subscriptionId').style.display= 'none'
+        document.getElementById('subscriptionId-label').style.display= 'none'
+        document.getElementById('subscriptionEmail').style.display= 'inline-block'
+        document.getElementById('subscriptionEmail-label').style.display= 'inline-block'
+      } 
+    });
+  
+    id_radio.addEventListener('change', function() {
+      if (this.checked) {
+          document.getElementById('subscriptionEmail').style.display= 'none'
+          document.getElementById('subscriptionEmail-label').style.display= 'none'
+          document.getElementById('subscriptionId').style.display= 'inline-block'
+          document.getElementById('subscriptionId-label').style.display= 'inline-block'
+      } 
+      })
+  
+  }
+  
+  radio_showHide();
