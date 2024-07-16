@@ -472,11 +472,11 @@ body {
     display: flex;
   }
   
-  .handsontable th {
+  .handsontable .htCore th {
       vertical-align: middle;
   }
 
-  .handsontable td {
+  .handsontable .htCore td {
       padding: 4px 8px; 
       height: auto;
       vertical-align: middle;
