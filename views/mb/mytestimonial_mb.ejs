@@ -40,6 +40,12 @@
     <link href="https://cdn.jsdelivr.net/npm/handsontable/dist/handsontable.full.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/handsontable/dist/handsontable.full.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+
+    <!-- For adding date picker following ISO -->
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  
 </head>
 
     <!-- Spinner Start -->
@@ -144,6 +150,8 @@
             <div class="text-center">
                 <h6 class="section-title bg-white text-center text-primary px-3">My Testimonial</h6>
                 <h1 class="mb-5">Welcome Back <%= u_name %>!</h1>
+                <h5 class="text-center text-secondary px-3">Here is list of your testimonials</h5>
+                <p class="text-center">Please click on cell under "Travel Date" or "Testimonial" to edit.</p>
             </div>
         </div>
     </div>
@@ -158,96 +166,14 @@
         <div class="creatAC-form-container" action="#" method="post"> 
 
          <form id="creatAC-form">
-         <h2>Please update your information.</h2><br>
-         <label for="email">Email :</label>         
-         <input type="email" class="email" name="email" placeholder="e.g. abc@gmail.com" maxlength="50" required> 
+         <h2>Please enter new testimonial.</h2><br>
  
-         <label for="acname">Name :</label>
-         <input type="acname" class="acname" name="acname" placeholder="e.g. Peter Law" pattern="[a-z A-Z]+" maxlength="30" required>
+         <label for="travelDate">Travel Date (yyyy-MM-dd) :</label>
+         <input type="text" id="datepicker" name="date" required>
 
-         <label for="pw1">Password :</label>
-         <input id="pw1" name="pw1" type="password1" placeholder="Enter password" minlength="8" maxlength="25" required>
-
-         <label for="pw2">Comfirm password :</label>
-         <input id="pw2" name="pw2" type="password2" placeholder="Confirm password" minlength="8" maxlength="25" onkeypress="" required>
-
-         <fieldset data-role="controlgroup">
-            <legend>Choose your gender : </legend>
-            <label for="male">Male</label>
-            <input type="radio" name="gender" id="male" value="male" required>
-            <label for="female">Female</label>  
-            <input type="radio" name="gender" id="female" value="female" required>
-         </fieldset>
-
-         <label for="imagepath">You image: </label> 
-         <!-- action="/file/single" method="post" enctype="multipart/form-data">   -->
-         <input type="file" id="imagePath" name="myFile" accept="image/*"/>     
-         
-         <fieldset data-role="controlgroup">
-            <legend>What are your favorite cities / countries you may travel?</legend>
-            <div class="checkbox-group">
-                <input type="checkbox" name="favcity" id="china" value="China">
-                <label for="china">China</label>
-            </div>
-            <div class="checkbox-group">
-                <input type="checkbox" name="favcity" id="japan" value="Japan">
-                <label for="japan">Japan</label>
-            </div>
-            <div class="checkbox-group">
-                <input type="checkbox" name="favcity" id="korean" value="Korea">
-                <label for="korean">Korea</label>
-            </div>
-            <div class="checkbox-group">
-                <input type="checkbox" name="favcity" id="taiwan" value="Taiwan">
-                <label for="taiwan">Taiwan</label>
-            </div>
-            <div class="checkbox-group">
-                <input type="checkbox" name="favcity" id="europe" value="Europe">
-                <label for="europe">Europe</label>
-            </div>
-            <div class="checkbox-group">
-                <input type="checkbox" name="favcity" id="usa" value="USA">
-                <label for="usa">USA</label>
-            </div>
-            <div class="checkbox-group">
-                <input type="checkbox" name="favcity" id="england" value="England">
-                <label for="england">England</label>
-            </div>
-            <div class="checkbox-group">
-                <input type="checkbox" name="favcity" id="canada" value="Canada">
-                <label for="canada">Canada</label>
-            </div>
-            <div class="checkbox-group">
-                <input type="checkbox" name="favcity" id="others" value="Others">
-                <label for="others">Others</label>
-                <input type="text" id="othercountry" name="othercountry" placeholder="e.g. Australia, Brazil" pattern="[a-zA-Z, ]+" maxlength="50">
-            </div>
-        </fieldset> 
-
-        <fieldset data-role="controlgroup2">
-            <legend>Which transportation did you prefer on your trip?</legend>
-            <div class="checkbox-group2">
-                <input type="checkbox" name="favcity2" id="airplan" value="Airplan">
-                <label for="airplan">Airplan</label>
-            </div>
-            <div class="checkbox-group2">
-                <input type="checkbox" name="favcity2" id="cruise" value="Cruise">
-                <label for="cruise">Cruise</label>
-            </div>
-            <div class="checkbox-group2">
-                <input type="checkbox" name="favcity2" id="train" value="Train">
-                <label for="train">Train</label>
-            </div>
-            <div class="checkbox-group2">
-                <input type="checkbox" name="favcity2" id="highspeedrail" value="High-speed rail">
-                <label for="highspeedrail">High-speed rail</label>
-            </div>
-            <div class="checkbox-group2">
-                <input type="checkbox" name="favcity2" id="others" value="Others">
-                <label for="others">Others</label>
-                <input type="text" id="othertran" name="othertran" placeholder="e.g. others" pattern="[a-zA-Z, ]+" maxlength="30">
-            </div>
-         </fieldset>
+         <label for="testimonial">Testimonial :</label>
+         <!-- <input id="testimonial" name="testimonial" type="text" placeholder="Enter testimonial" minlength="8" maxlength="200" required> -->
+         <textarea id="testimonial" name="testimonial" cols="50" rows="5" placeholder="Enter testimonial" minlength="8" maxlength="200" required></textarea>
 
          <input type="reset" id="reset" value="Reset">
          <input type="submit" id="submit" name="submit" value="Submit">
@@ -465,7 +391,12 @@
                     autoColumnSize: true // Add this to automatically adjust column widths
                 });
             })
-            .catch(error => console.log('Error fetching testimonials:', error));
+            .catch(error => console.log('Error fetching testimonials:', error)
+        );
+
+        $(document).ready(function() {
+            $("#datepicker").datepicker();
+        });
     </script>  
 </body>
 

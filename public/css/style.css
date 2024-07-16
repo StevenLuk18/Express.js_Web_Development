@@ -519,6 +519,10 @@ body {
   input[type="password"],
   input[type="password1"],
   input[type="password2"],
+  /* For the testimonial in mytestimonial_mb.ejs */
+  input[type="travelDate"],
+  input[type="testimonial"],
+  /* Stop: mytestimonial_mb.ejs */
   input[type="file"] {
     width: 100%;
     padding: 0.8rem;
@@ -534,6 +538,10 @@ body {
   input[type="email"]:focus,
   input[type="text"]:focus,
   input[type="acname"]:focus,
+  /* For the testimonial in mytestimonial_mb.ejs */
+  input[type="travelDate"],
+  input[type="testimonial"],
+  /* Stop: mytestimonial_mb.ejs */
   input[type="password1"]:focus,
   input[type="password2"]:focus {
     outline: none;
