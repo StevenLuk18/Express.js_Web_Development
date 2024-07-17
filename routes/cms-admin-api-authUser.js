@@ -73,7 +73,7 @@ router.get('/', (req, res, next) => {
     const data = await db.findOne({$and:[{sysopname:req.body.updateName},{sysoppswd:req.body.updatePw},{syslevel:req.body.updateLevel}]})
     console.log(data)
     if (data) {
-      if (updateNameComf === updateName && updatePwComf === updatePw && updateLevelComf === updateLevel) {
+      if (updateNameComf === updateName && updatePwComf === updatePw && updateLevelComf === updateLevel && updateNameReal === updateNameComf) {
         data.sysopname = updateNameReal
         data.sysoppswd = updatePwReal
         data.syslevel = updateLevelReal
@@ -89,7 +89,7 @@ router.get('/', (req, res, next) => {
         res.status(404).json('Please confirm your inputs are matched!!!')
       }
     } else {
-      res.status(404).json("Sorry, can't find the user!!! You may search users first ^.^");
+      res.status(404).json("Sorry, can't find the user/incorrect password!!! You may search users first ^.^");
     }
    } catch (err) {
     console.log(err)

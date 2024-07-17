@@ -30,206 +30,78 @@ fetch('/login/get-auth-user')
     } else {document.querySelector('input[id="female"]').checked = false}
 
     //Fill fav cities radio
-    let favcities = document.querySelectorAll('input[name="favcity"]')
+    let favcities = document.querySelectorAll('input[name="favcity"]');
 
     favcities.forEach(function(checkbox) {
-    
-        let matchingCity = data.userCities.find((city) => {
-          return Object.keys(city)[0] === checkbox.value && Object.values(city)[0] === 'T';
-        });
-      
-        if (matchingCity) {
-          checkbox.checked = true;
-        } 
-      });
+        let cityName = checkbox.value;
+        let isCityFavorite = data.userCities.some(city => Object.keys(city)[0] === cityName && Object.values(city)[0] === 'T');
+        checkbox.checked = isCityFavorite;
+    });
     
     //other countries
     document.querySelector('#othercountry').value = data.userCities[9]
+    if (document.querySelector('#othercountry').value){
+        document.querySelector('#othercountry').disabled = false;
+    } else {
+        otherCountryCheckbox = document.getElementById('othersC')
+        if (otherCountryCheckbox.checked){
+            document.querySelector('#othercountry').disabled = false;
+            document.querySelector('#othercountry').required = true;
+        }
+    }
 
     //trabsportation
     let userTrans = document.querySelectorAll('input[name="favcity2"]')
 
     userTrans.forEach(function(checkbox) {
-    
-        let matchingTrans = data.userTrans.find((trans) => {
-          return Object.keys(trans)[0] === checkbox.value && Object.values(trans)[0] === 'T';
-        });
-      
-        if (matchingTrans) {
-          checkbox.checked = true;
-        } 
+        let transname = checkbox.value;
+        let istransFavorite = data.userTrans.some(tran => Object.keys(tran)[0] === transname && Object.values(tran)[0] === 'T');
+        checkbox.checked = istransFavorite;
       });
 
     //other transport
     document.querySelector('#othertran').value = data.userTrans[5];
+    if (document.querySelector('#othertran').value){
+        document.querySelector('#othertran').disabled = false;
+    } else {
+        otherTransCheckbox = document.getElementById('othersT')
+        if (otherTransCheckbox.checked){
+            document.querySelector('#othertran').disabled = false;
+            document.querySelector('#othertran').required = true;
+        }
+    }
     
   })
   .catch(error => console.error('Error fetching company data:', error));
 
 
 //lock and open desc input in update profile
-let otherCountryCheckbox = document.querySelector('input[type="checkbox"][name="favcity"][id="othersC"]');
+document.addEventListener('DOMContentLoaded', function() {
+    // 找到需要操作的 checkbox 和 input 元素
+    let otherCountryCheckbox = document.getElementById('othersC');
+    let otherCountryInput = document.getElementById('othercountry');
+  
+    let otherTransCheckbox = document.getElementById('othersT');
+    let otherTransInput = document.getElementById('othertran');
 
-otherCountryCheckbox.addEventListener('change', function() {
+    updateInputDisabledState(otherCountryCheckbox, otherCountryInput);
+    updateInputDisabledState(otherTransCheckbox, otherTransInput);
     
-      let otherCountryInput = document.querySelector('#othercountry');
-      otherCountryInput.disabled =!this.checked;
-    } )
-
-let otherTransCheckbox = document.querySelector('input[type="checkbox"][name="favcity2"][id="othersT"]');
-
-otherTransCheckbox.addEventListener('change', function() {
+    if (otherCountryCheckbox && otherCountryInput && otherTransCheckbox && otherTransInput) {
     
-      let otherCountryInput = document.querySelector('#othertran');
-      otherCountryInput.disabled =!this.checked;
-    } )
-
-
     
-
-
-/* document.addEventListener('DOMContentLoaded', function() {
-    const form = document.getElementById('creatAC-form');
-    const resetButton = document.getElementById('reset');
-    let originalData = {};
-
-    // Function to load user data from session storage
-    function loadUserData() {
-        sessionStorage.setItem('userData', session);
-        const userData = JSON.parse(sessionStorage.getItem('userData'));
-        if (userData) {
-            originalData = userData;
-            populateForm(userData);
-        } else {
-            console.error('No user data found in session storage');
-        }
+        otherCountryCheckbox.addEventListener('change', function() {
+        updateInputDisabledState(this, otherCountryInput);
+        });
+    
+        otherTransCheckbox.addEventListener('change', function() {
+        updateInputDisabledState(this, otherTransInput);
+        });
+    } else {
+        console.log('cant find the elements !!');
     }
-
-    // Function to populate form with user data
-    function populateForm(data) {
-        document.getElementById('email').value = data.authUser[3] || '';
-        document.getElementById('acname').value = data.authUser[1] || '';
-        document.getElementById('nickname').value = data.authUser[2] || '';
-        document.getElementById('pw1').value = data.authUser[4] || '';
-        document.getElementById('pw2').value = data.mppswd || '';
-        
-        if (data.mpgender === 'male') {
-            document.getElementById('male').checked = true;
-        } else if (data.mpgender === 'female') {
-            document.getElementById('female').checked = true;
-        }
-
-        // Set favorite cities
-        const favCities = ['china', 'japan', 'korean', 'taiwan', 'europe', 'usa', 'england', 'canada'];
-        favCities.forEach(city => {
-            document.getElementById(city).checked = data[`mp${city}`] || false;
-        });
-
-        if (data.mpcntyother) {
-            document.getElementById('others').checked = true;
-            document.getElementById('othercountry').value = data.mpcntyothdesc || '';
-        }
-
-        // Set transportation preferences
-        const transportations = ['airplan', 'cruise', 'train', 'highspeedrail'];
-        transportations.forEach(trans => {
-            document.getElementById(trans).checked = data[`mp${trans}`] || false;
-        });
-
-        if (data.mptranother) {
-            document.getElementById('others2').checked = true;
-            document.getElementById('othertran').value = data.mptranothdesc || '';
-        }
-
-        // Set image
-        if (data.mpimagepath) {
-            document.getElementById('output').src = data.mpimagepath;
-        }
-    }
-
-    // Load user data when page loads
-    loadUserData();
-
-    // Handle form submission
-    form.addEventListener('submit', function(e) {
-        e.preventDefault();
-        
-        // Validate form
-        if (!validateForm()) {
-            return;
-        }
-
-        // Collect form data
-        const formData = new FormData(form);
-        const updatedData = {};
-
-        for (let [key, value] of formData.entries()) {
-            updatedData[key] = value;
-        }
-
-        // Handle checkboxes
-        const favCities = ['china', 'japan', 'korean', 'taiwan', 'europe', 'usa', 'england', 'canada'];
-        favCities.forEach(city => {
-            updatedData[`mp${city}`] = document.getElementById(city).checked;
-        });
-
-        const transportations = ['airplan', 'cruise', 'train', 'highspeedrail'];
-        transportations.forEach(trans => {
-            updatedData[`mp${trans}`] = document.getElementById(trans).checked;
-        });
-
-        // Handle file upload
-        const fileInput = document.getElementById('imagepath');
-        if (fileInput.files.length > 0) {
-            updatedData.mpimagepath = URL.createObjectURL(fileInput.files[0]);
-        } else {
-            updatedData.mpimagepath = originalData.mpimagepath;
-        }
-
-        // Update session storage
-        sessionStorage.setItem('userData', JSON.stringify(updatedData));
-
-        alert('Profile updated successfully!');
-    });
-
-    // Handle reset button
-    resetButton.addEventListener('click', function() {
-        populateForm(originalData);
-    });
-
-    // Image preview function
-    window.loadFile = function(event) {
-        const output = document.getElementById('output');
-        output.src = URL.createObjectURL(event.target.files[0]);
-        output.onload = function() {
-            URL.revokeObjectURL(output.src) // free memory
-        }
-    };
-
-    // Form validation function
-    function validateForm() {
-        const password = document.getElementById('pw1').value;
-        const confirmPassword = document.getElementById('pw2').value;
-
-        if (password !== confirmPassword) {
-            alert("Passwords do not match!");
-            return false;
-        }
-
-        const othersCheckbox = document.getElementById('others');
-        const othercountryInput = document.getElementById('othercountry');
-        if (othersCheckbox.checked && othercountryInput.value.trim() === '') {
-            alert("Please specify other countries.");
-            return false;
-        }
-
-        const others2Checkbox = document.getElementById('others2');
-        const othertranInput = document.getElementById('othertran');
-        if (others2Checkbox.checked && othertranInput.value.trim() === '') {
-            alert("Please specify other transportation.");
-            return false;
-        }
-
-        return true;
-    }
-}); */
+});
+  
+  function updateInputDisabledState(checkbox, input) {
+    input.disabled = !checkbox.checked;
+  }

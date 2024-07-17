@@ -32,6 +32,7 @@ document.addEventListener('DOMContentLoaded', () => {
             // handle image FormData
             const fileInput = document.querySelector('input[name="mbImageUp"]');
             if (fileInput.files.length > 0) {
+            //Use .delete or .set can remove duplicate post data name
             formData.append('mbImageUp', fileInput.files[0]);
             }
         

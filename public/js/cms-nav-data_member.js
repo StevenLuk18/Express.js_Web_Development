@@ -11,6 +11,7 @@ fetch('/cms-admin-api-member/allMbs')
     console.error('Error fetching company data:', error)
     });
 
+    // Post data to search
 document.addEventListener('DOMContentLoaded', () => {
     const form = document.getElementById('member-search');
     
@@ -84,6 +85,7 @@ function radio_showHide() {
       document.getElementById('memberId-label').style.display= 'none'
       document.getElementById('memberEmail').style.display= 'inline-block'
       document.getElementById('memberEmail-label').style.display= 'inline-block'
+      document.querySelector('button[name="search-submit"]').classList.remove('hidden')
     } 
   });
 
@@ -93,9 +95,12 @@ function radio_showHide() {
         document.getElementById('memberEmail-label').style.display= 'none'
         document.getElementById('memberId').style.display= 'inline-block'
         document.getElementById('memberId-label').style.display= 'inline-block'
+        document.querySelector('button[name="search-submit"]').classList.remove('hidden')
     } 
     })
 
 }
 
 radio_showHide();
+
+

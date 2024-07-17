@@ -50,7 +50,7 @@ router.get('/', (req, res, next) => {
     await client.connect()
     const sysoperator = client.db("travel")
     /* const data = await sysoperator.collection('member').find({$or:[{mpemail:searchEmail},{_id: new ObjectId(stringid)}]}).toArray() */
-    const data = await sysoperator.collection('member').findOne({mpemail:searchEmail})
+    const data = await sysoperator.collection('member').findOne({$or:[{mpemail:searchEmail},{_id:new ObjectId(searchId)}]})
     console.log(data)
     if (data) {
     res.json({

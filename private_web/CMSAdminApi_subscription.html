@@ -6,6 +6,11 @@
     <title>Great Travel Agency</title>
     <link rel="stylesheet" href="css/cms_main.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+    <style>
+        .hidden{
+            display: none;
+        }
+    </style>
 </head>
 <body>
     <header>
@@ -48,16 +53,16 @@
                         <input type="radio" id="subscription-search-id" name="subscription-radio" value="email">
                         <br/>
                         <br/>
-                        <label for="subscriptionEmail" id="subscriptionEmail-label">Email</label>
-                        <input type="email" id="subscriptionEmail" name="searchEmail" placeholder="Email">
+                        <label for="subscriptionEmail" id="subscriptionEmail-label" class="hidden">Email</label>
+                        <input type="email" id="subscriptionEmail" name="searchEmail" placeholder="Email" class="hidden">
                         &nbsp;
-                        <label for="subscriptionId" id="subscriptionId-label">_id</label>
-                        <input type="text" id="subscriptionId" name="searchId" placeholder="Database _id">
+                        <label for="subscriptionId" id="subscriptionId-label" class="hidden">_id</label>
+                        <input type="text" id="subscriptionId" name="searchId" placeholder="Database _id" class="hidden">
                         &nbsp;
                         <!-- <label>Date</label>
                         <input type="text" name="searchDate" placeholder="Subscription Date">
                         &nbsp; -->
-                        <button type="submit" name="search-submit">submit</button>
+                        <button type="submit" name="search-submit" class="hidden">submit</button>
                     </form>
                     <br/>
                     <p id="searchResult"></p>

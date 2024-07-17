@@ -189,7 +189,7 @@
                     
                 <input type="file" accept="image/*" name="mbImageUp" onchange="loadFile(event)"> 
                     <img id="output" max-width=100% height=auto src=""/>
-                    <!-- <script>
+                    <script>
                     var loadFile = function(event) {
                         var output = document.getElementById('output');
                         output.src = URL.createObjectURL(event.target.files[0]);
@@ -197,7 +197,7 @@
                         URL.revokeObjectURL(output.src)        // free memory
                         }
                     };
-                    </script>   -->
+                    </script>
 
             <!-- 4th way 
                 <input type="file" accept="image/*" onchange="loadFile(event)">
@@ -250,7 +250,7 @@
                     <div class="checkbox-group">
                         <input type="checkbox" name="favcity" id="othersC" value="Others">
                         <label for="othersC">Others</label>
-                        <input type="text" id="othercountry" name="othercountry" placeholder="e.g. Australia, Brazil" pattern="[a-zA-Z, ]+" maxlength="50" disabled>
+                        <input type="text" id="othercountry" name="othercountry" placeholder="e.g. Australia, Brazil" pattern="[a-zA-Z, ]+" maxlength="50" >
                     </div>
                 </fieldset> 
 
@@ -275,7 +275,7 @@
                     <div class="checkbox-group2">
                         <input type="checkbox" name="favcity2" id="othersT" value="Others">
                         <label for="othersT">Others</label>
-                        <input type="text" id="othertran" name="othertran" placeholder="e.g. others" pattern="[a-zA-Z, ]+" maxlength="30" disabled>
+                        <input type="text" id="othertran" name="othertran" placeholder="e.g. others" pattern="[a-zA-Z, ]+" maxlength="30">
                     </div>
                 </fieldset>
 

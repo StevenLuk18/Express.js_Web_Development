@@ -49,6 +49,7 @@ function radio_showHide() {
         document.getElementById('subscriptionId-label').style.display= 'none'
         document.getElementById('subscriptionEmail').style.display= 'inline-block'
         document.getElementById('subscriptionEmail-label').style.display= 'inline-block'
+        document.querySelector('button[name="search-submit"]').classList.remove('hidden')
       } 
     });
   
@@ -58,6 +59,7 @@ function radio_showHide() {
           document.getElementById('subscriptionEmail-label').style.display= 'none'
           document.getElementById('subscriptionId').style.display= 'inline-block'
           document.getElementById('subscriptionId-label').style.display= 'inline-block'
+          document.querySelector('button[name="search-submit"]').classList.remove('hidden')
       } 
       })
   

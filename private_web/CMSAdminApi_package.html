@@ -6,6 +6,11 @@
     <title>Great Travel Agency</title>
     <link rel="stylesheet" href="css/cms_main.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+    <style>
+        .hidden{
+            display: none;
+        }
+    </style>
 </head>
 <body>
     <header>
@@ -41,20 +46,32 @@
                     <h3><strong>Search Package Here:</strong></h3>
                     <form id="package-search">
                         <label>Search With:</label><br/>
-                        <label for="package-search-email">Email</label>
-                        <input type="checkbox" id="package-search-email" value="email">
-                        &nbsp;
                         <label for="package-search-id">_id</label>
-                        <input type="checkbox" id="package-search-id" value="email">
+                        <input type="checkbox" name="packageId" id="package-search-id" value="_id">
+                        &nbsp;
+                        <label for="package-search-name">Name</label>
+                        <input type="checkbox" name="packageName" id="package-search-name" value="name">
+                        &nbsp;
+                        <label for="package-search-country">Country</label>
+                        <input type="checkbox" name="packageCountry" id="package-search-country" value="country">
                         <br/>
                         <br/>
-                        <label>Email</label>
-                        <input type="email" name="searchEmail" placeholder="Member's Email">
+                        <div id="packageSearchId" class="hidden">
+                        <label for="packageSearchId" class="hidden">_id</label>
+                        <input type="text"  name="searchId" placeholder="package's db _id">
+                        </div>
                         &nbsp;
-                        <label>_id</label>
-                        <input type="text" name="searchId" placeholder="Member's Database _id">
+                        <div id="packageSearchName" class="hidden">
+                        <label for="packageSearchName" class="hidden" >Package Name</label>
+                        <input type="text" name="searchName" placeholder="package's Name">
+                        </div>
                         &nbsp;
-                        <button type="submit" name="search-submit">submit</button>
+                        <div id="packageSearchCountry" class="hidden">
+                        <label for="packageSearchCountry" class="hidden" >Package Country</label>
+                        <input type="text" name="searchCountry" placeholder="package's Country">
+                        </div>
+                        &nbsp;
+                        <button type="submit" class="hidden" name="search-submit">submit</button>
                     </form>
                     <br/>
                     <p id="searchResult"></p>

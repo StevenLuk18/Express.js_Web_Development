@@ -37,7 +37,7 @@ router.get('/', (req, res, next) => {
     await client.connect()
     const db = client.db('travel')
     /* const data = await db.collection('subscribe').findOne({$or:[{ sbemail: searchEmail },{ _id: new ObjectId(stringid)}]}) */
-    const data = await db.collection('subscribe').findOne({ sbemail: searchEmail})
+    const data = await db.collection('subscribe').findOne({$or:[{ sbemail: searchEmail},{_id: new ObjectId(searchId)}]})
   
 
     if(data){

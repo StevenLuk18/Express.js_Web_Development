@@ -4,6 +4,7 @@ var path = require('path');
 
 /* create db entries. */
 const MongoClient = require('mongodb').MongoClient;
+const ObjectId = require('mongodb').ObjectId
 const url = "mongodb://localhost:27017/";
 const client = new MongoClient(url);
 
@@ -35,19 +36,44 @@ router.get('/', (req, res, next) => {
   try{
 
     await client.connect()
-    const sysoperator = client.db("travel")
-    /* const data = await sysoperator.collection('member').find({$or:[{mpemail:searchEmail},{_id: new ObjectId(stringid)}]}).toArray() */
-    const data = await sysoperator.collection('contactus').findOne({$or:[{ctemail:searchEmail},{ctname:searchName},{ctsubject:searchSubject}]})
-    console.log(data)
-    if (data) {
-    res.json({
-      _id:data._id,
-      ctname: data.ctname,
-      ctdate: data.ctdate,
-      ctemail: data.ctemail,
-      ctsubject: data.ctsubject,
-      ctmessage: data.ctmessage
-    })
+    const db = client.db("travel")
+    let query = {}
+  
+      if (searchId) {
+        if (typeof searchId === 'string' && searchId.length === 24) {
+          query._id = new ObjectId(searchId)
+        } else if (Array.isArray(searchId) && searchId.length === 12 && searchId.every(byte => typeof byte === 'number' && byte >= 0 && byte <= 255)) {
+          query._id = new ObjectId(Buffer.from(searchId))
+        } else if (typeof searchId === 'number' && Number.isInteger(searchId)) {
+          query._id = searchId
+        } else {
+          res.status(400).json('Invalid searchId format')
+        }
+      }
+  
+      if (searchEmail) {
+        query.ctemail = searchEmail
+      }
+  
+      if (searchName) {
+        query.ctname = searchName
+      }
+
+      if(searchSubject){
+        query.ctsubject = searchSubject
+      }
+      
+      const data = await db.collection('contactus').findOne(query)
+
+      if (data) {
+        const enquiryKeys = Object.keys(data).filter(key => key.startsWith('ct') || key.startsWith('_id'));
+        const enquiryData = enquiryKeys.reduce((acc, key) => {
+          acc[key] = data[key];
+          return acc;
+        }, {});
+  
+        res.json(enquiryData)
+
     } else {
       res.status(404).json('Please confirm your inputs are correct !!!')
     }

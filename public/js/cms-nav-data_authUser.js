@@ -96,6 +96,23 @@ document.addEventListener('DOMContentLoaded', () => {
 
   })
 
+//
+/* const updateNamefield = document.querySelector('input[name="updateName"]')
+const updatePwfield = document.querySelector('input[name="updatePw"]') */ 
+const updateLevelfield = document.querySelector('select[name="updateLevel"]')
+
+/* const updateNameComfField = document.querySelector('input[name="updateNameComf"]');
+const updatePwComfField = document.querySelector('input[name="updatePwComf"]'); */
+const updateLevelComfField = document.querySelector('select[name="updateLevelComf"]');
+
+/* updateNamefield.addEventListener('input',autoFillUpdateName)
+updatePwfield.addEventListener('input',autoFillUpdatePw) */
+updateLevelfield.addEventListener('change',autoFillUpdateLevel)
+
+/* function autoFillUpdateName() {updateNameComfField.value = updateNamefield.value}
+function autoFillUpdatePw() {updatePwComfField.value = updatePwfield.value} */
+function autoFillUpdateLevel() {updateLevelComfField.value = updateLevelfield.value}
+
 //Set detect add or delete action
 const addordelActionPos = document.querySelector('select[name="addordelAction"]')
 document.getElementById('addordelAutoShow').innerHTML = "What's your action today? (*Please select the action first* so as to vertify your action !!)" 

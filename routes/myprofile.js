@@ -23,26 +23,29 @@ router.get('/', (req, res, next) => {
 
 }).post('/infoUpdate', upload.array('mbImageUp'), async (req, res, next) => {
 
-  /* const encodeEmail = encodeURIComponent(req.body.email) */
-  /* ${email} */
-  /* const email = req.body.email; */
-
   console.log('information updating ~')
+     
     try {
-      // handle image upload //
-    let newFileName;
-    
-    if (req.file) {
-      const fileExtension = path.extname(req.file.originalname);
-      newFileName = `test${fileExtension}`;
-      fs.renameSync(req.file.path, `public/images/member/${newFileName}`);
-    }
-
       await client.connect();
       const db =client.db('travel').collection('member');
       let data = await db.findOne({mpemail: req.body.email});
 
         if (data) {
+
+          // handle image upload //
+          if (req.files.length > 0) {
+            let newFileName
+              for (let file of req.files) {
+                console.log(file.filename)
+                const fileExtension = path.extname(file.originalname);
+                newFileName = `${req.body.email}${fileExtension}`;
+                console.log(newFileName)
+                fs.renameSync(path.join('tmp', file.filename), path.join('public', 'images', 'member',newFileName))
+              }
+            data.mpimagepath = `/images/member/${newFileName}`
+          }
+            
+
           data.mpusername = req.body.nickname;
           data.mpname = req.body.acname;
           data.mpgender = req.body.gender;
@@ -50,6 +53,7 @@ router.get('/', (req, res, next) => {
           data.mpemail =req.body.email;
           data.mpcntyothdesc = req.body.othercountry;
           data.mptranothdesc = req.body.othertran;
+          
 
           console.log(req.body)
 

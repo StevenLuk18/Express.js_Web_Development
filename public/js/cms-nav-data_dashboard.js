@@ -5,3 +5,30 @@ fetch('/api/alldb')
     document.getElementById('cms-allColl').textContent = data
   })
   .catch(error => console.error('Error fetching company data:', error));
+
+fetch('/cms-admin-api/numOfmembers')
+.then(response => response.json())
+.then(data => {
+  document.getElementById('cms-numOfmembers').textContent = data
+})
+.catch(error => console.error('Error fetching members data:', error));
+
+fetch('/cms-admin-api/numOfsubs')
+.then(response => response.json())
+.then(data => {
+  document.getElementById('cms-numOfsubscribes').textContent = data
+})
+.catch(error => console.error('Error fetching members data:', error));
+
+fetch('/cms-admin-api/numOfenqus')
+.then(response => response.json())
+.then(data => {
+  document.getElementById('cms-numOfenquiries').textContent = data
+})
+.catch(error => console.error('Error fetching members data:', error));
+
+fetch('/cms-admin-api/numOftesti')
+.then(response => response.json())
+.then(data => {
+  document.getElementById('cms-numOftestimonials').textContent = data
+})

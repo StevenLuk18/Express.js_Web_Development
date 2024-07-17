@@ -1,0 +1,55 @@
+.dashboard-container.KPI{
+    padding: 100px;
+}
+
+.cms-kpi-container.numOfmb h1{
+    text-align: center;
+    padding-top: 3vh;
+    font-size: 35px;
+}
+
+.cms-kpi-container.numOfmb{
+    width: 50vb;
+    padding: 30px;
+    border: 2px solid #86B817;
+    box-shadow: 0 0 10px rgba(0, 0, 0, .2);
+}
+
+.cms-kpi-container.numOfsub h1{
+    text-align: center;
+    padding-top: 3vh;
+    font-size: 35px;
+}
+
+.cms-kpi-container.numOfsub{
+    width: 50vb;
+    padding: 30px;
+    border: 2px solid #86B817;
+    box-shadow: 0 0 10px rgba(0, 0, 0, .2);
+}
+
+.cms-kpi-container.numOfenqu h1{
+    text-align: center;
+    padding-top: 3vh;
+    font-size: 35px;
+}
+
+.cms-kpi-container.numOfenqu{
+    width: 50vb;
+    padding: 30px;
+    border: 2px solid #86B817;
+    box-shadow: 0 0 10px rgba(0, 0, 0, .2);
+}
+
+.cms-kpi-container.numOftestial {
+    width: 50vb;
+    padding: 30px;
+    border: 2px solid #86B817;
+    box-shadow: 0 0 10px rgba(0, 0, 0, .2);
+}
+
+.cms-kpi-container.numOftestial h1{
+    text-align: center;
+    padding-top: 3vh;
+    font-size: 35px;
+}

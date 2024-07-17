@@ -6,6 +6,11 @@
     <title>Great Travel Agency</title>
     <link rel="stylesheet" href="css/cms_main.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+    <style>
+        .hidden{
+            display: none;
+        }
+    </style>
 </head>
 <body>
     <header>
@@ -55,13 +60,13 @@
                         <label for="member-search-id">_id<input type="radio" name='member-radio' id="member-search-id" value="id"></label>
                             <br/>
                             <br/>
-                        <label for="memberEmail" id="memberEmail-label" >Email</label>
-                        <input type="email" id="memberEmail" name="searchEmail" placeholder="Member's Email" >
+                        <label for="memberEmail" id="memberEmail-label" class="hidden">Email</label>
+                        <input type="email" id="memberEmail" class="hidden" name="searchEmail" placeholder="Member's Email" >
                             &nbsp;
-                        <label for="memberId" id="memberId-label" >_id</label>
-                        <input type="text" id="memberId" name="searchId" placeholder="Member's Database _id" >
+                        <label for="memberId" id="memberId-label" class="hidden">_id</label>
+                        <input type="text" id="memberId" class="hidden" name="searchId" placeholder="Member's Database _id" >
                             &nbsp;
-                        <button type="submit" name="search-submit">submit</button>
+                        <button type="submit" name="search-submit" class="hidden">submit</button>
                     </form>
                     <br/>
                     <p id="searchResult"></p>
