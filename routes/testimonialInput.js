@@ -32,7 +32,7 @@ router.get('/', async (req, res, next) => {
         // authUser[3] = email address.
         data = await client.db("travel").collection('testimonial').find({
             tmname: req.session.authUser[3]
-        }).toArray();
+        }).sort({ tmcrdate: -1 }).toArray(); // Closest date first
         res.send(data);
     } catch (err) {
         console.log(err.name, err.message);
@@ -74,7 +74,7 @@ router.get('/', async (req, res, next) => {
             
             if (result.matchedCount == 1) {
                 console.log("Update success");
-                res.json({ success: true, message: "Testimonial upated successfully"});
+                res.status(200).json({ success: true, message: "Testimonial upated successfully"});
             }
             else {
                 console.log("Cannot udpate");
@@ -88,39 +88,55 @@ router.get('/', async (req, res, next) => {
     } finally {
         await client.close();
     }
-}).post('/insertTestimonialwithParam', async (req, res, next) => {
-  const email = req.body.email;
-  const travelDate = req.body.travelDate;
-  const testimonial  = req.body.testimonial;
-  
-  console.log("Input =======", req.body );
+}).post('/insertOwnTestimonial', async (req, res, next) => {
+	if (req.session.authUser == null) { res.redirect("/login"); return; }
 
-  try {
-    await client.connect();
-    data = await client.db("travel").collection("testimonial").findOne(
-      // { tmname: email, tmdate: { $eq: new Date(travelDate)}, tmtest: testimonial }
-      { tmname: email, tmdate: { $eq: new Date(travelDate) }, tmtest: testimonial }
-    );
+	const travelDate = req.body.travelDate;
+	const testimonial  = req.body.testimonial;
 
-    console.log("Data  ============ ", data);
-    
-    if (data) {
-      console.log("No insert - dupliate found");
-      res.send("No insert - duplicate found");
-    }
-    else {
-      await client.db("travel").collection("testimonial").insertOne(
-        { tmname: email, tmdate: new Date(travelDate), tmtest: testimonial, tmcrdate: new Date() }
-      );
-      console.log("Inserted")
-      res.send("Inserted");
-    }
-  } catch (err) {
-    console.log(err.name, err.message);
-    return next(err);      
-  } finally {
-    await client.close();
-  }
+    console.log("Input =======", req.session.authUser[3]);
+	console.log("Input =======", req.body.travelDate );
+    console.log("Input =======", req.body.testimonial );
+
+	try {
+		await client.connect();
+		const data = await client.db("travel").collection("testimonial").findOne({ 
+			tmname: req.session.authUser[3], 
+			tmdate: travelDate,
+			tmtest: testimonial 
+        });
+
+		console.log("Data  ============ ", data);
+
+		if (data) {
+    		console.log("No insert - dupliate found");
+		    res.status(400).json({ success: false, message: "Cannot insert - duplicate record found!" });
+		}
+		else {
+            console.log("Trying to insert....");
+            const result = await client.db("travel").collection("testimonial").insertOne({ 
+                tmname: req.session.authUser[3], 
+                tmdate: travelDate, 
+                tmtest: testimonial, 
+                tmcrdate: new Date()
+            });
+
+            if (result.acknowledged) {
+                console.log("New testimonial inserted");
+                res.status(200).json({ success: true, message: "New testimonial added successfully!" });
+            }
+            else {
+                console.log("Cannot delete");
+                res.status(400).json({ success: false, message: "Cannot insert. Maybe authorization problem." });
+            }
+        }
+	} catch (err) {
+		console.log("Insert error ==== ", err.name, err.message);
+		res.status(500).json({ success: false, message: "An error occured while updating the testimonial"});
+		return next(err);      
+	} finally {
+		await client.close();
+	} 
 }).delete('/deleteOwnTestimonial', async (req, res, next) => {
     if (req.session.authUser == null) { res.redirect("/login"); return; }
 

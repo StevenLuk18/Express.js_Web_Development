@@ -157,26 +157,26 @@
     <!-- Please see below for script for filling up handonstable -->
     <div>&nbsp;</div>
     <!-- modify the input form layout and css dated 07/07/2024 -->
-     <main> 
+    <main> 
 
-        <div class="creatAC-form-container" action="/testimonialInput/insertOwnTestimonial" method="post"> 
+        <div class="creatTestimonial-form-container"> 
 
-         <form id="creatAC-form">
-         <h2>Please enter new testimonial.</h2><br>
- 
-         <label for="travelDate">Travel Date :</label>
-         <input type="date" id="datepicker" name="date" required>
+            <form id="creatTestimonial-form" action="/testimonialInput/insertOwnTestimonial/" method="post">
+                <h2>Please enter new testimonial.</h2><br>
 
-         <label for="testimonial">Testimonial :</label>
-         <!-- <input id="testimonial" name="testimonial" type="text" placeholder="Enter testimonial" minlength="8" maxlength="200" required> -->
-         <textarea id="testimonial" name="testimonial" cols="50" rows="5" placeholder="Enter testimonial" minlength="8" maxlength="200" required></textarea>
+                <label for="travelDate">Travel Date :</label>
+                <input type="date" id="datepicker" name="travelDate" required>
 
-         <input type="reset" id="reset" value="Reset">
-         <input type="submit" id="submit" name="submit" value="Submit">
- 
-       </form>
+                <label for="testimonial">Testimonial :</label>
+                <!-- <input id="testimonial" name="testimonial" type="text" placeholder="Enter testimonial" minlength="8" maxlength="200" required> -->
+                <textarea id="testimonial" name="testimonial" cols="70" rows="10" placeholder="Enter testimonial" minlength="8" maxlength="1000" required></textarea>
 
-     </main>
+                <input type="reset" id="reset" value="Reset">
+                <input type="submit" id="submit" name="submit" value="Submit">
+
+            </form>
+        </div>
+    </main>
     <!-- From of registration -->
   
 
@@ -263,7 +263,6 @@
 
     <!-- Template Javascript -->
     <script src="js/main.js"></script>
-    <script src="/script.js"></script> 
     <script src="js/fetch_logout.js"></script>   
     <script>
         // Add this function before creating the Handsontable instance
