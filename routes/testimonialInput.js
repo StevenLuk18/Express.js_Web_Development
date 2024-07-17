@@ -125,7 +125,7 @@ router.get('/', async (req, res, next) => {
     if (req.session.authUser == null) { res.redirect("/login"); return; }
 
     try {
-		const { id: testimonialId } = req.body;
+		const { testimonialId } = req.body;
 		if (!testimonialId) {
 			res.status(400).json({ success: false, message: "Please supply ID of selected testimonial." });
 			return;
@@ -133,7 +133,7 @@ router.get('/', async (req, res, next) => {
 		
         await client.connect();
         const data = await client.db("travel").collection("testimonial").findOne({ 
-            _id: ObjectId(testimonialId) 
+            _id: new ObjectId(testimonialId) 
         });
 
         if (data == null) {
@@ -141,7 +141,7 @@ router.get('/', async (req, res, next) => {
         }
         else {
             const result = await client.db("travel").collection("testimonial").deleteOne({ 
-                _id: ObjectId(testimonialId)
+                _id: new ObjectId(testimonialId)
             });
 
             if (result.deletedCount == 1) {

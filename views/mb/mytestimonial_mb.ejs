@@ -40,11 +40,6 @@
     <link href="https://cdn.jsdelivr.net/npm/handsontable/dist/handsontable.full.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/handsontable/dist/handsontable.full.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
-
-    <!-- For adding date picker following ISO -->
-    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
   
 </head>
 
@@ -151,7 +146,8 @@
                 <h6 class="section-title bg-white text-center text-primary px-3">My Testimonial</h6>
                 <h1 class="mb-5">Welcome Back <%= u_name %>!</h1>
                 <h5 class="text-center text-secondary px-3">Here is list of your testimonials</h5>
-                <p class="text-center">Please click on cell under "Travel Date" or "Testimonial" to edit.</p>
+                <p class="text-center">If you want to delete any Testimonial, just click on the Delete button of that row.</p>
+                <p class="text-center">If you want to edit Travel Date or Testimonial, just click on any cell and edit. Afterward, click on the Update button.</p>
             </div>
         </div>
     </div>
@@ -163,13 +159,13 @@
     <!-- modify the input form layout and css dated 07/07/2024 -->
      <main> 
 
-        <div class="creatAC-form-container" action="#" method="post"> 
+        <div class="creatAC-form-container" action="/testimonialInput/insertOwnTestimonial" method="post"> 
 
          <form id="creatAC-form">
          <h2>Please enter new testimonial.</h2><br>
  
-         <label for="travelDate">Travel Date (yyyy-MM-dd) :</label>
-         <input type="text" id="datepicker" name="date" required>
+         <label for="travelDate">Travel Date :</label>
+         <input type="date" id="datepicker" name="date" required>
 
          <label for="testimonial">Testimonial :</label>
          <!-- <input id="testimonial" name="testimonial" type="text" placeholder="Enter testimonial" minlength="8" maxlength="200" required> -->
@@ -276,7 +272,7 @@
             const date = moment(value, 'YYYY-MM-DD', true);
             return date.isValid() ? date.format(format) : value;
         }
-        fetch('/testimonial/getOwnTestimonial')
+        fetch('/testimonialInput/getOwnTestimonial')
             .then(response => response.json())
             .then(data => {
                 // Register the custom cell type
@@ -295,8 +291,8 @@
                         deleteBtn.addEventListener('click', () => {
                             const rowData = instance.getDataAtRow(row);
                             const testimonialId = rowData[1];
-                            alert(`Deleting row with ID: ${testimonialId}`);
-                            fetch('/testimonial/deleteOwnTestimonial', { 
+                            // alert(`Deleting row with ID: ${testimonialId}`);
+                            fetch('/testimonialInput/deleteOwnTestimonial', { 
                                 method: 'DELETE',
                                 headers: {
                                     'Content-Type': 'application/json'
@@ -309,10 +305,10 @@
                             .then(result => {
                                 if (result.success) {
                                     instance.alter('remove_row', row);
-                                    alert(`Deleted selected testimonial successfully`);
+                                    alert(`Selected testimonial deleted successfully`);
                                 }
                                 else {
-                                    alter(`Failed to delete selected testimonial : `, result.message);
+                                    alert(`Failed to delete selected testimonial : `, result.message);
                                 }
                             })
                             .catch(error => console.log('Error: ', error));
@@ -324,8 +320,8 @@
                             const testimonialId = rowData[1];
                             const newTravelDate = rowData[2];
                             const updatedTestimonial = rowData[3]; 
-                            alert(`Updating row with ID: ${testimonialId}`);
-                            fetch('/testimonial/updateOwnTestimonial', {
+                            // alert(`Updating row with ID: ${testimonialId}`);
+                            fetch('/testimonialInput/updateOwnTestimonial', {
                                 method: 'PATCH',
                                 headers: {
                                     'Content-Type': 'application/json'
@@ -339,7 +335,7 @@
                             .then(response => response.json())
                             .then(result => {
                                 if (result.success) {
-                                    alert('Testiminoial updated');
+                                    alert('Testimonial updated');
                                 }
                                 else {
                                     console.error('Failed to update testimonial: ', result.message);
@@ -393,10 +389,6 @@
             })
             .catch(error => console.log('Error fetching testimonials:', error)
         );
-
-        $(document).ready(function() {
-            $("#datepicker").datepicker();
-        });
     </script>  
 </body>
 
