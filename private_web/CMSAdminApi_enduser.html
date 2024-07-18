@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Great Travel Agency</title>
+    <link rel="stylesheet" href="css/cms_main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+    <link rel="stylesheet" href="css/cms_dashboard.css">
+    <style>
+        .hidden{
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="top-bar">
+            <button class="list-btn" id="toggle-left-bar">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+            <h1>Great Travel Agency</h1>
+            <div class="user-info">
+                <span>Username:<strong id="cms-username"></strong></span>
+                <i class="fa-solid fa-user"></i>
+                <button id="logout-btn" type="button" style="display: inline-block;"><i class="fas fa-sign-out-alt"></i> Logout</button>
+            </div>
+        </nav>
+    </header>
+
+    <aside class="left-bar">
+        <ul>
+            <li id="aside-dashboard"><a href="/cms-admin-api">Dashboard</a></li>
+            <li id="aside-company"><a href="/cms-admin-api-company">Company</a></li>
+            <li id="aside-authUser"><a href="/cms-admin-api-authUser">Auth-User</a></li>
+            <li id="aside-member"><a href="/cms-admin-api-member">Member</a></li>
+            <li id="aside-enduser"><a href="/cms-admin-api-enduser">Enduser</a></li>
+            <li id="aside-subscription"><a href="/cms-admin-api-subscription">Subscription</a></li>
+            <li id="aside-enquiry"><a href="/cms-admin-api-enquiry">Contact Us</a></li>
+            <li id="aside-package"><a href="/cms-admin-api-package">Package</a></li>
+        </ul>
+    </aside>
+    <main>
+        <!-- Search section -->
+        <div class="dashboard-wrapper">
+            <div class="dashboard-container">
+                <div class="cms-enduser search">
+                    <h3><strong>Search Enduser Here:</strong></h3>
+                    <form id="enduser-search">
+                        <div id="enduserName">
+                        <label>Login Name</label>
+                        <input type="text" name="searchEmail" placeholder="Customer's Email">
+                        &nbsp;
+                        <button type="submit" name="search-submit">submit</button>
+                        </div>
+                    </form>
+                        <br/>
+                    <p id="searchResult"></p>
+                </div>
+            </div>
+
+            <!-- Update section -->
+            <div class="dashboard-container">
+                <div class="cms-enduser update">
+                    <h3><strong>Update Enduser Here:</strong></h3>
+
+                    <div class="cms-authUser-update">
+                        <form id="enduser-update">
+                            <label>Login Name</label>
+                            <input type="text" name="updateName" placeholder="Enduser's Name">
+                                &nbsp;
+                            <label>Password</label>
+                            <input type="text" name="updatePw" placeholder="Enduser's Password">
+                                &nbsp;
+                            <button type="button" name="continue-button">continues</button>
+                                <br/>
+                            <h3>Please Confirm Again</h3>
+                            <label>Login Name</label>
+                            <input type="text" name="updateNameConfirm" placeholder="Enduser's Name">
+                            <label>Password</label>
+                            <input type="text" name="updatePwConfirm" placeholder="Enduser's Password">
+                                <br/>
+                                <br/>
+                            <label for="imagepath">You image: (File Size Less Than 1MB)</label> 
+                                <br/>
+                                <br/>
+                            <input type="file" accept="image/*" name="mbImageUp" onchange="loadFile(event)"> 
+                                <img id="output" max-width=100% height=auto src=""/>
+                                <script>
+                                    var loadFile = function(event) {
+                                        var output = document.getElementById('output');
+                                        output.src = URL.createObjectURL(event.target.files[0]);
+                                        output.onload = function() {
+                                        URL.revokeObjectURL(output.src)        // free memory
+                                        }
+                                    };
+                                </script>
+                                <br/>
+                                <br/>
+                            <button type="submit" name="update-submit">submit</button>
+                        </form>
+                            <br/>
+                        <p id="updateResult"></p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Add or Delete section -->
+            <div class="dashboard-container">
+                <div class="cms-enduser addDel">
+                    <h3><strong>Add/Del Users:</strong></h3>
+                    <div class="cms-enduser-adddel">
+                        <form id="enduser-adddel">
+                            <label>Action</label>
+
+                            <select name="addordelAction" required>
+                                <option value="none">None</option>
+                                <option value="add">Add User</option>
+                                <option value="del">Delete User</option>
+                            </select>
+                                    <br/>
+                                    <br/>
+                            <div>
+                                <label>The User U Wanna Make Changes</label> <br/>
+                                <label>Name</label>
+                                <input type="text" name="addordelName" placeholder="e.g ChanTaiMan" required>
+                                &nbsp;
+                                <label>Password</label>
+                                <input type="text" name="addordelPw" placeholder="Enduser's Password" required>
+                                &nbsp;
+                                <button type="button" name="adddel-continue-button">Continues</button>
+                            </div>
+                                <br/>
+                            <h4 id="addordelAutoShow"></h4>
+                            <div>
+                                <h4>Confirmation</h4>
+                                <label>Plz Type Again</label> <br/>
+                                <label>Name</label>
+                                <input type="text" name="addordelNameComf" placeholder="e.g ChanTaiMan" required>
+                                    &nbsp;
+                                <label>Password</label>
+                                <input type="text" name="addordelPwComf" placeholder="Enduser's Password" required>
+                                    <br/>
+                                    <br/>
+                                <label>Shown Name</label>
+                                <input type="text" placeholder="e.g 10_Chan Tai Man Tom">
+                                    &nbsp;
+                                <label>Shown Profile</label>
+                                <input type="text" placeholder="e.g Japan Lover">
+                                    <br/>
+                                <button type="submit" name="addordel-submit">submit</button>
+                            </div>
+                                
+                            
+                        </form>
+                    </div>
+                    <p id="addordelResult"></p>
+                </div>
+            </div> 
+
+
+        </div>
+    </main>
+
+    <script>
+        document.getElementById('toggle-left-bar').addEventListener('click', function() {
+            document.querySelector('.left-bar').classList.toggle('active');
+        });
+    </script>
+
+    <script src="js/cms-nav-data_enduser.js"></script>
+    <script src="js/fetch_cmsUser.js"></script>
+    <script src="js/fetch_logout_cms.js"></script>
+
+</body>
+</html>

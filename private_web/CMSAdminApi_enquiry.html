@@ -33,55 +33,58 @@
             <li id="aside-company"><a href="/cms-admin-api-company">Company</a></li>
             <li id="aside-authUser"><a href="/cms-admin-api-authUser">Auth-User</a></li>
             <li id="aside-member"><a href="/cms-admin-api-member">Member</a></li>
+            <li id="aside-enduser"><a href="/cms-admin-api-enduser">Enduser</a></li>
             <li id="aside-subscription"><a href="/cms-admin-api-subscription">Subscription</a></li>
             <li id="aside-enquiry"><a href="/cms-admin-api-enquiry">Contact Us</a></li>
             <li id="aside-package"><a href="/cms-admin-api-package">Package</a></li>
         </ul>
     </aside>
     <main>
-        <div class="dashboard-container">
+        <div class="dashboard-wrapper">
+            <div class="dashboard-container">
 
-            <div class="cms-enquiry search">
-                <h3><strong>Search Equiry Here:</strong></h3>
-                <form id="enquiry-search">
-                    <label>Search With:</label> <br/>
-                    <label for="enquiry-search-email">Email</label>
-                    <input type="checkbox" id="enquiry-search-email" name="email" value="email">
-                    &nbsp;
-                    <label for="enquiry-search-id">_id</label>
-                    <input type="checkbox" id="enquiry-search-id" name="id" value="id">
-                    &nbsp;
-                    <label for="enquiry-search-ctname">Customr's Name</label>
-                    <input type="checkbox" id="enquiry-search-ctname" name="ctname" value="ctname">
-                    &nbsp;
-                    <label for="enquiry-search-subject">Subject</label>
-                    <input type="checkbox" id="enquiry-search-subject" name="subject" value="subject">
-                    <br/>
-                    <br/>
-                    <div class="hidden" id="enquiryEmail">
-                    <label>Email</label>
-                    <input type="email" name="searchEmail" placeholder="Customer's Email">
-                    </div>
-                    &nbsp;
-                    <div class="hidden" id="enquiryId">
-                    <label>_id</label>
-                    <input type="text" name="searchId" placeholder="Enquiry's Database _id">
-                    </div>
-                    &nbsp;
-                    <div class="hidden" id="enquiryName">
-                    <label>Customer's Name</label>
-                    <input type="text" name="searchName" placeholder="Customer's Name">
-                    </div>
-                    &nbsp;
-                    <div class="hidden" id="enquirySubject">
-                    <label>Enquiry's subject</label>
-                    <input type="text" name="searchSubject" placeholder="Enquiry's subject">
-                    </div>
-                    &nbsp;
-                    <button type="submit" class="hidden" name="search-submit">submit</button>
-                </form>
-                <br/>
-                <p id="searchResult"></p>
+                <div class="cms-enquiry search">
+                    <h3><strong>Search Equiry Here:</strong></h3>
+                    <form id="enquiry-search">
+                        <label>Search With:</label> <br/>
+                        <label for="enquiry-search-email">Email</label>
+                        <input type="checkbox" id="enquiry-search-email" name="email" value="email">
+                            &nbsp;
+                        <label for="enquiry-search-id">_id</label>
+                        <input type="checkbox" id="enquiry-search-id" name="id" value="id">
+                            &nbsp;
+                        <label for="enquiry-search-ctname">Customr's Name</label>
+                        <input type="checkbox" id="enquiry-search-ctname" name="ctname" value="ctname">
+                            &nbsp;
+                        <label for="enquiry-search-subject">Subject</label>
+                        <input type="checkbox" id="enquiry-search-subject" name="subject" value="subject">
+                            <br/>
+                            <br/>
+                        <div class="hidden" id="enquiryEmail">
+                        <label>Email</label>
+                        <input type="email" name="searchEmail" placeholder="Customer's Email">
+                        </div>
+                            &nbsp;
+                        <div class="hidden" id="enquiryId">
+                        <label>_id</label>
+                        <input type="text" name="searchId" placeholder="Enquiry's Database _id">
+                        </div>
+                            &nbsp;
+                        <div class="hidden" id="enquiryName">
+                        <label>Customer's Name</label>
+                        <input type="text" name="searchName" placeholder="Customer's Name">
+                        </div>
+                            &nbsp;
+                        <div class="hidden" id="enquirySubject">
+                        <label>Enquiry's subject</label>
+                        <input type="text" name="searchSubject" placeholder="Enquiry's subject">
+                        </div>
+                            &nbsp;
+                        <button type="submit" class="hidden" name="search-submit">submit</button>
+                    </form>
+                        <br/>
+                    <p id="searchResult"></p>
+                </div>
             </div>
         </div>
     </main>

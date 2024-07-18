@@ -34,7 +34,10 @@ fetch('/login/get-auth-user')
 
     favcities.forEach(function(checkbox) {
         let cityName = checkbox.value;
-        let isCityFavorite = data.userCities.some(city => Object.keys(city)[0] === cityName && Object.values(city)[0] === 'T');
+        //checkbox.checked = data.userCities[cityName]==="T";
+        let isCityFavorite = data.userCities.some(city => 
+            city!=null && city.hasOwnProperty(cityName) &&  city[cityName]=== 'T'
+        );
         checkbox.checked = isCityFavorite;
     });
     
@@ -55,7 +58,9 @@ fetch('/login/get-auth-user')
 
     userTrans.forEach(function(checkbox) {
         let transname = checkbox.value;
-        let istransFavorite = data.userTrans.some(tran => Object.keys(tran)[0] === transname && Object.values(tran)[0] === 'T');
+        let istransFavorite = data.userTrans.some(tran => 
+            tran!=null && tran.hasOwnProperty(transname) &&  tran[transname] === 'T'
+        )
         checkbox.checked = istransFavorite;
       });
 
