@@ -268,7 +268,7 @@
 
 /*** Booking ***/
 .booking {
-    background: linear-gradient(rgba(15, 23, 43, .7), rgba(15, 23, 43, .7)), url(../img/booking.jpg);
+    background: linear-gradient(rgba(15, 23, 43, .4), rgba(15, 23, 43, .4)), url(../img/booking.jpg);
     background-position: center center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -363,7 +363,7 @@
     position: relative;
     display: inline-block;
     margin: 0 5px;
-    width: 15px;
+    width: 30px;
     height: 15px;
     border: 1px solid #CCCCCC;
     border-radius: 15px;
@@ -747,6 +747,7 @@
     }
   
     input[type="email"],
+    input[type="acname"],
     input[type="nickname"],
     input[type="text"],
     input[type="password1"],
