@@ -30,7 +30,7 @@ router.get('/createcompany', async (req, res, next) => {
             {sysopname:"admin",
              sysoppswd:"12345678",
              syslevel:"A"},
-            {sysopname:"superisor",
+            {sysopname:"supervisor",
              sysoppswd:"12345678",
              syslevel:"S"},
             {sysopname:"operator",

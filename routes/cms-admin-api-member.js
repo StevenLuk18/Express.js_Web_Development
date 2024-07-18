@@ -48,41 +48,39 @@ router.get('/', (req, res, next) => {
   try{
 
     await client.connect()
-    const sysoperator = client.db("travel")
-    /* const data = await sysoperator.collection('member').find({$or:[{mpemail:searchEmail},{_id: new ObjectId(stringid)}]}).toArray() */
-    const data = await sysoperator.collection('member').findOne({$or:[{mpemail:searchEmail},{_id:new ObjectId(searchId)}]})
-    console.log(data)
-    if (data) {
-    res.json({
-      _id:data._id,
-      mpemail:data.mpemail,
-      mppswd: data.mpname,
-      mpname:data.mppswd,
-      mpusername:data.mpusername,
-      mpgender:data.mpgender,
-      mpjoindate:data.mpjoindate,
-      mpchina:data.mpchina,
-      mpjapan:data.mpjapan,
-      mpkorean:data.mpkorean,
-      mptaiwan:data.mptaiwan,
-      mpeurope:data.mpeurope,
-      mpusa:data.mpusa,
-      mpengland:data.mpengland,
-      mpcanada:data.mpcanada,
-      mpcntyother:data.mpcntyother,
-      mpcntyothdesc:data.mpcntyothdesc,
-      mpairplan:data.mpairplan,
-      mpcruise:data.mpcruise,
-      mptrain:data.mptrain,
-      mprail:data.mprail,
-      mptranother:data.mptranother,
-      mptranothdesc:data.mptranothdesc,
-      mpimagepath:data.mpimagepath,
-
-    })
-  } else {
-      res.status(404).json('Please confirm your inputs are correct !!!')
-    }
+    const db = client.db("travel")
+    let query = {}
+  
+      if (searchId) {
+        if (typeof searchId === 'string' && searchId.length === 24) {
+          query._id = new ObjectId(searchId)
+        } else if (Array.isArray(searchId) && searchId.length === 12 && searchId.every(byte => typeof byte === 'number' && byte >= 0 && byte <= 255)) {
+          query._id = new ObjectId(Buffer.from(searchId))
+        } else if (typeof searchId === 'number' && Number.isInteger(searchId)) {
+          query._id = searchId
+        } else {
+          res.status(400).json('Invalid searchId format')
+        }
+      }
+  
+      if (searchEmail) {
+        query.mpemail = searchEmail
+      }
+  
+      const data = await db.collection('member').findOne(query)
+  
+      //Use reduce to store data
+      if (data) {
+        const subscribeKeys = Object.keys(data).filter(key => key.startsWith('mp') || key.startsWith('_id'));
+        const subscribeData = subscribeKeys.reduce((acc, key) => {
+          acc[key] = data[key];
+          return acc;
+        }, {});
+  
+        res.json(subscribeData)
+        } else {
+          res.status(404).json('No data found')
+        }
 
   } catch (err){
     console.log(err)

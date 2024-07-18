@@ -68,27 +68,34 @@ router.get('/', (req, res, next) => {
   }
 }).get('/numOfmembers', async (req, res) => {
   console.log('entering numOfmember api')
-  client.connect()
+  await client.connect()
   const db = client.db('travel')
   const data = await db.collection('member').countDocuments()
   res.json(data) 
 }).get('/numOfsubs', async (req, res) => {
   console.log('entering numOfsubs api')
-  client.connect()
+  await client.connect()
   const db = client.db('travel')
   const data = await db.collection('subscribe').countDocuments()
   res.json(data)
 }).get('/numOfenqus', async (req,res) => {
   console.log('entering numOfenqus api')
-  client.connect()
+  await client.connect()
   const db = client.db('travel')
   const data = await db.collection('contactus').countDocuments()
   res.json(data)
 }).get('/numOftesti', async (req,res) => {
-  console.log('entering numOfenqus api')
-  client.connect()
+  console.log('entering numOftesti api')
+  await client.connect()
   const db = client.db('travel')
   const data = await db.collection('testimonial').countDocuments()
-  res.json(data)})
+  res.json(data)
+}).get('/numOfpacks', async (req,res) => {
+  console.log('entering numOfpacks api')
+  await client.connect()
+  const db = client.db('travel')
+  const data = await db.collection('package').countDocuments()
+  res.json(data)
+})
 
 module.exports = router;

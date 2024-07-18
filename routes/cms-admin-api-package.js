@@ -59,7 +59,8 @@ router.get('/', (req, res, next) => {
       }
   
       const data = await db.collection('package').findOne(query)
-  
+      
+      //Use reduce to store data
       if (data) {
         const packageKeys = Object.keys(data).filter(key => key.startsWith('pk') || key.startsWith('_id'));
         const packageData = packageKeys.reduce((acc, key) => {

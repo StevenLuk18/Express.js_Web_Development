@@ -30,28 +30,42 @@ router.get('/', (req, res, next) => {
 
   const {searchMethod, searchEmail ,searchId} = req.body
   console.log('Search loading')
-
-  /* const stringid = JSON.stringify(searchId) */
  
   try{
     await client.connect()
     const db = client.db('travel')
-    /* const data = await db.collection('subscribe').findOne({$or:[{ sbemail: searchEmail },{ _id: new ObjectId(stringid)}]}) */
-    const data = await db.collection('subscribe').findOne({$or:[{ sbemail: searchEmail},{_id: new ObjectId(searchId)}]})
+    let query = {}
   
-
-    if(data){
-      res.json({
-        _id:data._id,
-        sbemail:data.sbemail,
-        sbdate:data.sbdate
-      })
-
-    } else {
-      console.log('No data found');
-      res.status(404).json('Please confirm your inputs are correct !!!');
-    }
-
+      if (searchId) {
+        if (typeof searchId === 'string' && searchId.length === 24) {
+          query._id = new ObjectId(searchId)
+        } else if (Array.isArray(searchId) && searchId.length === 12 && searchId.every(byte => typeof byte === 'number' && byte >= 0 && byte <= 255)) {
+          query._id = new ObjectId(Buffer.from(searchId))
+        } else if (typeof searchId === 'number' && Number.isInteger(searchId)) {
+          query._id = searchId
+        } else {
+          res.status(400).json('Invalid searchId format')
+        }
+      }
+  
+      if (searchEmail) {
+        query.sbemail = searchEmail
+      }
+  
+      const data = await db.collection('subscribe').findOne(query)
+  
+      //Use reduce to store data
+      if (data) {
+        const subscribeKeys = Object.keys(data).filter(key => key.startsWith('sb') || key.startsWith('_id'));
+        const subscribeData = subscribeKeys.reduce((acc, key) => {
+          acc[key] = data[key];
+          return acc;
+        }, {});
+  
+        res.json(subscribeData)
+        } else {
+          res.status(404).json('No data found')
+        }
   } catch (err) {
     console.log(err)
   } finally {

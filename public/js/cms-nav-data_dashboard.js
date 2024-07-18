@@ -32,3 +32,9 @@ fetch('/cms-admin-api/numOftesti')
 .then(data => {
   document.getElementById('cms-numOftestimonials').textContent = data
 })
+
+fetch('/cms-admin-api/numOfpacks')
+.then(response => response.json())
+.then(data => {
+  document.getElementById('cms-numOfpackages').textContent = data
+})

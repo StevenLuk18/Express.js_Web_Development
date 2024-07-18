@@ -101,7 +101,30 @@ document.addEventListener('DOMContentLoaded', function() {
         console.log('cant find the elements !!');
     }
 });
-  
-  function updateInputDisabledState(checkbox, input) {
+
+
+function updateInputDisabledState(checkbox, input) {
     input.disabled = !checkbox.checked;
   }
+
+
+  function checkPasswordMatch() {
+    const profilePw1 = document.getElementById('pw1');
+    const profilePw2 = document.getElementById('pw2');
+    const submitBtn = document.getElementById('submit');
+  
+    if (profilePw1.value === profilePw2.value) {
+      profilePw1.style.border = '2px solid green';
+      profilePw2.style.border = '2px solid green';
+      submitBtn.style.display = 'block';
+    } else {
+      profilePw1.style.border = '2px solid red';
+      profilePw2.style.border = '2px solid red';
+      submitBtn.style.display = 'none';
+    }
+  }
+  
+  // Call the checkPasswordMatch function whenever the password fields are changed
+  document.getElementById('pw1').addEventListener('input', checkPasswordMatch);
+  document.getElementById('pw2').addEventListener('input', checkPasswordMatch);
+
