@@ -73,7 +73,7 @@ router.get('/', (req, res, next) => {
     const data = await db.findOne({$and:[{sysopname:req.body.updateName},{sysoppswd:req.body.updatePw},{syslevel:req.body.updateLevel}]})
     console.log(data)
     if (data) {
-      if (updateNameComf === updateName && updatePwComf === updatePw && updateLevelComf === updateLevel && updateNameReal === updateNameComf) {
+      if (updateNameComf === updateName && updatePwComf === updatePw && updateLevelComf === updateLevel) {
         data.sysopname = updateNameReal
         data.sysoppswd = updatePwReal
         data.syslevel = updateLevelReal
