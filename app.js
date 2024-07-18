@@ -27,6 +27,7 @@ app.use(express.urlencoded({ extended: false }));
 //app.use(cookieParser());
 app.use(session({secret:'secret string', resave:false, saveUninitialized:true, cookie: {
   expires: new Date(Date.now() + 36000 * 1000) }}));// 10 hours from now
+
 app.use(express.static(path.join(__dirname, 'public')));
 
 // foreach api_setting file to get app.use() params
@@ -41,7 +42,7 @@ app.get('/api/company', async (req, res) => {
     const db = client.db("travel");
     const company = await db.collection("company").findOne({});
     res.json(company);
-    client.close();
+    await client.close();
   } catch (error) {
     console.error('Error fetching company data:', error);
     res.status(500).json({ error: 'Failed to fetch company data'});
@@ -54,7 +55,7 @@ app.get('/api/enduser', async (req, res) => {
     const db = client.db("travel");
     const enduser = await db.collection("enduser").find({});
     res.json(enduser);
-    client.close();
+    await client.close();
   } catch (error) {
     console.error('Error fetching enduser data:', error);
     res.status(500).json({ error: 'Failed to fetch enduser data'});
@@ -67,7 +68,7 @@ app.get('/api/testimonial', async (req, res) => {
     const db = client.db("travel");
     const testimonial = await db.collection("testimonial").find({});
     res.json(testimonial);
-    client.close();
+    await client.close();
   } catch (error) {
     console.error('Error fetching enduser data:', error);
     res.status(500).json({ error: 'Failed to fetch enduser data'});
@@ -78,14 +79,28 @@ app.get('/api/member', async (req, res) => {
   try {
     const client = await MongoClient.connect(mongoUrl);
     const db = client.db("travel");
-    const member = await db.collection("member").find({});
-    res.json(member);
-    client.close();
+    const member = await db.collection("member").find({}).toArray();
+    res.json(Object.keys(member));
+    await client.close();
   } catch (error) {
     console.error('Error fetching enduser data:', error);
     res.status(500).json({ error: 'Failed to fetch enduser data'});
   }
 });
+
+// Get DB collection info
+app.get('/api/alldb', async (req, res) => {
+  try {
+    const client = await MongoClient.connect(mongoUrl);
+    const db = client.db("travel");
+    const collectionNames = await db.listCollections().toArray();
+    res.json(collectionNames.map(c => c.name));
+    await client.close();
+  } catch (error) {
+    console.error('Error fetching enduser data:', error);
+    res.status(500).json({ error: 'Failed to fetch enduser data'});
+  }
+})
 
 // due to the app.listen had been called by bin/www, so no need at here 
 //app.listen(port, () => {

@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Great Travel Agency</title>
+    <link rel="stylesheet" href="css/cms_main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+    <link rel="stylesheet" href="css/cms_dashboard.css">
+    <style>
+        .hidden{
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="top-bar">
+            <button class="list-btn" id="toggle-left-bar">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+            <h1>Great Travel Agency</h1>
+            <div class="user-info">
+                <span>Username:<strong id="cms-username"></strong></span>
+                <i class="fa-solid fa-user"></i>
+                <button id="logout-btn" type="button" style="display: inline-block;"><i class="fas fa-sign-out-alt"></i> Logout</button>
+            </div>
+        </nav>
+    </header>
+
+    <aside class="left-bar">
+        <ul>
+            <li id="aside-dashboard"><a href="/cms-admin-api">Dashboard</a></li>
+            <li id="aside-company"><a href="/cms-admin-api-company">Company</a></li>
+            <li id="aside-authUser"><a href="/cms-admin-api-authUser">Auth-User</a></li>
+            <li id="aside-member"><a href="/cms-admin-api-member">Member</a></li>
+            <li id="aside-subscription"><a href="/cms-admin-api-subscription">Subscription</a></li>
+            <li id="aside-enquiry"><a href="/cms-admin-api-enquiry">Contact Us</a></li>
+            <li id="aside-package"><a href="/cms-admin-api-package">Package</a></li>
+        </ul>
+    </aside>
+    <main>
+        <div class="dashboard-wrapper">
+            <!-- manage db -->
+            <div class="dashboard-container allColl">
+                <div class="cms-allcoll-container">
+                    <h3><strong>All Existing Collections</strong></h3>
+                    <li id="cms-allColl"></li>
+                </div>
+            </div>
+
+            <br/>
+
+            <span><h1>Important Information / KPI</h1></span>
+
+            <div class="dashboard-container KPI">
+                <div class="cms-kpi-container numOfmb">
+                    <h3><strong>Number Of Members ::</strong></h3>
+                    <h1 id="cms-numOfmembers"></h1>
+                </div>
+                
+                <div style="display: block; margin: 20px;"></div>
+
+                <div class="cms-kpi-container numOfsub">
+                    <h3><strong>Number Of Subscriptions ::</strong></h3>
+                    <h1 id="cms-numOfsubscribes"></h1>
+                </div>
+
+                <div style="display: block; margin: 20px;"></div>
+
+                <div class="cms-kpi-container numOfenqu">
+                    <h3><strong>Number Of Enquiries ::</strong></h3>
+                    <h1 id="cms-numOfenquiries"></h1>
+                </div>
+            </div>
+
+            <br/>
+            <br/>
+            
+            <div class="dashboard-container KPI">
+                <div class="cms-kpi-container numOftestial">
+                    <h3><strong>Number Of Testimonials ::</strong></h3>
+                    <h1 id="cms-numOftestimonials"></h1>
+                </div>
+
+                <div style="display: block; margin: 20px;"></div>
+
+                <div class="cms-kpi-container numOfpackage">
+                    <h3><strong>Number Of Packages ::</strong></h3>
+                    <h1 id="cms-numOfpackages"></h1>
+                </div>
+
+
+            </div>
+        </div>
+    </main>
+
+    <script>
+        document.getElementById('toggle-left-bar').addEventListener('click', function() {
+            document.querySelector('.left-bar').classList.toggle('active');
+        });
+    </script>
+
+    <script src="js/cms-nav-data_dashboard.js"></script>
+    <script src="js/fetch_cmsUser.js"></script>
+    <script src="js/fetch_logout_cms.js"></script>
+
+</body>
+</html>

@@ -7,13 +7,13 @@ const url = "mongodb://localhost:27017/";
 const client = new MongoClient(url);
 
 
-router.get('/', (req, res) => {
+router.get('/', async (req, res) => {
   if (req.session.authUser) {
 
     console.log(`${req.session.authUser[2]} is logging out!`)
-    // 從 session 中移除使用者資訊
-    delete req.session.authUser;
-    // 銷毀 session
+    // del user info from session
+    await delete req.session.authUser;
+    // destory session
     req.session.destroy((err) => {
       if (err) {
         console.error('Error destroying session:', err);
@@ -23,9 +23,10 @@ router.get('/', (req, res) => {
       }
     });
   } else {
-    // 如果使用者尚未登入,則直接重導向至登入頁面
+    // if never in login status
     res.redirect('/');
   }
-});
+})
+
 
 module.exports = router

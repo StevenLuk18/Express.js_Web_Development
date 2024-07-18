@@ -6,7 +6,7 @@ const MongoClient = require('mongodb').MongoClient;
 const ObjectId = require('mongodb').ObjectId;  // 1
 const client = new MongoClient("mongodb://localhost:27017/");         // define which drive of database or primary/secondly server etc.
 
-router.get('/createcomp', async (req, res, next) => {
+router.get('/createcompany', async (req, res, next) => {
     try {
         await client.connect();
         const db = client.db("travel");                // use great travel agency company profile
@@ -28,11 +28,15 @@ router.get('/createcomp', async (req, res, next) => {
         const kln = db.collection("sysoperator");
         await kln.insertMany([
             {sysopname:"admin",
-             sysoppswd:"12345678"},
-            {sysopname:"superisor",
-             sysoppswd:"12345678"},
+             sysoppswd:"12345678",
+             syslevel:"A"},
+            {sysopname:"supervisor",
+             sysoppswd:"12345678",
+             syslevel:"S"},
             {sysopname:"operator",
-             sysoppswd:"12345678"}
+             sysoppswd:"12345678",
+             syslevel:"O"
+            }
         ]);
         res.send("Done system operators");
     } finally {
@@ -66,7 +70,7 @@ router.get('/createcomp', async (req, res, next) => {
              mprail:"T",
              mptranother:"T",
              mptranothdesc:"annaabcdefg456",
-             mpimagepath:"T",
+             mpimagepath:"/images/member/annachan@gmail.com.jpg",
             },
             {mpemail:"paulho@gmail.com",
              mppswd:"12345678",
@@ -90,7 +94,7 @@ router.get('/createcomp', async (req, res, next) => {
              mprail:"T",
              mptranother:"T",
              mptranothdesc:"paulabcdefg456",
-             mpimagepath:"T",
+             mpimagepath:"/images/member/paulho@gmail.com.jpg",
             },
             {mpemail:"elaineng@gmail.com",
              mppswd:"12345678",
@@ -114,7 +118,7 @@ router.get('/createcomp', async (req, res, next) => {
              mprail:"T",
              mptranother:"T",
              mptranothdesc:"elaineabcdefg456",
-             mpimagepath:"T",
+             mpimagepath:"/images/member/elaineng@gmail.com.jpg",
             },
             {mpemail:"appleli@gmail.com",
              mppswd:"12345678",
@@ -138,7 +142,7 @@ router.get('/createcomp', async (req, res, next) => {
              mprail:"T",
              mptranother:"T",
              mptranothdesc:"appleabcdefg456",
-             mpimagepath:"T",
+             mpimagepath:"/images/member/appleli@gmail.com.jpg",
             }            
         ]);
         res.send("Done member profile");
@@ -152,15 +156,15 @@ router.get('/createcomp', async (req, res, next) => {
         const kln = db.collection("subscribe");
         await kln.insertMany([
             {sbemail:"annachan@gmail.com",
-             sbdate:new Date("2024-05-01")},
+             sbdate: "2024-05-01"},
             {sbemail:"paulho@gmail.com",
-             sbdate:new Date("2024-05-02")},
+             sbdate: "2024-05-02"},
             {sbemail:"elaineng@gmail.com",
-             sbdate:new Date("2024-05-03")},
+             sbdate: "2024-05-03"},
             {sbemail:"appleli@gmail.com",
-             sbdate:new Date("2024-05-04")},
+             sbdate: "2024-05-04"},
             {sbemail:"chantaiman@gmail.com",
-             sbdate:new Date("2024-05-05")}
+             sbdate: "2024-05-05"}
         ]);
         res.send("Done subscribe newsletter");
     } finally {
@@ -172,33 +176,26 @@ router.get('/createcomp', async (req, res, next) => {
         const db = client.db("travel");                          // use end user 
         const kln = db.collection("enduser");
         await kln.insertMany([
-            {eulogin:"peterlaw",
-             eupswd:"12345678",
-             euname:"25_Law Pui Ming Peter",
-             euprofile:"aabbcc",
-             eucrdate:new Date("2024-05-01"),
-             euimage:"/images/enduser/peterlaw.jpg",            
-            },
             {eulogin:"stevenluk",
              eupswd:"12345678",
              euname:"10_Luk Ka Chun Steven",
-             euprofile:"ffgghh",
+             euprofile:"Japan Lover",
              eucrdate:new Date("2024-05-01"),
-             euimage:"/images/enduser/stevenluk.jpg",            
+             euimage:"/images/enduser/stevenluk@gmail.com.png",            
             },
             {eulogin:"wongkafai",
              eupswd:"12345678",
              euname:"24_Wong Ka Fai",
-             euprofile:"hhKkLl",
+             euprofile:"Europe Lover",
              eucrdate:new Date("2024-05-01"),
-             euimage:"/images/enduser/wongkafai.jpg",            
+             euimage:"/images/enduser/wongkafai@gmail.com.png",            
             },
-            {eulogin:"enduser",
+            {eulogin:"peterlaw",
              eupswd:"12345678",
-             euname:"Dummy end user",
-             euprofile:"Dummy xxyyzz",
+             euname:"25_Law Pui Ming Peter",
+             euprofile:"Love Round the World Love Round the World Love Round the World Love Round the World Love Round the WorldLove Round the World",
              eucrdate:new Date("2024-05-01"),
-             euimage:"/images/enuser/enduser.jpg",            
+             euimage:"/images/enduser/peterlaw@gmail.com.png",            
             }
         ]);
         res.send("Done system enduser");
@@ -212,49 +209,49 @@ router.get('/createcomp', async (req, res, next) => {
         const kln = db.collection("testimonial");
         await kln.insertMany([
             {tmname:"annachan@gmail.com",
-             tmdate:new Date("2024-06-25"),
+             tmdate:"2024-06-25",
              tmcountry:"China",
              tmtest:"Anna Chan testimonial description",
              tmcrdate:new Date("2024-06-26")
             },
             {tmname:"paulho@gmail.com",
-             tmdate:new Date("2024-06-04"),
+             tmdate:"2024-06-04",
              tmcountry:"Korean",
              tmtest:"Paul Ho testimonial description",
              tmcrdate:new Date("2024-06-15")
             },
             {tmname:"elaineng@gmail.com",
-             tmdate:new Date("2024-06-25"),
+             tmdate:"2024-06-25",
              tmcountry:"Japan",
              tmtest:"はタイが一番好きです。朝と夜の 2 つのスタイルがとても違います。素晴らしいと思います。私は夜のツアーがとても好きです。",
              tmcrdate:new Date("2024-06-27")
             },
-            {tnname:"appleli@gmail.com",
-             tmdate:new Date("2024-06-01"),
+            {tmname:"appleli@gmail.com",
+             tmdate:"2024-06-01",
              tmcountry:"Holland",
              tmtest:"The Iberico pig is super delicious. The cuttlefish noodles, egg yolk noodles, and round tiramisu are all delicious. I was really happy to receive the card thanking Jingxuan Travel for my birthday. I also want to thank Candy Lai for preparing the cake for us. I eat cake every birthday. Before I left, I felt a little sad. This year I couldn’t eat the cake or blow out the candles. But in the end I was very happy.", 
              tmcrdate:new Date("2024-06-15")
             },
             {tmname:"annachan@gmail.com",
-             tmdate:new Date("2024-05-15"),
+             tmdate:"2024-05-15",
              tmcountry:"New York, USA",
              tmtest:"The tour leader Peter is really super nice. I like it very much. He is knowledgeable, patient, considerate, emotionally stable, cheerful and funny, and loves to play and take photos. I think the tour leader is more enthusiastic about various attractions than us. He will always be there. He waited for every group member to finish their homework before leaving. He kept observing us to see if we encountered any problems. He always fulfilled our needs and helped us take photos and taught us how to take photos. I really liked it.",
              tmcrdate:new Date("2024-06-01")
             },
             {tmname:"paulho@gmail.com",
-             tmdate:new Date("2024-06-14"),
+             tmdate:"2024-06-14",
              tmcountry:"England",
              tmtest:"Wah哥领队，而且行程遇到问题都是平稳解决，完全没有难倒他的事情菁选旅游感谢你们让我们的蜜月甜美又充实，还好当时没有被恐惧吓退，非常开心是和你们一起去旅行",
              tmcrdate:new Date("2024-06-30")
             },
             {tmname:"elaineng@gmail.com",
-             tmdate:new Date("2024-04-01"),
+             tmdate:"2024-04-01",
              tmcountry:"Austria - Lake Hallstatt",
              tmtest:"Elaine Ng testimonial description",
              tmcrdate:new Date("2024-04-20")
             },
-            {tnname:"appleli@gmail.com",
-             tmdate:new Date("2024-05-03"),
+            {tmname:"appleli@gmail.com",
+             tmdate:"2024-05-03",
              tmcountry:"Tailand Bangkok",
              tmtest:"Apple Li testimonial description", 
              tmcrdate:new Date("2024-05-18")
@@ -287,5 +284,71 @@ router.get('/createcomp', async (req, res, next) => {
     } finally {
         await client.close();
     }
+}).get('/createpackage', async (req, res, next) => {
+    try {
+        await client.connect();
+        const db = client.db("travel");
+        const package = db.collection("package");
+        await package.insertMany([
+            {
+                pkname: "Thailand-Bangkok",
+                pkdate: new Date("2024-06-01"),
+                pkcountry: "Thailand",
+                pkdescription: "Experience the vibrant city of Bangkok with this travel package.",
+                pkcreatedAt: new Date("2023-12-20"),
+                pkprice: 12999.99,
+                pkduration: 7,
+                pkinclusions: ["Hotel accommodation", "City tours", "Boat rides"],
+                pkavailability: 25,
+                pkjoinByDeadline: new Date("2024-04-20"),
+                pkhighlights: ["Visit the Grand Palace", "Explore the floating markets"]
+            },
+            {
+                pkname: "Austria-Lake-Hallstatt",
+                pkdate: new Date("2024-07-01"),
+                pkcountry: "Austria",
+                pkdescription: "Discover the picturesque town of Hallstatt and its stunning lake in Austria.",
+                pkcreatedAt: new Date("2024-01-20"),
+                pkprice: 22399.99,
+                pkduration: 9,
+                pkinclusions: ["Hotel accommodation", "Guided tours", "Boat cruises"],
+                pkavailability: 18,
+                pkjoinByDeadline: new Date("2024-05-20"),
+                pkhighlights: ["Visit the historic old town", "Enjoy the scenic lake views"]
+            },
+            {
+                pkname: "Japan-Osaka-Wakayama",
+                pkdate: new Date("2024-08-01"),
+                pkcountry: "Japan",
+                pkdescription: "Explore the cities of Osaka and Wakayama in Japan with this comprehensive package.",
+                pkcreatedAt: new Date("2024-02-20"),
+                pkprice: 15799.99,
+                pkduration: 12,
+                pkinclusions: ["Hotel accommodation", "Transportation", "Cultural experiences"],
+                pkavailability: 22,
+                pkjoinByDeadline: new Date("2024-06-20"),
+                pkhighlights: ["Visit the Osaka Castle", "Explore the Wakayama Prefecture"]
+            },
+            {
+                pkname: "Holland-Rotterdam",
+                pkdate: new Date("2024-09-01"),
+                pkcountry: "Netherlands",
+                pkdescription: "Discover the vibrant city of Rotterdam, the Netherlands, with this comprehensive package.",
+                pkcreatedAt: new Date("2024-03-20"),
+                pkprice: 20999.99,
+                pkduration: 8,
+                pkinclusions: ["Hotel accommodation", "City tours", "Museum visits"],
+                pkavailability: 20,
+                pkjoinByDeadline: new Date("2024-07-20"),
+                pkhighlights: ["Explore the unique architecture", "Visit the Rotterdam Harbour"]
+            }
+            ]);
+        res.send('Done create packages')
+        
+        } finally {
+            await client.close();
+        }
 })
+
+
 module.exports = router;

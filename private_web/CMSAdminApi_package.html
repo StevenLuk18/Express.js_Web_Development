@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Great Travel Agency</title>
+    <link rel="stylesheet" href="css/cms_main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+    <style>
+        .hidden{
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="top-bar">
+            <button class="list-btn" id="toggle-left-bar">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+            <h1>Great Travel Agency</h1>
+            <div class="user-info">
+                <span>Username:<strong id="cms-username"></strong></span>
+                <i class="fa-solid fa-user"></i>
+                <button id="logout-btn" type="button" style="display: inline-block;"><i class="fas fa-sign-out-alt"></i> Logout</button>
+            </div>
+        </nav>
+    </header>
+
+    <aside class="left-bar">
+        <ul>
+            <li id="aside-dashboard"><a href="/cms-admin-api">Dashboard</a></li>
+            <li id="aside-company"><a href="/cms-admin-api-company">Company</a></li>
+            <li id="aside-authUser"><a href="/cms-admin-api-authUser">Auth-User</a></li>
+            <li id="aside-member"><a href="/cms-admin-api-member">Member</a></li>
+            <li id="aside-subscription"><a href="/cms-admin-api-subscription">Subscription</a></li>
+            <li id="aside-enquiry"><a href="/cms-admin-api-enquiry">Contact Us</a></li>
+            <li id="aside-package"><a href="/cms-admin-api-package">Package</a></li>
+        </ul>
+    </aside>
+    <main>
+        <div class="dashboard-wrapper">
+
+            <div class="dashboard-container">
+                <div class="cms-package search">
+                    <h3><strong>Search Package Here:</strong></h3>
+                    <form id="package-search">
+                        <label>Search With:</label><br/>
+                        <label for="package-search-id">_id</label>
+                        <input type="checkbox" name="packageId" id="package-search-id" value="_id">
+                        &nbsp;
+                        <label for="package-search-name">Name</label>
+                        <input type="checkbox" name="packageName" id="package-search-name" value="name">
+                        &nbsp;
+                        <label for="package-search-country">Country</label>
+                        <input type="checkbox" name="packageCountry" id="package-search-country" value="country">
+                        <br/>
+                        <br/>
+                        <div id="packageSearchId" class="hidden">
+                        <label for="packageSearchId">_id</label>
+                        <input type="text"  name="searchId" placeholder="package's db _id">
+                        </div>
+                        &nbsp;
+                        <div id="packageSearchName" class="hidden">
+                        <label for="packageSearchName">Package Name</label>
+                        <input type="text" name="searchName" placeholder="package's Name">
+                        </div>
+                        &nbsp;
+                        <div id="packageSearchCountry" class="hidden">
+                        <label for="packageSearchCountry">Package Country</label>
+                        <input type="text" name="searchCountry" placeholder="package's Country">
+                        </div>
+                        &nbsp;
+                        <button type="submit" class="hidden" name="search-submit">submit</button>
+                    </form>
+                    <br/>
+                    <p id="searchResult"></p>
+                </div>
+            </div>
+
+            <br/>
+
+        </div>
+    </main>
+
+    <script>
+        document.getElementById('toggle-left-bar').addEventListener('click', function() {
+            document.querySelector('.left-bar').classList.toggle('active');
+        });
+    </script>
+
+    <script src="js/cms-nav-data_package.js"></script>
+    <script src="js/fetch_cmsUser.js"></script>
+    <script src="js/fetch_logout_cms.js"></script>
+    
+</body>

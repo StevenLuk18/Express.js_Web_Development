@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Great Travel Agency</title>
+    <link rel="stylesheet" href="css/cms_main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+    <style>
+        .hidden{
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="top-bar">
+            <button class="list-btn" id="toggle-left-bar">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+            <h1>Great Travel Agency</h1>
+            <div class="user-info">
+                <span>Username:<strong id="cms-username"></strong></span>
+                <i class="fa-solid fa-user"></i>
+                <button id="logout-btn" type="button" style="display: inline-block;"><i class="fas fa-sign-out-alt"></i> Logout</button>
+            </div>
+        </nav>
+    </header>
+
+    <aside class="left-bar">
+        <ul>
+            <li id="aside-dashboard"><a href="/cms-admin-api">Dashboard</a></li>
+            <li id="aside-company"><a href="/cms-admin-api-company">Company</a></li>
+            <li id="aside-authUser"><a href="/cms-admin-api-authUser">Auth-User</a></li>
+            <li id="aside-member"><a href="/cms-admin-api-member">Member</a></li>
+            <li id="aside-subscription"><a href="/cms-admin-api-subscription">Subscription</a></li>
+            <li id="aside-enquiry"><a href="/cms-admin-api-enquiry">Contact Us</a></li>
+            <li id="aside-package"><a href="/cms-admin-api-package">Package</a></li>
+        </ul>
+    </aside>
+    <main>
+        <div class="dashboard-wrapper">
+
+            <div class="dashboard-container">
+                <div class="cms-subscription search">
+                    <h3><strong>Search Subscription:</strong></h3>
+                    <form id="subscription-search">
+                        <label>Search With:</label> <br/>
+                        <label for="subscription-search-email">Email</label>
+                        <input type="radio" id="subscription-search-email" name="subscription-radio" value="email">
+                        &nbsp;
+                        <label for="subscription-search-id">_id</label>
+                        <input type="radio" id="subscription-search-id" name="subscription-radio" value="email">
+                        <br/>
+                        <br/>
+                        <label for="subscriptionEmail" id="subscriptionEmail-label" class="hidden">Email</label>
+                        <input type="email" id="subscriptionEmail" name="searchEmail" placeholder="Email" class="hidden">
+                        &nbsp;
+                        <label for="subscriptionId" id="subscriptionId-label" class="hidden">_id</label>
+                        <input type="text" id="subscriptionId" name="searchId" placeholder="Database _id" class="hidden">
+                        &nbsp;
+                        <!-- <label>Date</label>
+                        <input type="text" name="searchDate" placeholder="Subscription Date">
+                        &nbsp; -->
+                        <button type="submit" name="search-submit" class="hidden">submit</button>
+                    </form>
+                    <br/>
+                    <p id="searchResult"></p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        document.getElementById('toggle-left-bar').addEventListener('click', function() {
+            document.querySelector('.left-bar').classList.toggle('active');
+        });
+    </script>
+
+    <script src="js/cms-nav-data_subscription.js"></script>
+    <script src="js/fetch_cmsUser.js"></script>
+    <script src="js/fetch_logout_cms.js"></script>
+    
+</body>

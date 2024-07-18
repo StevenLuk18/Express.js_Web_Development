@@ -71,7 +71,7 @@
                              <% if (!u_name) { %>
                              <button id="login-btn" class="btn"><i class="fas fa-sign-in-alt"></i> Login / Sign up</a>
                              <% } else { %>
-                             <button id="logout-btn" class="btn hidden" type="button" style="display: inline-block;"><i class="fas fa-sign-out-alt"></i> Logout</a>   
+                             <button id="logout-btn" class="btn hidden" type="button" style="display: inline-block;"><i class="fas fa-sign-out-alt"></i> Logout</button>   
                              <% } %>
                     </div>    
                 </div>
@@ -148,109 +148,145 @@
     <!-- Registration End -->
 
     <!-- modify the input form layout and css dated 07/07/2024 -->
-     <main> 
+    <main> 
 
-        <div class="creatAC-form-container" action="#" method="post"> 
+        <!-- <div class="creatAC-form-container" action="#" method="post"> -->
+        <div class="creatAC-form-container"> 
+            <form id="creatAC-form"> <!-- action="/myprofile/infoUpdate" method="post" -->
+                <h2>Please update your information.</h2>
+                <label for="email">Email:</label>         
+                <input type="email" class="email" name="email" placeholder="e.g. chantaiman@gmail.com" maxlength="50"  readonly> 
+        
+                <label for="acname">Name:</label>
+                <input type="acname" class="acname" name="acname" placeholder="e.g. Chan Tai Man" pattern="[a-z A-Z]+" maxlength="40">
 
-         <form id="creatAC-form">
-         <h2>Please update your information.</h2><br>
-         <label for="email">Email :</label>         
-         <input type="email" class="email" name="email" placeholder="e.g. abc@gmail.com" maxlength="50" required> 
- 
-         <label for="acname">Name :</label>
-         <input type="acname" class="acname" name="acname" placeholder="e.g. Peter Law" pattern="[a-z A-Z]+" maxlength="30" required>
+                <label for="nickname">Nick Name:</label>
+                <input type="nickname" class="nickname" name="nickname" placeholder="e.g. Tai Man" pattern="[a-z A-Z]+" maxlength="40" required>
+                
+                <label for="pw1">Password:</label>
+                <input id="pw1" name="pw1" type="password1" placeholder="Enter password" minlength="3" maxlength="25" required>
 
-         <label for="pw1">Password :</label>
-         <input id="pw1" name="pw1" type="password1" placeholder="Enter password" minlength="8" maxlength="25" required>
+                <label for="pw2">Comfirm password:</label>
+                <input id="pw2" name="pw2" type="password2" placeholder="Confirm password" minlength="3" maxlength="25" onkeypress="" required>
 
-         <label for="pw2">Comfirm password :</label>
-         <input id="pw2" name="pw2" type="password2" placeholder="Confirm password" minlength="8" maxlength="25" onkeypress="" required>
+                <fieldset data-role="controlgroup">
+                    <legend>Choose your gender:</legend>
+                    <label for="male">Male</label>
+                    <input type="radio" name="gender" id="male" value="M" required>
+                    <label for="female">Female</label>  
+                    <input type="radio" name="gender" id="female" value="F" required>
+                </fieldset>
 
-         <fieldset data-role="controlgroup">
-            <legend>Choose your gender : </legend>
-            <label for="male">Male</label>
-            <input type="radio" name="gender" id="male" value="male" required>
-            <label for="female">Female</label>  
-            <input type="radio" name="gender" id="female" value="female" required>
-         </fieldset>
+                <label for="imagepath">You image:</label> 
+                <!-- 1st way for image 
+                action="/file/single" method="post" enctype="multipart/form-data">   
+                    2nd way 
+                <input type="file" id="imagePath" name="myFile" accept="image/*" >     
+                    3th way 
+                <img id="blah" alt="your image" width="150" height="150" />  
+                <input type="file" id="imagePath" name="myfile" accept="image/*"
+                    onchange="document.getElementById('blah').src=window.URL.createObjectURL(this.files[0])"> -->
+                    
+                <input type="file" accept="image/*" name="mbImageUp" onchange="loadFile(event)"> 
+                    <img id="output" max-width=100% height=auto src=""/>
+                    <script>
+                        var loadFile = function(event) {
+                            var output = document.getElementById('output');
+                            output.src = URL.createObjectURL(event.target.files[0]);
+                            output.onload = function() {
+                            URL.revokeObjectURL(output.src)        // free memory
+                            }
+                        };
+                    </script>
 
-         <label for="imagepath">You image: </label> 
-         <!-- action="/file/single" method="post" enctype="multipart/form-data">   -->
-         <input type="file" id="imagePath" name="myFile" accept="image/*"/>     
-         
-         <fieldset data-role="controlgroup">
-            <legend>What are your favorite cities / countries you may travel?</legend>
-            <div class="checkbox-group">
-                <input type="checkbox" name="favcity" id="china" value="China">
-                <label for="china">China</label>
-            </div>
-            <div class="checkbox-group">
-                <input type="checkbox" name="favcity" id="japan" value="Japan">
-                <label for="japan">Japan</label>
-            </div>
-            <div class="checkbox-group">
-                <input type="checkbox" name="favcity" id="korean" value="Korea">
-                <label for="korean">Korea</label>
-            </div>
-            <div class="checkbox-group">
-                <input type="checkbox" name="favcity" id="taiwan" value="Taiwan">
-                <label for="taiwan">Taiwan</label>
-            </div>
-            <div class="checkbox-group">
-                <input type="checkbox" name="favcity" id="europe" value="Europe">
-                <label for="europe">Europe</label>
-            </div>
-            <div class="checkbox-group">
-                <input type="checkbox" name="favcity" id="usa" value="USA">
-                <label for="usa">USA</label>
-            </div>
-            <div class="checkbox-group">
-                <input type="checkbox" name="favcity" id="england" value="England">
-                <label for="england">England</label>
-            </div>
-            <div class="checkbox-group">
-                <input type="checkbox" name="favcity" id="canada" value="Canada">
-                <label for="canada">Canada</label>
-            </div>
-            <div class="checkbox-group">
-                <input type="checkbox" name="favcity" id="others" value="Others">
-                <label for="others">Others</label>
-                <input type="text" id="othercountry" name="othercountry" placeholder="e.g. Australia, Brazil" pattern="[a-zA-Z, ]+" maxlength="50">
-            </div>
-        </fieldset> 
+            <!-- 4th way 
+                <input type="file" accept="image/*" onchange="loadFile(event)">
+                    <img id="output" width=100% height=auto/>
+                    <script>
+                        var loadFile = function(event) {
+                        var reader = new FileReader();
+                        reader.onload = function(){
+                        var output = document.getElementById('output');
+                        output.src = reader.result;
+                        };
+                    reader.readAsDataURL(event.target.files[0]);
+                    };
+                    </script>   -->
 
-        <fieldset data-role="controlgroup2">
-            <legend>Which transportation did you prefer on your trip?</legend>
-            <div class="checkbox-group2">
-                <input type="checkbox" name="favcity2" id="airplan" value="Airplan">
-                <label for="airplan">Airplan</label>
-            </div>
-            <div class="checkbox-group2">
-                <input type="checkbox" name="favcity2" id="cruise" value="Cruise">
-                <label for="cruise">Cruise</label>
-            </div>
-            <div class="checkbox-group2">
-                <input type="checkbox" name="favcity2" id="train" value="Train">
-                <label for="train">Train</label>
-            </div>
-            <div class="checkbox-group2">
-                <input type="checkbox" name="favcity2" id="highspeedrail" value="High-speed rail">
-                <label for="highspeedrail">High-speed rail</label>
-            </div>
-            <div class="checkbox-group2">
-                <input type="checkbox" name="favcity2" id="others" value="Others">
-                <label for="others">Others</label>
-                <input type="text" id="othertran" name="othertran" placeholder="e.g. others" pattern="[a-zA-Z, ]+" maxlength="30">
-            </div>
-         </fieldset>
+                <fieldset data-role="controlgroup">
+                    <legend>What are your favorite cities / countries you may travel?</legend>
+                    <div class="checkbox-group">
+                        <input type="checkbox" name="favcity" id="china" value="China">
+                        <label for="china">China</label>
+                    </div>
+                    <div class="checkbox-group">
+                        <input type="checkbox" name="favcity" id="japan" value="Japan">
+                        <label for="japan">Japan</label>
+                    </div>
+                    <div class="checkbox-group">
+                        <input type="checkbox" name="favcity" id="korean" value="Korea">
+                        <label for="korean">Korea</label>
+                    </div>
+                    <div class="checkbox-group">
+                        <input type="checkbox" name="favcity" id="taiwan" value="Taiwan">
+                        <label for="taiwan">Taiwan</label>
+                    </div>
+                    <div class="checkbox-group">
+                        <input type="checkbox" name="favcity" id="europe" value="Europe">
+                        <label for="europe">Europe</label>
+                    </div>
+                    <div class="checkbox-group">
+                        <input type="checkbox" name="favcity" id="usa" value="USA">
+                        <label for="usa">USA</label>
+                    </div>
+                    <div class="checkbox-group">
+                        <input type="checkbox" name="favcity" id="england" value="England">
+                        <label for="england">England</label>
+                    </div>
+                    <div class="checkbox-group">
+                        <input type="checkbox" name="favcity" id="canada" value="Canada">
+                        <label for="canada">Canada</label>
+                    </div>
+                    <div class="checkbox-group">
+                        <input type="checkbox" name="favcity" id="othersC" value="Others">
+                        <label for="othersC">Others</label>
+                        <input type="text" id="othercountry" name="othercountry" placeholder="e.g. Australia, Brazil" pattern="[a-zA-Z, ]+" maxlength="50" >
+                    </div>
+                </fieldset> 
 
-         <input type="reset" id="reset" value="Reset">
-         <input type="submit" id="submit" name="submit" value="Submit">
- 
-       </form>
+                <fieldset data-role="controlgroup2">
+                    <legend>Which transportation did you prefer on your trip?</legend>
+                    <div class="checkbox-group2">
+                        <input type="checkbox" name="favcity2" id="airplan" value="Airplan">
+                        <label for="airplan">Airplan</label>
+                    </div>
+                    <div class="checkbox-group2">
+                        <input type="checkbox" name="favcity2" id="cruise" value="Cruise">
+                        <label for="cruise">Cruise</label>
+                    </div>
+                    <div class="checkbox-group2">
+                        <input type="checkbox" name="favcity2" id="train" value="Train">
+                        <label for="train">Train</label>
+                    </div>
+                    <div class="checkbox-group2">
+                        <input type="checkbox" name="favcity2" id="highspeedrail" value="High-speed rail">
+                        <label for="highspeedrail">High-speed rail</label>
+                    </div>
+                    <div class="checkbox-group2">
+                        <input type="checkbox" name="favcity2" id="othersT" value="Others">
+                        <label for="othersT">Others</label>
+                        <input type="text" id="othertran" name="othertran" placeholder="e.g. others" pattern="[a-zA-Z, ]+" maxlength="30">
+                    </div>
+                </fieldset>
 
-     </main>
-    <!-- From of registration -->
+                <input type="reset" id="reset" value="Reset">
+                <input type="submit" id="submit" name="submit" value="Submit">
+    
+            </form>
+        </div>
+
+    </main>
+    <!-- From of MyProfile -->
   
 
     <!-- Footer Start -->
@@ -306,10 +342,14 @@
                 <div class="col-lg-3 col-md-6">
                     <h4 class="text-white mb-3">Newsletter</h4>
                     <p>To keep our latest information of Travel, </p>
-                    <div class="position-relative mx-auto" style="max-width: 400vw;">
-                        <input class="form-control border-primary w-100 py-3 ps-2 pe-5" type="text" placeholder="Please enter your email">
-                        <button type="button" class="btn btn-primary py-2 position-absolute top-0 end-0 mt-2 me-2">Subscribe</button>
-                    </div>
+                    <form action="/contact/subNews" method="post"> <!-- Add a form tag with action and method -->
+                        <div class="position-relative mx-auto" style="max-width: 400vw;">
+                            <!-- Add name='' and required code for prevent empty input -->
+                            <input class="form-control border-primary w-100 py-3 ps-2 pe-5" type="text" placeholder="Please enter your email" name="sbemail" required>
+                            <button type="submit" class="btn btn-primary py-2 position-absolute top-0 end-0 mt-2 me-2">Subscribe</button>
+                            <!-- button type changed to submit to activate tag action -->
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
@@ -336,7 +376,8 @@
 
     <!-- Template Javascript -->
     <script src="js/main.js"></script>
-    <script src="/script.js"></script> 
+    <script src="js/profileUpdate.js"></script>
+    <script src="js/profile.js"></script>
     <script src="js/fetch_logout.js"></script>     
 </body>
 

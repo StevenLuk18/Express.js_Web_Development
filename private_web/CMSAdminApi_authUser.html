@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Great Travel Agency</title>
+    <link rel="stylesheet" href="css/cms_main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+</head>
+<body>
+    <header>
+        <nav class="top-bar">
+            <button class="list-btn" id="toggle-left-bar">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+            <h1>Great Travel Agency</h1>
+            <div class="user-info">
+                <span>Username:<strong id="cms-username"></strong></span>
+                <i class="fa-solid fa-user"></i>
+                <button id="logout-btn" type="button" style="display: inline-block;"><i class="fas fa-sign-out-alt"></i> Logout</button>
+            </div>
+        </nav>
+    </header>
+
+    <aside class="left-bar">
+        <ul>
+            <li id="aside-dashboard"><a href="/cms-admin-api">Dashboard</a></li>
+            <li id="aside-company"><a href="/cms-admin-api-company">Company</a></li>
+            <li id="aside-authUser"><a href="/cms-admin-api-authUser">Auth-User</a></li>
+            <li id="aside-member"><a href="/cms-admin-api-member">Member</a></li>
+            <li id="aside-subscription"><a href="/cms-admin-api-subscription">Subscription</a></li>
+            <li id="aside-enquiry"><a href="/cms-admin-api-enquiry">Contact Us</a></li>
+            <li id="aside-package"><a href="/cms-admin-api-package">Package</a></li>
+        </ul>
+    </aside>
+    <main>
+        <div class="dashboard-wrapper">
+            <!-- Show authorized users info -->
+            <div class="dashboard-container">
+                <div class="cms-authUser show">
+                    <h3><strong>All Active Users:</strong></h3>
+                    <p id="cms-allRoles"></p>
+                </div>
+            </div>
+
+            <div class="dashboard-container">
+                <div class="cms-authUser search">
+                    <h3><strong>Search Users Info:</strong></h3>
+                    <div class="cms-authUser-search">
+                        <form id="authUser-search"> <!-- action="/cms-admin-api-authUser/sysopSearch" method="post" -->
+                            <label>Name</label>
+                            <input type="text" name="searchName" required>
+                            &nbsp;
+                            <label>System level</label>
+                            <select name="searchLevel" required>
+                                <option class="authUser-op-a" value="A">Admin</option>
+                                <option class="authUser-op-s" value="S">Supervisor</option>
+                                <option class="authUser-op-o" value="O">Operator</option>
+                            </select>
+                            &nbsp;
+                            <button type="submit" name="search-submit">submit</button>
+                        </form>
+                        <br/>
+                        <p id="searchResult"></p>
+                    </div>
+
+                </div>
+            </div> 
+
+            <div class="dashboard-container">
+                <div class="cms-authUser update">
+                    <h3><strong>Update Users Info:</strong></h3>
+
+                    <div class="cms-authUser-update">
+                        <form id="authUser-update">
+                            <label>The User U Wanna Update</label> <br/>
+                            <label>Name</label>
+                            <input type="text" name="updateName" required>
+                            &nbsp;
+                            <label>Password</label>
+                            <input type="text" name="updatePw" required>
+                            &nbsp;
+                            <label>System level</label>
+                            <select name="updateLevel" required>
+                                <option class="authUser-op-a" value="A">Admin</option>
+                                <option class="authUser-op-s" value="S">Supervisor</option>
+                                <option class="authUser-op-o" value="O">Operator</option>
+                            </select>
+
+                            <br/>
+                            <h4>Confirmation</h4>
+                            <label>Plz Type Again</label> <br/>
+                            <label>Name</label>
+                            <input type="text" name="updateNameComf" required readonly>
+                            &nbsp;
+                            <label>Password</label>
+                            <input type="text" name="updatePwComf" required readonly> 
+                            &nbsp;
+                            <label>System level</label>
+                            <select name="updateLevelComf" required>
+                                <option class="authUser-op-a" value="A">Admin</option>
+                                <option class="authUser-op-s" value="S">Supervisor</option>
+                                <option class="authUser-op-o" value="O">Operator</option>
+                            </select>
+
+                            <br/>
+                            <h4>Update</h4>
+                            <label>The Update U Wanna Make</label> <br/>
+                            <label>Name</label>
+                            <input type="text" name="updateNameReal" required>
+                            &nbsp;
+                            <label>Password</label>
+                            <input type="text" name="updatePwReal" required>
+                            &nbsp;
+                            <label>System level</label>
+                            <select name="updateLevelReal" required>
+                                <option class="authUser-op-a" value="A">Admin</option>
+                                <option class="authUser-op-s" value="S">Supervisor</option>
+                                <option class="authUser-op-o" value="O">Operator</option>
+                            </select>
+                            &nbsp;
+                            <button type="submit" name="update-submit">submit</button>
+                        </form>
+                        <br/>
+                        <p id="updateResult"></p>
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="dashboard-container">
+                <div class="cms-authUser addDel">
+                    <h3><strong>Add/Del Users:</strong></h3>
+                    <div class="cms-authUser-adddelf">
+                        <form id="authUser-adddel">
+                            <label>Action</label>
+                            <select name="addordelAction" required>
+                                <option value="none">None</option>
+                                <option value="add">Add User</option>
+                                <option value="del">Delete User</option>
+                            </select>
+                            <br/>
+                            <br/>
+                            <label>The User U Wanna Make Changes</label> <br/>
+                            <label>Name</label>
+                            <input type="text" name="addordelName" required>
+                            &nbsp;
+                            <label>Password</label>
+                            <input type="text" name="addordelPw" required>
+                            &nbsp;
+                            <label>System level</label>
+                            <select name="addordelLevel" required>
+                                <option class="authUser-op-a" value="A">Admin</option>
+                                <option class="authUser-op-s" value="S">Supervisor</option>
+                                <option class="authUser-op-o" value="O">Operator</option>
+                            </select>
+                            <br/>
+                            <h4>Confirmation</h4>
+                            <label>Plz Type Again</label> <br/>
+                            <label>Name</label>
+                            <input type="text" name="addordelNameComf" required>
+                            &nbsp;
+                            <label>Password</label>
+                            <input type="text" name="addordelPwComf" required>
+                            &nbsp;
+                            <label>System level</label>
+                            <select name="addordelLevelComf" required>
+                                <option class="authUser-op-a" value="A">Admin</option>
+                                <option class="authUser-op-s" value="S">Supervisor</option>
+                                <option class="authUser-op-o" value="O">Operator</option>
+                            </select>
+                            <br/>
+                            <h4 id="addordelAutoShow"></h4>
+                            <label>The Changes U Wanna Make</label> <br/>
+                            <label>Name</label>
+                            <input type="text" name="addordelNameReal" required>
+                            &nbsp;
+                            <label>Password</label>
+                            <input type="text" name="addordelPwReal" required>
+                            &nbsp;
+                            <label>System level</label>
+                            <select name="addordelLevelReal" required>
+                                <option class="authUser-op-a" value="A">Admin</option>
+                                <option class="authUser-op-s" value="S">Supervisor</option>
+                                <option class="authUser-op-o" value="O">Operator</option>
+                            </select>
+                            &nbsp;
+                            <button type="submit" name="addordel-submit">submit</button>
+                        </form>
+                    </div>
+                    <p id="addordelResult"></p>
+                </div>
+            </div> 
+
+        </div>
+    </main>
+
+    <script>
+        document.getElementById('toggle-left-bar').addEventListener('click', function() {
+            document.querySelector('.left-bar').classList.toggle('active');
+        });
+    </script>
+
+    <script src="js/cms-nav-data_authUser.js"></script>
+    <script src="js/fetch_cmsUser.js"></script>
+    <script src="js/fetch_logout_cms.js"></script>
+
+</body>
+</html>

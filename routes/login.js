@@ -19,17 +19,18 @@ router.get('/', (req,res, next) => {
        
         data = await client.db("travel").collection('member').findOne({mpemail:NameOrEmail, mppswd:mppswd});
         if (data) {
-            req.session.authUser = [data._id, data.mpname ,data.mpusername, data.mpemail, data.mppswd, data.mpgender];
+            req.session.authUser = [data._id, data.mpname ,data.mpusername, data.mpemail, data.mppswd, data.mpgender, data.mpimagepath];
+          
+            req.session.userCities = [{'China': data.mpchina} , {'Japan':data.mpjapan}, {'Korea':data.mpkorean}, {'Taiwan':data.mptaiwan}, {'Europe':data.mpeurope}, {'USA': data.mpusa}, {'England': data.mpengland}, {'Canada':data.mpcanada}, {'Others': data.mpcntyother}, data.mpcntyothdesc];
 
-            req.session.userCities = [data.mpchina , data.mpjapan, data.mpkorean, data.mptaiwan, data.mpeurope, data.mpusa, data.mpengland, data.mpcanada, data.mpcntyother, data.mpcntyothdesc];
+            req.session.userTrans = [{'Airplan': data.mpairplan}, {'Cruise': data.mpcruise}, {'Train': data.mptrain}, {'High-speed rail':data.mprail}, {'Others': data.mptranother}, data.mptranothdesc];
+
+            req.session.imagePath = [data.mpimagepath]
             
-            req.session.userTrans = [data.mpairplan, data.mpcruise, data.mptrain, data.mprail, data.mptranother, data.mptranothdesc, data.mpimagepath];
-                        
             res.redirect('/login');
         } else {
         
-            res.sendFile(path.join(__dirname,'..','public','404_login.html'));
-        }
+            res.send('<script>history.back(); alert("Sorry, you entered incorrect email / password");</script>');}
 
     } catch (err) {
         console.log(err.name, err.message)
@@ -44,8 +45,10 @@ router.get('/', (req,res, next) => {
         res.json({
             authUser: req.session.authUser,
             userCities: req.session.userCities,
-            userTrans: req.session.userTrans
+            userTrans: req.session.userTrans,
+            imagePath: req.session.imagePath
           });
+        
       /*   res.json(req.session.userCities);
         res.json(req.session.userTrans); */
 
