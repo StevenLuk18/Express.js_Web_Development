@@ -54,11 +54,11 @@ router.get('/', async (req, res, next) => {
             res.redirect('/');
         }
 
-    } catch {(err) => {
+    } catch (err) {
         console.log(err.name, err.message)
         return next(err)
     
-    }} finally {
+    } finally {
         await client.close();
     }
 

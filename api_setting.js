@@ -11,7 +11,8 @@ module.exports = [
     { route: '/services', file: './routes/services' },
     { route: '/destination', file: './routes/destination' },
     { route: '/team', file: './routes/team' },
-    { route: '/testimonial', file: './routes/testimonial' },
+    
+    { route: '/testimonialInput', file: './routes/testimonialInput' },
     { route: '/booking', file: './routes/booking' },
     { route: '/myprofile', file: './routes/myprofile' },
     { route: '/register', file: './routes/register' },
