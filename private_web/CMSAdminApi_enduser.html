@@ -41,15 +41,17 @@
         </ul>
     </aside>
     <main>
-        <!-- Search section -->
+
         <div class="dashboard-wrapper">
+
+            <!-- Search section -->
             <div class="dashboard-container">
                 <div class="cms-enduser search">
                     <h3><strong>Search Enduser Here:</strong></h3>
                     <form id="enduser-search">
                         <div id="enduserName">
                         <label>Login Name</label>
-                        <input type="text" name="searchEmail" placeholder="Customer's Email">
+                        <input type="text" name="searchName" placeholder="Enduser's Login Name">
                         &nbsp;
                         <button type="submit" name="search-submit">submit</button>
                         </div>
@@ -61,103 +63,27 @@
 
             <!-- Update section -->
             <div class="dashboard-container">
-                <div class="cms-enduser update">
-                    <h3><strong>Update Enduser Here:</strong></h3>
+                <div class="cms-enduser image">
+                    <h3><strong>Enduser Image Here:</strong></h3>
 
-                    <div class="cms-authUser-update">
-                        <form id="enduser-update">
-                            <label>Login Name</label>
-                            <input type="text" name="updateName" placeholder="Enduser's Name">
-                                &nbsp;
-                            <label>Password</label>
-                            <input type="text" name="updatePw" placeholder="Enduser's Password">
-                                &nbsp;
-                            <button type="button" name="continue-button">continues</button>
-                                <br/>
-                            <h3>Please Confirm Again</h3>
-                            <label>Login Name</label>
-                            <input type="text" name="updateNameConfirm" placeholder="Enduser's Name">
-                            <label>Password</label>
-                            <input type="text" name="updatePwConfirm" placeholder="Enduser's Password">
-                                <br/>
-                                <br/>
-                            <label for="imagepath">You image: (File Size Less Than 1MB)</label> 
-                                <br/>
-                                <br/>
-                            <input type="file" accept="image/*" name="mbImageUp" onchange="loadFile(event)"> 
-                                <img id="output" max-width=100% height=auto src=""/>
-                                <script>
-                                    var loadFile = function(event) {
-                                        var output = document.getElementById('output');
-                                        output.src = URL.createObjectURL(event.target.files[0]);
-                                        output.onload = function() {
-                                        URL.revokeObjectURL(output.src)        // free memory
-                                        }
-                                    };
-                                </script>
-                                <br/>
-                                <br/>
-                            <button type="submit" name="update-submit">submit</button>
-                        </form>
+                    <div class="cms-authUser-image">
+                        <p id="login-name" name="loginName"></p>
+                        <label for="imagepath">Enduser Image:</label> 
                             <br/>
-                        <p id="updateResult"></p>
+                            <br/> 
+                            <img id="output" max-width=100% height=auto src=""/>
+                            <script>
+                                var loadFile = function(event) {
+                                    var output = document.getElementById('output');
+                                    output.src = URL.createObjectURL(event.target.files[0]);
+                                    output.onload = function() {
+                                    URL.revokeObjectURL(output.src)        // free memory
+                                    }
+                                };
+                            </script>
                     </div>
                 </div>
             </div>
-
-            <!-- Add or Delete section -->
-            <div class="dashboard-container">
-                <div class="cms-enduser addDel">
-                    <h3><strong>Add/Del Users:</strong></h3>
-                    <div class="cms-enduser-adddel">
-                        <form id="enduser-adddel">
-                            <label>Action</label>
-
-                            <select name="addordelAction" required>
-                                <option value="none">None</option>
-                                <option value="add">Add User</option>
-                                <option value="del">Delete User</option>
-                            </select>
-                                    <br/>
-                                    <br/>
-                            <div>
-                                <label>The User U Wanna Make Changes</label> <br/>
-                                <label>Name</label>
-                                <input type="text" name="addordelName" placeholder="e.g ChanTaiMan" required>
-                                &nbsp;
-                                <label>Password</label>
-                                <input type="text" name="addordelPw" placeholder="Enduser's Password" required>
-                                &nbsp;
-                                <button type="button" name="adddel-continue-button">Continues</button>
-                            </div>
-                                <br/>
-                            <h4 id="addordelAutoShow"></h4>
-                            <div>
-                                <h4>Confirmation</h4>
-                                <label>Plz Type Again</label> <br/>
-                                <label>Name</label>
-                                <input type="text" name="addordelNameComf" placeholder="e.g ChanTaiMan" required>
-                                    &nbsp;
-                                <label>Password</label>
-                                <input type="text" name="addordelPwComf" placeholder="Enduser's Password" required>
-                                    <br/>
-                                    <br/>
-                                <label>Shown Name</label>
-                                <input type="text" placeholder="e.g 10_Chan Tai Man Tom">
-                                    &nbsp;
-                                <label>Shown Profile</label>
-                                <input type="text" placeholder="e.g Japan Lover">
-                                    <br/>
-                                <button type="submit" name="addordel-submit">submit</button>
-                            </div>
-                                
-                            
-                        </form>
-                    </div>
-                    <p id="addordelResult"></p>
-                </div>
-            </div> 
-
 
         </div>
     </main>
