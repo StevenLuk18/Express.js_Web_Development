@@ -645,6 +645,35 @@ body {
       -2px -2px 5px var(--shadow-light);
   }
   
+  /* For the testimonial in mytestimonial_mb.ejs */  
+  button#submit {
+    margin-top: 1rem;
+    padding: 0.8rem 1.5rem;
+    border: none;
+    border-radius: 10px;
+    background: var(--accent-color);
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 
+      5px 5px 10px var(--shadow-dark),
+      -5px -5px 10px var(--shadow-light);
+  }
+  
+  button#submit:hover {
+    background: #3a7bc8;
+    transform: translateY(-2px);
+  }
+  
+  button#submit:active {
+    transform: translateY(1px);
+    box-shadow: 
+      2px 2px 5px var(--shadow-dark),
+      -2px -2px 5px var(--shadow-light);
+  }
+  /* Stop: mytestimonial_mb.ejs */
+
   @keyframes fadeIn {
     from { opacity: 0; transform: translateY(20px); }
     to { opacity: 1; transform: translateY(0); }

@@ -35,7 +35,7 @@ router.get('/', async (req, res, next) => {
         }).sort({ tmcrdate: -1 }).toArray(); // Closest date first
         res.send(data);
     } catch (err) {
-        console.log(err.name, err.message);
+        console.log("Get exception error ==== ", err.name, err.message);
         return next(err);
     } finally {
         await client.close();
@@ -45,7 +45,7 @@ router.get('/', async (req, res, next) => {
 
     try {
         const { testimonialId, newTravelDate, updatedTestimonial } = req.body;
-        console.log("Id = ", testimonialId, ", new travel date = ", newTravelDate, ", new test = ", updatedTestimonial);
+
         if (!testimonialId || !newTravelDate || !updatedTestimonial) {
             res.status(400).json({ success: false, 
                 message: "Please supply ID of selected testimonial, date of travel, and updated testimonial." });
@@ -64,26 +64,30 @@ router.get('/', async (req, res, next) => {
         }
             
         else {
-            console.log("Found such record")
             const result = await client.db("travel").collection("testimonial").updateOne({ 
                 _id: new ObjectId(testimonialId),
                 tmname: req.session.authUser[3]
             },
-            { $set: { 'tmdate': newTravelDate, 'tmtest': updatedTestimonial, tmcrdate: new Date()} }
-            );
+            { 
+                $set: { 
+                    'tmdate': newTravelDate, 
+                    'tmtest': updatedTestimonial, 
+                    tmcrdate: new Date()
+                } 
+            });
             
             if (result.matchedCount == 1) {
-                console.log("Update success");
-                res.status(200).json({ success: true, message: "Testimonial upated successfully"});
+                console.log("Testimonial updated successfully.");
+                res.status(200).json({ success: true, message: "Testimonial updated successfully."});
             }
             else {
-                console.log("Cannot udpate");
-                res.status(404).json({ success: false, message: "Cannot delete. Maybe authorization problem."});
+                console.log("Cannot udpate. Maybe authorization problem.");
+                res.status(404).json({ success: false, message: "Cannot update. Maybe authorization problem."});
             }
         }
     } catch (err) {
-        console.log("catch error ==== ", err.name, err.message);
-        res.status(500).json({ success: false, message: "An error occured while updating the testimonial"});
+        console.log("Update exception error ==== ", err.name, err.message);
+        res.status(500).json({ success: false, message: "An error occured while updating the testimonial."});
         return next(err);      
     } finally {
         await client.close();
@@ -94,10 +98,6 @@ router.get('/', async (req, res, next) => {
 	const travelDate = req.body.travelDate;
 	const testimonial  = req.body.testimonial;
 
-    console.log("Input =======", req.session.authUser[3]);
-	console.log("Input =======", req.body.travelDate );
-    console.log("Input =======", req.body.testimonial );
-
 	try {
 		await client.connect();
 		const data = await client.db("travel").collection("testimonial").findOne({ 
@@ -106,14 +106,11 @@ router.get('/', async (req, res, next) => {
 			tmtest: testimonial 
         });
 
-		console.log("Data  ============ ", data);
-
 		if (data) {
     		console.log("No insert - dupliate found");
 		    res.status(400).json({ success: false, message: "Cannot insert - duplicate record found!" });
 		}
 		else {
-            console.log("Trying to insert....");
             const result = await client.db("travel").collection("testimonial").insertOne({ 
                 tmname: req.session.authUser[3], 
                 tmdate: travelDate, 
@@ -122,8 +119,8 @@ router.get('/', async (req, res, next) => {
             });
 
             if (result.acknowledged) {
-                console.log("New testimonial inserted");
-                res.status(200).json({ success: true, message: "New testimonial added successfully!" });
+                console.log("New testimonial inserted successfully.");
+                res.status(200).json({ success: true, message: "New testimonial inserted successfully." });
             }
             else {
                 console.log("Cannot delete");
@@ -131,8 +128,8 @@ router.get('/', async (req, res, next) => {
             }
         }
 	} catch (err) {
-		console.log("Insert error ==== ", err.name, err.message);
-		res.status(500).json({ success: false, message: "An error occured while updating the testimonial"});
+		console.log("Insert exception error ==== ", err.name, err.message);
+		res.status(500).json({ success: false, message: "An error occured while inserting the testimonial"});
 		return next(err);      
 	} finally {
 		await client.close();
@@ -161,15 +158,16 @@ router.get('/', async (req, res, next) => {
             });
 
             if (result.deletedCount == 1) {
-                console.log("Delete successfully");
+                console.log("Testimonial deleted successfully");
                 res.json({ success: true, message: "Testimonial deleted successfully" });
             }
             else {
+                console.log("Cannot delete. Maybe authorization problem.");
                 res.status(404).json({ success: false, message: "Cannot delete. Maybe authorization problem."});
             }
         }
     } catch (err) {
-        console.log(err.name, err.message);
+        console.log("Delete exception error ==== ", err.name, err.message);
         res.status(500).json({ success: false, message: "An error occured while deleting the testimonial" });
         return next(err);      
     } finally {
@@ -178,7 +176,6 @@ router.get('/', async (req, res, next) => {
 
 }).get('/*', (req, res, next) => {
   user_name = req.session.authUser //set variable as the session
-  console.log("other get");
 
   if (!user_name) {
     res.redirect("/login");
