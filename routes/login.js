@@ -9,10 +9,7 @@ const client = new MongoClient(url);
 
 
 router.get('/', (req,res, next) => {
-    if (req.session.authUser) res.redirect('/'); //redirect a api
-    else res.redirect('/');
-        /* let msg = "Your Email or Password is incorrect~! Please login again ~"
-        res.render('loginForm', {wrongLogPW : msg});} */ 
+    res.redirect('/');
 }).post('/', async (req, res , next) => {
 
     const {NameOrEmail , mppswd} = req.body
@@ -23,7 +20,7 @@ router.get('/', (req,res, next) => {
         data = await client.db("travel").collection('member').findOne({mpemail:NameOrEmail, mppswd:mppswd});
         if (data) {
             req.session.authUser = [data._id, data.mpname ,data.mpusername, data.mpemail, data.mppswd, data.mpgender, data.mpimagepath];
-
+          
             req.session.userCities = [{'China': data.mpchina} , {'Japan':data.mpjapan}, {'Korea':data.mpkorean}, {'Taiwan':data.mptaiwan}, {'Europe':data.mpeurope}, {'USA': data.mpusa}, {'England': data.mpengland}, {'Canada':data.mpcanada}, {'Others': data.mpcntyother}, data.mpcntyothdesc];
 
             req.session.userTrans = [{'Airplan': data.mpairplan}, {'Cruise': data.mpcruise}, {'Train': data.mptrain}, {'High-speed rail':data.mprail}, {'Others': data.mptranother}, data.mptranothdesc];
@@ -35,10 +32,10 @@ router.get('/', (req,res, next) => {
         
             res.send('<script>history.back(); alert("Sorry, you entered incorrect email / password");</script>');}
 
-    } catch {(err) => {
+    } catch (err) {
         console.log(err.name, err.message)
         return next(err)
-    }} finally {
+    } finally {
         await client.close();
     }
 }).get('/get-auth-user', (req, res) => {
