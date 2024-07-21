@@ -4,7 +4,7 @@ Developed a backend API and database integration functions using Node.js, Expres
 This allowed me to effectively fetch data from a MongoDB database and deliver a seamless user experience (UX) on the front end. 
 Additionally, I integrated various add-on APIs, such as a CMS system, to enhance the website's functionality and user interface (UI).
 
-##Webpage Structure
+## Webpage Structure
 ![image](https://github.com/user-attachments/assets/f48db50a-6922-43b8-9a5f-06dec2249520)
 
 ## Set-up
@@ -12,12 +12,13 @@ Additionally, I integrated various add-on APIs, such as a CMS system, to enhance
 Setting up a database and designing the structure of the database is essential for this project.
 We are using node.js with the module Express to create the needed API.
 
-#### Node.js
+### Node.js
 
 You can download Node.js here with [Node.js Pages](https://nodejs.org/zh-cn).
 
 #### NPM (After installing Node.js)
 
+*set up Express with its default files*:
 ```
 npx express-generator --view=ejs <YourProjectName>
 ```
@@ -59,8 +60,27 @@ so that the server can be run.
 ### Database
 > MongoDB
 
+```
+npm install mongodb
+```
+
+Use the below code to get MongoClient
+> const MongoClient = require('mongodb').MongoClient;
+> const {MongoClient} = require('mongodb');
+
 ### Required Module
 ![image](https://github.com/user-attachments/assets/a7683173-c6d5-4a18-ab74-749bb83c3a51)
+
+## Backend application
+
+### Login/Registration form
+
+Design a pop-up Login/Registration form that allows users to log in. If the users don't have one, they can press register to create a new account.
+**Login**
+![image](https://github.com/user-attachments/assets/d5b779a0-d85d-4519-8007-9807ba245b25)
+**Registration**
+![image](https://github.com/user-attachments/assets/ddb66027-3c4f-46e2-ae4b-95bbbc377521)
+
 
 
 
