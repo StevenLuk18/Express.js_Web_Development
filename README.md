@@ -15,7 +15,6 @@ We are using node.js with the module Express to create needed API.
 ### Node.js
 
 You can dowmload Node.js here with [Node.js Pages](https://nodejs.org/zh-cn).
-This site was built using [GitHub Pages](https://pages.github.com/).
 
 ### NPM (After install Node.js)
 
