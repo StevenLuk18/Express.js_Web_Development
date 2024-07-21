@@ -39,7 +39,7 @@ Nodemon automatically restarts the server when changes are detected in the appli
 
 Nodemon continuously monitors the files in the project directory and refreshes the browser or terminal when changes are made, providing a seamless development experience.
 
-#### Customization on Nodemon
+#### **Customization on Nodemon**
 Nodemon allows you to customize the files and directories it monitors and the command used to start the server.
 
 In package.js file:
@@ -53,7 +53,7 @@ You can customize your command for starting the server. In my case, it is monsta
 ```
 npm run monstart
 ```
-so that the service can be run.
+so that the server can be run.
 
 ### Database
 MongoDB
