@@ -29,6 +29,7 @@ The word inside <> is your designated project name
 ```
 npm install nodemon
 ```
+
 #### Why use Nodemon
 
 1. *Automatic Restart*:
@@ -42,21 +43,21 @@ Nodemon continuously monitors the files in the project directory and refreshes t
 #### Customization on Nodemon
 Nodemon allows you to customize the files and directories it monitors and the command used to start the server.
 
-In package.json file:
+*In package.json file*:
 ```
 "scripts": {
     "start": "node ./bin/www",
     "monstart": "nodemon ./bin/www"
   },
 ```
-You can customize your command for starting the server. In my case, it is monstart
+You can customize your command for starting the server. **In my case, it is monstart.**
 ```
 npm run monstart
 ```
 so that the server can be run.
 
 ### Database
-MongoDB
+> MongoDB
 
 ### Required Module
 ![image](https://github.com/user-attachments/assets/a7683173-c6d5-4a18-ab74-749bb83c3a51)
