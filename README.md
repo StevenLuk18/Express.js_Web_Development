@@ -4,6 +4,8 @@ Developed a backend API and database integration functions using Node.js, Expres
 This allowed me to effectively fetch data from a MongoDB database and deliver a seamless user experience (UX) on the front end. 
 Additionally, I integrated various add-on APIs, such as a CMS system, to enhance the website's functionality and user interface (UI).
 
+Main color for our website is: `#86B817`
+
 ## Webpage Structure
 ![image](https://github.com/user-attachments/assets/f48db50a-6922-43b8-9a5f-06dec2249520)
 
@@ -269,7 +271,7 @@ Show the username inside the EJS web
 
 **User can edit and update their personal information**
 
-![image](https://github.com/user-attachments/assets/2c859450-da95-4c0e-ba91-3ad928c6440f)
+![image](https://github.com/user-attachments/assets/f8b269b1-587a-468a-a9d2-004709e7ca63)
 
 ![image](https://github.com/user-attachments/assets/e69b50c1-39a8-4d85-846e-95968995d154)
 
@@ -317,6 +319,32 @@ npm install multer
 ### Testimonial
 
 This web feature can let the users edit their comment on their travel trip
+
+![image](https://github.com/user-attachments/assets/eeca1851-2143-45c4-8722-ea831bf1d758)
+
+![image](https://github.com/user-attachments/assets/5a896f97-1cfd-47ef-be3d-9f94cbcbce05)
+
+```
+npm install handsontable
+```
+
+### CMS Login System
+
+*Designed for simulating backend CMS*
+
+![image](https://github.com/user-attachments/assets/bd6d9033-7c26-40c0-8289-c6d5d12fb67c)
+
+#### CMS structure
+
+**Different HTML webs for differnt functionality**
+![image](https://github.com/user-attachments/assets/7d8b7ef4-9a8e-47f9-a410-908a6d9f81aa)
+
+**With relative API**
+![image](https://github.com/user-attachments/assets/3c632bce-c835-44eb-80b7-2bbb42fc254e)
+
+**The main page of Backend CMS**
+![image](https://github.com/user-attachments/assets/71114f9d-58a1-4a20-bebf-b97b3c8b0221)
+
 
 
 ## Credit
