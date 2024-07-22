@@ -1,6 +1,6 @@
 Disclaimer:
 
-
+***This project just for learning and practice purpose. No commerical intention included***  
 
 # Backend Web Develop Project On A Travel Agency
 
