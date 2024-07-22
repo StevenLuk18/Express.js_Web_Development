@@ -12,7 +12,7 @@ Main color for our website is: `#86B817`
 ## Set-up
 
 Setting up a database and designing the structure of the database is essential for this project.
-We are using node.js with the module Express to create the needed API.
+We are using ***node.js*** with the module ***Express*** to create the needed ***API***.
 
 ### Required Module
 ![image](https://github.com/user-attachments/assets/a7683173-c6d5-4a18-ab74-749bb83c3a51)
