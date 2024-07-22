@@ -271,7 +271,7 @@ Show the username inside the EJS web
 
 ![image](https://github.com/user-attachments/assets/2c859450-da95-4c0e-ba91-3ad928c6440f)
 
-![image](https://github.com/user-attachments/assets/9b7151d9-9fef-448f-9d6b-3d8f8052f5f6)
+![image](https://github.com/user-attachments/assets/e69b50c1-39a8-4d85-846e-95968995d154)
 
 ![image](https://github.com/user-attachments/assets/a09d2619-79cc-4ec4-8fe1-75fe304d0076)
 
@@ -285,7 +285,8 @@ Show the username inside the EJS web
 npm install multer
 ```
 
-![image](https://github.com/user-attachments/assets/9c6fb96e-0c2a-4285-8558-4c12bb01de75)
+![image](https://github.com/user-attachments/assets/ddd448b7-2064-4f8a-b1c4-c8241a4d0746)
+
 
 **The code**:
 
