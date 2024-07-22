@@ -318,4 +318,19 @@ npm install multer
 This web feature can let the users edit their comment on their travel trip
 
 
+## Credit
+
+Image credit from https://www.freepik.com/
+
+[enduser-image](https://www.freepik.com/free-photo/unbothered-guy-pointing-finger-up-looking-careless_9696638.htm#fromView=search&page=1&position=2&uuid=8c05457b-4326-4262-b1be-f908d25aee5f)
+
+[enduser-image](https://www.freepik.com/free-photo/business-finance-people-concept-surprised-impressed-asian-male-entrepreneur-office-manager-blue-shirt-pointing-upper-right-corner-look-amazed-say-wow-stare-camera-awe_16800470.htm#fromView=search&page=1&position=5&uuid=db9cee98-9ccd-4dda-8ccd-046a5a57a28f)
+
+[member-image](https://www.freepik.com/free-ai-image/3d-cartoon-character_170851002.htm#fromView=search&page=1&position=2&uuid=e0c31614-b1c7-4a3a-ae81-98d2e8f6ba96)
+
+[member-image](https://www.freepik.com/free-photo/close-up-fresh-apple_6818030.htm#fromView=search&page=1&position=1&uuid=49fc9e27-ab7f-44b6-9634-3da84f9ca1ea)
+
+[member-image](https://www.freepik.com/free-vector/sticker-template-with-girl-standing-posing-cartoon-character-isolated_18233319.htm#fromView=search&page=1&position=25&uuid=401282c6-2b38-446b-98a1-d5a4960b1670)
+
+[member-image](https://www.freepik.com/free-vector/sticker-template-with-boy-cartoon-character-isolated_16854036.htm#fromView=search&page=1&position=7&uuid=473a8096-713d-4e6a-ba64-568e9127edf8)
 
