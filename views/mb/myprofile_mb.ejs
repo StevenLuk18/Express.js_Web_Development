@@ -178,14 +178,6 @@
                 </fieldset>
 
                 <label for="imagepath">You image: (File Size Less Than 1MB)</label> 
-                <!-- 1st way for image 
-                action="/file/single" method="post" enctype="multipart/form-data">   
-                    2nd way 
-                <input type="file" id="imagePath" name="myFile" accept="image/*" >     
-                    3th way 
-                <img id="blah" alt="your image" width="150" height="150" />  
-                <input type="file" id="imagePath" name="myfile" accept="image/*"
-                    onchange="document.getElementById('blah').src=window.URL.createObjectURL(this.files[0])"> -->
                     
                 <input type="file" accept="image/*" name="mbImageUp" onchange="loadFile(event)"> 
                     <img id="output" max-width=100% height=auto src=""/>
@@ -198,20 +190,6 @@
                             }
                         };
                     </script>
-
-            <!-- 4th way 
-                <input type="file" accept="image/*" onchange="loadFile(event)">
-                    <img id="output" width=100% height=auto/>
-                    <script>
-                        var loadFile = function(event) {
-                        var reader = new FileReader();
-                        reader.onload = function(){
-                        var output = document.getElementById('output');
-                        output.src = reader.result;
-                        };
-                    reader.readAsDataURL(event.target.files[0]);
-                    };
-                    </script>   -->
 
                 <fieldset data-role="controlgroup">
                     <legend>What are your favorite cities / countries you may travel?</legend>
