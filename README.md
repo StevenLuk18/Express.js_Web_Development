@@ -310,7 +310,7 @@ npm install multer
 
 **Get the preview image from the path that saved inside the MongoDB**
 
-![image](https://github.com/user-attachments/assets/973aa193-b155-4562-8697-99cf5d59be8c)
+![image](https://github.com/user-attachments/assets/b2e74885-b40f-40e5-b2d4-f440f5764688)
 
 *Get the data from API and insert into the image's src attribute*
 
@@ -338,7 +338,7 @@ npm install handsontable
 
 #### CMS structure
 
-**CMS Login User Design**
+*CMS Login User Design*
 
 ![image](https://github.com/user-attachments/assets/6dac7c5e-ba18-4abc-8898-c691698e2ff2)
 
@@ -523,7 +523,7 @@ More Detail in [ [Add feature detail](https://github.com/StevenLuk18/backendProj
 await db.deleteOne({_id: data._id})
 ```
 
-More Detail in [ [Add feature detail](https://github.com/StevenLuk18/backendProject/blob/c93465b2df4e26764e9ff648d692654c7d7f03a7/routes/cms-admin-api-authUser.js) ]
+More Detail in [ [Delete feature detail](https://github.com/StevenLuk18/backendProject/blob/c93465b2df4e26764e9ff648d692654c7d7f03a7/routes/cms-admin-api-authUser.js) ]
 
 *Actual effect*
 
