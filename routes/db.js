@@ -178,10 +178,10 @@ router.get('/createcompany', async (req, res, next) => {
         await kln.insertMany([
             {eulogin:"steven",
              eupswd:"12345678",
-             euname:"10_Chan Tai Chun Steven",
+             euname:"10_Luk Tai Man Steven",
              euprofile:"Japan Lover",
              eucrdate:new Date("2024-05-01"),
-             euimage:"/images/enduser/steven@gmail.com.png",            
+             euimage:"/images/enduser/steven@gmail.com.jpg",            
             },
             {eulogin:"keith",
              eupswd:"12345678",
@@ -195,7 +195,7 @@ router.get('/createcompany', async (req, res, next) => {
              euname:"25_Law Tai Man Peter",
              euprofile:"Love Round the World Love Round the World Love Round the World Love Round the World Love Round the WorldLove Round the World",
              eucrdate:new Date("2024-05-01"),
-             euimage:"/images/enduser/peter@gmail.com.png",            
+             euimage:"/images/enduser/peter@gmail.com.jpg",            
             }
         ]);
         res.send("Done system enduser");
