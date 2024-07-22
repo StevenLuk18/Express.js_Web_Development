@@ -8,7 +8,6 @@ fetch('/cms-admin-api/get-auth-user')
     
     switch (system_level) {
       case 'A':
-        /* document.getElementById('cms-system-level').textContent = 'Administrator'; */
         let admin_op = document.querySelectorAll('.authUser-op-a')
         if (admin_op) {
           admin_op.forEach((op) => {
@@ -97,13 +96,6 @@ fetch('/cms-admin-api/get-auth-user')
         break;
 
         }
-
-        
-
-      
-    
-  
-  
   })
   .catch(error => console.error('Error fetching company data:', error));
 

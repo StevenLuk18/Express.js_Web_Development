@@ -47,7 +47,7 @@ router.get('/', async (req, res, next) => {
     data = await client.db("travel").collection('member').findOne({$or:[{mpusername:mpusername} , {mpemail:mpemail}]});
         
         if (data) {
-            res.sendFile(path.join(__dirname,'..','public','404.html'));
+            res.send('<script>history.back(); alert("Sorry, your username or email has been taken!!!");</script>');
         } else {
             req.session.regUser = [req.body.mpemail, req.body.mpusername, req.body.mppswd];
             await client.db("travel").collection('member').insertOne({mpemail:mpemail,mppswd:mppswd,mpusername:mpusername,mpjoindate:hongKongTime});
