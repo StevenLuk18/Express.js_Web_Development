@@ -220,7 +220,7 @@ router.get('/', async (req, res, next) => {
 module.exports = router;
 ```
 
-#### EJS
+### EJS
 
 *If the users login, the API will render the EJS*
 
@@ -290,5 +290,32 @@ npm install multer
 **The code**:
 
 *Preview image*
+
 ![image](https://github.com/user-attachments/assets/5477d879-7fa9-46fb-94b7-6d4bcdb61f56)
+
+*Multer Set-up (After installation)*
+
+![image](https://github.com/user-attachments/assets/6fb0defd-69a9-4e8b-ab4f-44c026c62518)
+
+**Upload the image to the designated folder**
+
+![image](https://github.com/user-attachments/assets/2c063897-ef96-4188-8db8-16a7da15aa57)
+
+*In my case, it is public/images/member/'FileName'*
+
+**Get the preview image from the path that saved inside the MongoDB**
+
+![image](https://github.com/user-attachments/assets/973aa193-b155-4562-8697-99cf5d59be8c)
+
+*Get the data from API and insert into the image's src attribute*
+
+![image](https://github.com/user-attachments/assets/99982929-9c54-4d77-8ad4-8d05c8f1ae31)
+
+*imagePath is the session saved from the login API*
+
+### Testimonial
+
+This web feature can let the users edit their comment on their travel trip
+
+
 
