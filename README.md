@@ -296,6 +296,8 @@ npm install multer
 
 ![image](https://github.com/user-attachments/assets/5477d879-7fa9-46fb-94b7-6d4bcdb61f56)
 
+*Third-party module -- multer*
+
 *Multer Set-up (After installation)*
 
 ![image](https://github.com/user-attachments/assets/6fb0defd-69a9-4e8b-ab4f-44c026c62518)
@@ -336,16 +338,220 @@ npm install handsontable
 
 #### CMS structure
 
+**CMS Login User Design**
+
+![image](https://github.com/user-attachments/assets/6dac7c5e-ba18-4abc-8898-c691698e2ff2)
+
+*With system level role field that could restrict login user's access*
+
+```
+switch (system_level) {
+      case 'A':
+        let admin_op = document.querySelectorAll('.authUser-op-a')
+        if (admin_op) {
+          admin_op.forEach((op) => {
+          op.parentNode.removeChild(op);})}
+        break;
+      
+      case 'S':
+        let sup_op = document.querySelectorAll('.authUser-op-s')
+        if (sup_op) {
+          sup_op.forEach((op) => {
+          op.parentNode.removeChild(op);})}
+
+        let admin_op2 = document.querySelectorAll('.authUser-op-a')
+        if (admin_op2) {
+          admin_op2.forEach((op) => {
+          op.parentNode.removeChild(op);})}
+
+          let hideColl = document.querySelector('.dashboard-container.allColl')
+          if (hideColl) {hideColl.classList.toggle('hidden')}
+  
+          let hideMbIdLabel = document.querySelector('label[for="member-search-id"]')
+          let hideMbIdRadio = document.getElementById('member-search-id')
+          if (hideMbIdLabel) {hideMbIdLabel.classList.toggle('hidden')}
+          if (hideMbIdRadio) {hideMbIdRadio.classList.toggle('hidden')}
+  
+          let hideSubIdLabel = document.querySelector('label[for="subscription-search-id"]')
+          let hideSubIdRadio = document.getElementById('subscription-search-id')
+          if (hideSubIdLabel) {hideSubIdLabel.classList.toggle('hidden')}
+          if (hideSubIdRadio) {hideSubIdRadio.classList.toggle('hidden')}
+  
+          let hideEnqIdLabel = document.querySelector('label[for="enquiry-search-id"]')
+          let hideEnqIdRadio = document.getElementById('enquiry-search-id')
+          if (hideEnqIdLabel) {hideEnqIdLabel.classList.toggle('hidden')}
+          if (hideEnqIdRadio) {hideEnqIdRadio.classList.toggle('hidden')}
+  
+          let hidePkIdLabel = document.querySelector('label[for="package-search-id"]')
+          let hidePkIdRadio = document.getElementById('package-search-id')
+          if (hidePkIdLabel) {hidePkIdLabel.classList.toggle('hidden')}
+          if (hidePkIdRadio) {hidePkIdRadio.classList.toggle('hidden')}
+        
+        break;
+      
+      case 'O':
+        
+        let admin_op3 = document.querySelectorAll('.authUser-op-a')
+        if (admin_op3) {
+          admin_op3.forEach((op) => {
+          op.parentNode.removeChild(op);})}
+        
+        let sup_op2 = document.querySelectorAll('.authUser-op-s')
+        if (sup_op2) {
+          sup_op2.forEach((op) => {
+          op.parentNode.removeChild(op);})}
+        
+        let op_op = document.querySelectorAll('.authUser-op-o')
+        if (op_op) {
+          op_op.forEach((op) => {
+          op.parentNode.removeChild(op)})}
+
+        let op_aside = document.getElementById('aside-authUser')
+        if(op_aside) op_aside.style.display = 'none'
+
+        let hideColl2 = document.querySelector('.dashboard-container.allColl')
+        if (hideColl2) {hideColl.classList.toggle('hidden')}
+
+        let hideMbIdLabel2 = document.querySelector('label[for="member-search-id"]')
+        let hideMbIdRadio2 = document.getElementById('member-search-id')
+        if (hideMbIdLabel2) {hideMbIdLabel.classList.toggle('hidden')}
+        if (hideMbIdRadio2) {hideMbIdRadio.classList.toggle('hidden')}
+
+        let hideSubIdLabel2 = document.querySelector('label[for="subscription-search-id"]')
+        let hideSubIdRadio2 = document.getElementById('subscription-search-id')
+        if (hideSubIdLabel2) {hideSubIdLabel.classList.toggle('hidden')}
+        if (hideSubIdRadio2) {hideSubIdRadio.classList.toggle('hidden')}
+
+        let hideEnqIdLabel2 = document.querySelector('label[for="enquiry-search-id"]')
+        let hideEnqIdRadio2 = document.getElementById('enquiry-search-id')
+        if (hideEnqIdLabel2) {hideEnqIdLabel.classList.toggle('hidden')}
+        if (hideEnqIdRadio2) {hideEnqIdRadio.classList.toggle('hidden')}
+
+        let hidePkIdLabel2 = document.querySelector('label[for="package-search-id"]')
+        let hidePkIdRadio2 = document.getElementById('package-search-id')
+        if (hidePkIdLabel2) {hidePkIdLabel.classList.toggle('hidden')}
+        if (hidePkIdRadio2) {hidePkIdRadio.classList.toggle('hidden')}
+
+        break;
+
+        }
+  })
+  .catch(error => console.error('Error fetching company data:', error));
+```
+
 **Different HTML webs for differnt functionality**
+
 ![image](https://github.com/user-attachments/assets/7d8b7ef4-9a8e-47f9-a410-908a6d9f81aa)
 
 **With relative API**
+
 ![image](https://github.com/user-attachments/assets/3c632bce-c835-44eb-80b7-2bbb42fc254e)
 
 **The main page of Backend CMS**
+
 ![image](https://github.com/user-attachments/assets/71114f9d-58a1-4a20-bebf-b97b3c8b0221)
 
+#### Key function
 
+*Search/Update/Add/Delete*
+
+***CRUD***
+
+*In Authorize User Section*
+
+![image](https://github.com/user-attachments/assets/00cbd778-69a9-4618-929f-0dab6d4a76f1)
+
+##### Search
+
+*Use fetch to get MongoDB data*
+
+![image](https://github.com/user-attachments/assets/26b178cc-00d8-4c2a-bbe2-47abb823f3e7)
+
+*After fetching the needed data, the result will show out by using innerHTML*
+```
+if (response.ok) {
+return response.json().then(data => {
+   const searchResult = 
+      `< &nbsp;Searched sysopname: *${data.searchedName}*&nbsp; > <br/> 
+      < &nbsp;Searched sysoppswd: *${data.searchedPw}*&nbsp; > <br/> 
+      < &nbsp;Searched syslevel: *${data.searchedLevel}*&nbsp; >` ;
+
+document.getElementById('searchResult').innerHTML = searchResult;
+```
+
+*API*
+
+![image](https://github.com/user-attachments/assets/3c797df1-70ed-4005-abc0-bcfec867d89a)
+
+*Actual effect*
+
+![image](https://github.com/user-attachments/assets/b8a7e4b7-4fca-42e0-b622-3651379a8c50)
+
+##### Update
+
+Same as the search one but use *replaceOne* in API
+
+```
+await db.replaceOne({_id:data._id}, data);
+```
+
+More Detail in [ [Update feature detail](https://github.com/StevenLuk18/backendProject/blob/c93465b2df4e26764e9ff648d692654c7d7f03a7/routes/cms-admin-api-authUser.js) ]
+
+*Actual effect*
+
+![image](https://github.com/user-attachments/assets/27c7b34c-89d8-4b90-b650-e992e3b78388)
+
+
+##### Add
+
+```
+await db.insertOne(
+   {sysopname: addordelNameReal, sysoppswd: addordelPwReal,syslevel: addordelLevelReal}
+)
+```
+
+More Detail in [ [Add feature detail](https://github.com/StevenLuk18/backendProject/blob/c93465b2df4e26764e9ff648d692654c7d7f03a7/routes/cms-admin-api-authUser.js) ]
+
+*Actual effect*
+
+![image](https://github.com/user-attachments/assets/65cc6c1d-9647-4955-9a4f-aecd2da49255)
+
+
+##### Delete
+
+```
+await db.deleteOne({_id: data._id})
+```
+
+More Detail in [ [Add feature detail](https://github.com/StevenLuk18/backendProject/blob/c93465b2df4e26764e9ff648d692654c7d7f03a7/routes/cms-admin-api-authUser.js) ]
+
+*Actual effect*
+
+![image](https://github.com/user-attachments/assets/21fba5fa-a314-41b1-a62b-f9662ef4ed7a)
+
+
+*In enduser section*
+
+_fetch data from the MongoDB database and get the preview image path_
+
+```
+return response.json().then(data => {
+            const searchResult =
+            `< &nbsp;Searched _id: *${data._id}*&nbsp; > <br/> 
+            < &nbsp;Searched eulogin: *${data.eulogin}*&nbsp; > <br/> 
+            < &nbsp;Searched eupswd: *${data.eupswd}*&nbsp; > <br/>
+            < &nbsp;Searched euname: *${data.euname}*&nbsp; > <br/>
+            < &nbsp;Searched euprofile: *${data.euprofile}*&nbsp; > <br/>
+            < &nbsp;Searched eucrdate: *${data.eucrdate}*&nbsp; > <br/>
+            < &nbsp;Searched euimage: *${data.euimage}*&nbsp; > <br/>`
+            
+            document.getElementById('searchResult').innerHTML = searchResult;
+            document.getElementById('output').src = data.euimage;
+```
+
+*The preview image effect*
+
+![image](https://github.com/user-attachments/assets/fb3f59cc-cd54-453f-8efe-b00fdbff56f5)
 
 ## Credit
 
