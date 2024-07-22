@@ -253,13 +253,13 @@ There are several ejs that created that designated for member view only.
 
 ### Added feature of using EJS
 
-Show the username inside the EJS web
+#### Show the username inside the EJS web
 ![image](https://github.com/user-attachments/assets/120a4b10-530f-4827-8793-cbb3b006adfe)
 
-**The code**:
+- **The code**:
 ![image](https://github.com/user-attachments/assets/64561853-fdf3-4feb-a98f-1251747cf369)
 
-*Before login*
+- *Before login*
 
 ![image](https://github.com/user-attachments/assets/8436f95f-1296-4e2b-bdb9-276a43a6f65a)
 
@@ -267,17 +267,17 @@ Show the username inside the EJS web
 
 ![image](https://github.com/user-attachments/assets/f50d3dc0-38ff-4a6d-9e4b-0df8417a7264)
 
-**The code**:
+- **The code**:
 
 ![image](https://github.com/user-attachments/assets/372a48b4-ab51-4400-a9a4-1f965c86f3c2)
 
-*Before login* 
+- *Before login* 
 
 ![image](https://github.com/user-attachments/assets/2ca7b745-164a-410b-a79a-d2bccb2d1111)
 
 ### My Profile Edition
 
-**User can edit and update their personal information**
+- **User can edit and update their personal information**
 
 ![image](https://github.com/user-attachments/assets/f8b269b1-587a-468a-a9d2-004709e7ca63)
 
@@ -289,7 +289,7 @@ Show the username inside the EJS web
 
 **Special Feature**
 
-*The user can update their personal image, also preview their profile images*
+- *The user can update their personal image, also preview their profile images*
 
 ```
 npm install multer
@@ -304,7 +304,7 @@ npm install multer
 
 ![image](https://github.com/user-attachments/assets/5477d879-7fa9-46fb-94b7-6d4bcdb61f56)
 
-*Third-party module -- multer*
+- *Third-party module -- multer*
 
 *Multer Set-up (After installation)*
 
@@ -324,11 +324,11 @@ npm install multer
 
 ![image](https://github.com/user-attachments/assets/99982929-9c54-4d77-8ad4-8d05c8f1ae31)
 
-*imagePath is the session saved from the login API*
+- *imagePath is the session saved from the login API*
 
 ### Testimonial
 
-This web feature can let the users edit their comment on their travel trip
+- This web feature can let the users edit their comment on their travel trip
 
 ![image](https://github.com/user-attachments/assets/eeca1851-2143-45c4-8722-ea831bf1d758)
 
@@ -340,7 +340,7 @@ npm install handsontable
 
 ### CMS Login System
 
-*Designed for simulating backend CMS*
+- *Designed for simulating backend CMS*
 
 ![image](https://github.com/user-attachments/assets/bd6d9033-7c26-40c0-8289-c6d5d12fb67c)
 
@@ -350,7 +350,7 @@ npm install handsontable
 
 ![image](https://github.com/user-attachments/assets/6dac7c5e-ba18-4abc-8898-c691698e2ff2)
 
-*With system level role field that could restrict login user's access*
+- *With system level role field that could restrict login user's access*
 
 ```
 switch (system_level) {
@@ -461,7 +461,7 @@ switch (system_level) {
 
 #### Key function
 
-*Search/Update/Add/Delete*
+- *Search/Update/Add/Delete*
 
 ***CRUD***
 
@@ -475,7 +475,7 @@ switch (system_level) {
 
 ![image](https://github.com/user-attachments/assets/26b178cc-00d8-4c2a-bbe2-47abb823f3e7)
 
-*After fetching the needed data, the result will show out by using innerHTML*
+- *After fetching the needed data, the result will show out by using innerHTML*
 ```
 if (response.ok) {
 return response.json().then(data => {
@@ -497,7 +497,7 @@ document.getElementById('searchResult').innerHTML = searchResult;
 
 ##### Update
 
-Same as the search one but use *replaceOne* in API
+- Same as the search one but use *replaceOne* in API
 
 ```
 await db.replaceOne({_id:data._id}, data);
@@ -540,7 +540,7 @@ More Detail in [ [Delete feature detail](https://github.com/StevenLuk18/backendP
 
 *In enduser section*
 
-_fetch data from the MongoDB database and get the preview image path_
+- _fetch data from the MongoDB database and get the preview image path_
 
 ```
 return response.json().then(data => {
