@@ -21,68 +21,6 @@ Setting up a database and designing the structure of the database is essential f
 ### Required Module
 ![image](https://github.com/user-attachments/assets/a7683173-c6d5-4a18-ab74-749bb83c3a51)
 
-### Node.js
-
-You can download Node.js here with [Node.js Pages](https://nodejs.org/zh-cn).
-
-#### NPM (After installing Node.js)
-
-*set up Express with its default files*:
-```
-npx express-generator --view=ejs <YourProjectName>
-```
-
-The word inside <> is your designated project name
-
-*It is suggested to download nodemon*:
-
-```
-npm install nodemon
-```
-
-
-#### Why use Nodemon
-
-1. *Automatic Restart*:
-   
-- Automatically restarts the server when changes are detected in the application files.
-- Eliminating the need to stop and restart the server during development manually.
-
-2. *Real-time Updates*:
-
-- Continuously monitors the files in the project directory and refreshes the browser or terminal when changes are made.
-- Providing a seamless development experience.
-
-#### Customization on Nodemon
-Nodemon allows you to customize the files and directories it monitors and the command used to start the server.
-
-*In package.json file*:
-```
-"scripts": {
-    "start": "node ./bin/www",
-    "monstart": "nodemon ./bin/www"
-  },
-```
-You can customize your command for starting the server. 
-- **In my case, it is monstart.**
-```
-npm run monstart
-```
-so that the server can be run.
-
-### Database
-> MongoDB
-
-```
-npm install mongodb
-```
-
-Use the below code to get MongoClient
-> const MongoClient = require('mongodb').MongoClient;
-
-> const {MongoClient} = require('mongodb');
-
-
 ## Backend application
 
 ### Login/Registration form
