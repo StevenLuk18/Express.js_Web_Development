@@ -42,132 +42,6 @@ Setting up a database and designing the structure of the database is essential f
 
 ![image](https://github.com/user-attachments/assets/37b1bdd3-4f78-4d8f-8419-ea381a24c79a)
 
-
-- Use API to connect MongoDB and find whether the login is valid or not
-
-```
-var express = require('express');
-var router = express.Router();
-var path = require('path');
-
-/* create db entries. */
-const MongoClient = require('mongodb').MongoClient;
-const url = "mongodb://localhost:27017/";
-const client = new MongoClient(url);
-
-
-router.get('/', (req,res, next) => {
-    res.redirect('/');
-}).post('/', async (req, res , next) => {
-
-    const {NameOrEmail , mppswd} = req.body
-
-    try {
-        await client.connect()
-       
-        data = await client.db("travel").collection('member').findOne({mpemail:NameOrEmail, mppswd:mppswd});
-        if (data) {
-            req.session.authUser = [data._id, data.mpname ,data.mpusername, data.mpemail, data.mppswd, data.mpgender, data.mpimagepath];
-          
-            req.session.userCities = [{'China': data.mpchina} , {'Japan':data.mpjapan}, {'Korea':data.mpkorean}, {'Taiwan':data.mptaiwan}, {'Europe':data.mpeurope}, {'USA': data.mpusa}, {'England': data.mpengland}, {'Canada':data.mpcanada}, {'Others': data.mpcntyother}, data.mpcntyothdesc];
-
-            req.session.userTrans = [{'Airplan': data.mpairplan}, {'Cruise': data.mpcruise}, {'Train': data.mptrain}, {'High-speed rail':data.mprail}, {'Others': data.mptranother}, data.mptranothdesc];
-
-            req.session.imagePath = [data.mpimagepath]
-            
-            res.redirect('/login');
-        } else {
-        
-            res.send('<script>history.back(); alert("Sorry, you entered incorrect email / password");</script>');}
-
-    } catch (err) {
-        console.log(err.name, err.message)
-        return next(err)
-    } finally {
-        await client.close();
-    }
-})
-```
-- **If valid, it will _redirect to the API_ that is designed for the member.**
-- **If not valid, it will return the _error message_**
-
-- **At the same time, the API will mark down the _session_ information for later usage.**
-
-#### Register
-
-- *Check if the register username and email are taken*
-
-- *if not exist, the API will insert the registration data into MongoDB. That means create a account*
-```
-var express = require('express');
-var router = express.Router();
-var path = require('path');
-const { validate } = require('jsonschema');
-
-/* create db entries. */
-const MongoClient = require('mongodb').MongoClient;
-const url = "mongodb://localhost:27017/";
-const client = new MongoClient(url);
-
-// Insrt date time
-const datetime = new Date()
-const hongKongTime = new Date(datetime.getTime() + (8 * 60 * 60 * 1000));
-
-let schema = {
-type: 'object',
-properties: {
-  mpemail: { type: 'string', format: 'email' },
-  mppswd: { type: 'string', format: 'password' },
-  mpusername: { type: 'string' },
-  mpjoindate: { type: 'string', format: 'date-time' }
-},
-required: ['mpemail', 'mppswd', 'mpusername'],
-additionalProperties: false
-};
-
-
-router.get('/', async (req, res, next) => {
-    if (req.session.regUser) res.render('/');
-    else res.render('/');
-
-}).post('/', async (req, res, next) => {
-
-    const {mpusername, mpemail, mppswd} = req.body;
-
-    let result = validate(req.body, schema);
-
-    if (!result.valid) {
-    /* res.status(400).send(`Invalid request body: ${result.errors.map(e => e.message).join(', ')}`); */
-    res.status(400).render('404_register', {err : result.errors.map(e => e.message)});
-    return;
-  }
-
-    try {
-    await client.connect()
-
-    data = await client.db("travel").collection('member').findOne({$or:[{mpusername:mpusername} , {mpemail:mpemail}]});
-        
-        if (data) {
-            res.send('<script>history.back(); alert("Sorry, your username or email has been taken!!!");</script>');
-        } else {
-            req.session.regUser = [req.body.mpemail, req.body.mpusername, req.body.mppswd];
-            await client.db("travel").collection('member').insertOne({mpemail:mpemail,mppswd:mppswd,mpusername:mpusername,mpjoindate:hongKongTime});
-            res.redirect('/');
-        }
-
-    } catch (err) {
-        console.log(err.name, err.message)
-        return next(err)
-    
-    } finally {
-        await client.close();
-    }
-
-});
-
-module.exports = router;
-```
-
 ### EJS
 
 *If the users login, the API will render the EJS*
@@ -290,6 +164,8 @@ npm install handsontable
 
 - *With system level role field that could restrict login user's access*
 
+
+#### Switch case
 ```
 switch (system_level) {
       case 'A':
@@ -313,25 +189,7 @@ switch (system_level) {
           let hideColl = document.querySelector('.dashboard-container.allColl')
           if (hideColl) {hideColl.classList.toggle('hidden')}
   
-          let hideMbIdLabel = document.querySelector('label[for="member-search-id"]')
-          let hideMbIdRadio = document.getElementById('member-search-id')
-          if (hideMbIdLabel) {hideMbIdLabel.classList.toggle('hidden')}
-          if (hideMbIdRadio) {hideMbIdRadio.classList.toggle('hidden')}
-  
-          let hideSubIdLabel = document.querySelector('label[for="subscription-search-id"]')
-          let hideSubIdRadio = document.getElementById('subscription-search-id')
-          if (hideSubIdLabel) {hideSubIdLabel.classList.toggle('hidden')}
-          if (hideSubIdRadio) {hideSubIdRadio.classList.toggle('hidden')}
-  
-          let hideEnqIdLabel = document.querySelector('label[for="enquiry-search-id"]')
-          let hideEnqIdRadio = document.getElementById('enquiry-search-id')
-          if (hideEnqIdLabel) {hideEnqIdLabel.classList.toggle('hidden')}
-          if (hideEnqIdRadio) {hideEnqIdRadio.classList.toggle('hidden')}
-  
-          let hidePkIdLabel = document.querySelector('label[for="package-search-id"]')
-          let hidePkIdRadio = document.getElementById('package-search-id')
-          if (hidePkIdLabel) {hidePkIdLabel.classList.toggle('hidden')}
-          if (hidePkIdRadio) {hidePkIdRadio.classList.toggle('hidden')}
+          ...more details in my project
         
         break;
       
@@ -346,37 +204,8 @@ switch (system_level) {
         if (sup_op2) {
           sup_op2.forEach((op) => {
           op.parentNode.removeChild(op);})}
-        
-        let op_op = document.querySelectorAll('.authUser-op-o')
-        if (op_op) {
-          op_op.forEach((op) => {
-          op.parentNode.removeChild(op)})}
 
-        let op_aside = document.getElementById('aside-authUser')
-        if(op_aside) op_aside.style.display = 'none'
-
-        let hideColl2 = document.querySelector('.dashboard-container.allColl')
-        if (hideColl2) {hideColl.classList.toggle('hidden')}
-
-        let hideMbIdLabel2 = document.querySelector('label[for="member-search-id"]')
-        let hideMbIdRadio2 = document.getElementById('member-search-id')
-        if (hideMbIdLabel2) {hideMbIdLabel.classList.toggle('hidden')}
-        if (hideMbIdRadio2) {hideMbIdRadio.classList.toggle('hidden')}
-
-        let hideSubIdLabel2 = document.querySelector('label[for="subscription-search-id"]')
-        let hideSubIdRadio2 = document.getElementById('subscription-search-id')
-        if (hideSubIdLabel2) {hideSubIdLabel.classList.toggle('hidden')}
-        if (hideSubIdRadio2) {hideSubIdRadio.classList.toggle('hidden')}
-
-        let hideEnqIdLabel2 = document.querySelector('label[for="enquiry-search-id"]')
-        let hideEnqIdRadio2 = document.getElementById('enquiry-search-id')
-        if (hideEnqIdLabel2) {hideEnqIdLabel.classList.toggle('hidden')}
-        if (hideEnqIdRadio2) {hideEnqIdRadio.classList.toggle('hidden')}
-
-        let hidePkIdLabel2 = document.querySelector('label[for="package-search-id"]')
-        let hidePkIdRadio2 = document.getElementById('package-search-id')
-        if (hidePkIdLabel2) {hidePkIdLabel.classList.toggle('hidden')}
-        if (hidePkIdRadio2) {hidePkIdRadio.classList.toggle('hidden')}
+       ...more details in my project
 
         break;
 
@@ -405,25 +234,9 @@ switch (system_level) {
 
 *In Authorize User Section*
 
-![image](https://github.com/user-attachments/assets/00cbd778-69a9-4618-929f-0dab6d4a76f1)
+![image](https://github.com/user-attachments/assets/ffc5b266-5004-4cd8-b8fe-0e27b60b0302)
 
 ##### Search
-
-*Use fetch to get MongoDB data*
-
-![image](https://github.com/user-attachments/assets/26b178cc-00d8-4c2a-bbe2-47abb823f3e7)
-
-- *After fetching the needed data, the result will show out by using innerHTML*
-```
-if (response.ok) {
-return response.json().then(data => {
-   const searchResult = 
-      `< &nbsp;Searched sysopname: *${data.searchedName}*&nbsp; > <br/> 
-      < &nbsp;Searched sysoppswd: *${data.searchedPw}*&nbsp; > <br/> 
-      < &nbsp;Searched syslevel: *${data.searchedLevel}*&nbsp; >` ;
-
-document.getElementById('searchResult').innerHTML = searchResult;
-```
 
 *API*
 
@@ -445,8 +258,7 @@ More Detail in [ [Update feature detail](https://github.com/StevenLuk18/backendP
 
 *Actual effect*
 
-![image](https://github.com/user-attachments/assets/27c7b34c-89d8-4b90-b650-e992e3b78388)
-
+![image](https://github.com/user-attachments/assets/490e0018-a580-48db-a73f-91340660f765)
 
 ##### Add
 
@@ -460,7 +272,7 @@ More Detail in [ [Add feature detail](https://github.com/StevenLuk18/backendProj
 
 *Actual effect*
 
-![image](https://github.com/user-attachments/assets/65cc6c1d-9647-4955-9a4f-aecd2da49255)
+![image](https://github.com/user-attachments/assets/c7a3fcdd-bdb5-4e2c-9fc0-a3163744860c)
 
 
 ##### Delete
@@ -473,10 +285,12 @@ More Detail in [ [Delete feature detail](https://github.com/StevenLuk18/backendP
 
 *Actual effect*
 
-![image](https://github.com/user-attachments/assets/21fba5fa-a314-41b1-a62b-f9662ef4ed7a)
+![image](https://github.com/user-attachments/assets/ef1ac086-843f-4f05-a842-a226da54e832)
 
 
 *In enduser section*
+
+The purpose is to find the travel guide that the company has, with the personal picture provided.
 
 - _fetch data from the MongoDB database and get the preview image path_
 
