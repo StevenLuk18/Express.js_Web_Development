@@ -47,13 +47,17 @@ router.get('/', (req, res, next) => {
 
     client.connect()
     const sysoperator = client.db("travel")
-    const data = await sysoperator.collection('sysoperator').find({$and:[{sysopname:searchName},{syslevel:searchLevel}]}).toArray()
+    const data = await sysoperator.collection('sysoperator').findOne({$and:[{sysopname:searchName},{syslevel:searchLevel}]})
     console.log(data)
-    res.json({
-      searchedName:searchName,
-      searchedPw: data[0].sysoppswd,
-      searchedLevel:searchLevel,
-    })
+    
+    if (data){
+      res.json({
+        searchedName:searchName,
+        searchedPw: data.sysoppswd,
+        searchedLevel:searchLevel,
+    })} else {
+      res.status(404).json('No data found!!! Could be Wrong User Name/ Operation Level')
+    }
 
   } catch (err){
     console.log(err)
@@ -64,7 +68,7 @@ router.get('/', (req, res, next) => {
 
   console.log('Update loading')
    
-  const {updateName, updatePw, updateLevel, updateNameComf, updatePwComf, updateLevelComf,updateNameReal,updatePwReal,updateLevelReal} = req.body
+  const {updateName, updatePw, updateLevel, updateNameReal, updatePwReal, updateLevelReal} = req.body
 
   try{
     client.connect()
@@ -73,7 +77,6 @@ router.get('/', (req, res, next) => {
     const data = await db.findOne({$and:[{sysopname:req.body.updateName},{sysoppswd:req.body.updatePw},{syslevel:req.body.updateLevel}]})
     console.log(data)
     if (data) {
-      if (updateNameComf === updateName && updatePwComf === updatePw && updateLevelComf === updateLevel) {
         data.sysopname = updateNameReal
         data.sysoppswd = updatePwReal
         data.syslevel = updateLevelReal
@@ -84,12 +87,8 @@ router.get('/', (req, res, next) => {
           updatedName: updateNameReal,
           updatedPw: updatePwReal,
           updatedLevel: updateLevelReal})
-
-      } else {
-        res.status(404).json('Please confirm your inputs are matched!!!')
-      }
     } else {
-      res.status(404).json("Sorry, can't find the user/incorrect password!!! You may search users first ^.^");
+      res.status(404).json("Sorry, can't find the user/incorrect password!!! You may search users first.");
     }
    } catch (err) {
     console.log(err)
@@ -100,7 +99,7 @@ router.get('/', (req, res, next) => {
 
   console.log('Add/Del loading')
 
-  const {addordelAction, addordelName, addordelPw, addordelLevel, addordelNameComf, addordelPwComf, addordelLevelComf, addordelNameReal, addordelPwReal, addordelLevelReal} = req.body
+  const {addordelAction, addordelName, addordelPw, addordelLevel} = req.body
   
   
     try{
@@ -109,27 +108,23 @@ router.get('/', (req, res, next) => {
       const db = sysoperator.collection('sysoperator')
       const data = await db.findOne({sysopname:addordelName})
       if (!data) {
-        if (addordelNameComf === addordelName && addordelPwComf === addordelPw && addordelLevelComf === addordelLevel){
           if (addordelAction === 'add'){
             await db.insertOne(
-              {sysopname: addordelNameReal, sysoppswd: addordelPwReal,syslevel: addordelLevelReal}
+              {sysopname: addordelName, sysoppswd: addordelPw,syslevel: addordelLevel}
             )
+          } else if (addordelAction === 'del') {
+            res.status(404).json("The user doesn't exist, please enter the correct one or check your spelling")
           }
           
           res.json({
             addordelAction: addordelAction,
-            addordelName: addordelNameReal, 
-            addordelPw: addordelPwReal,
-            addordelLevel: addordelLevelReal
+            addordelName: addordelName, 
+            addordelPw: addordelPw,
+            addordelLevel: addordelLevel
           })
-          
-        } else {
-          res.status(404).json('Please confirm your inputs are matched!!!')
-        }
       } else { 
-        if (addordelNameComf === addordelName && addordelPwComf === addordelPw && addordelLevelComf === addordelLevel){
           if (addordelAction === 'add') {
-            res.status(404).json("Sorry, the use name is taken!!! You may search users first and retry ^.^");
+            res.status(404).json("Sorry, the user name is taken!!! You may search the user first and retry.");
           } 
           else {
 
@@ -137,17 +132,12 @@ router.get('/', (req, res, next) => {
 
             res.json({
               addordelAction: addordelAction,
-              addordelName: addordelNameReal, 
-              addordelPw: addordelPwReal,
-              addordelLevel: addordelLevelReal
+              addordelName: addordelName, 
+              addordelPw: addordelPw,
+              addordelLevel: addordelLevel
             })
-          }} else {
-            res.status(404).json('Please confirm your inputs are matched!!!')
           }
       };
-        
-
-
   } catch (err) {
     console.log(err)
   } finally {
