@@ -1,0 +1,16 @@
+.resetFormWrapper{
+    display: flex;
+    justify-content: center; 
+    align-items: center; 
+    height: 100%;
+}
+
+body, html {
+    height: 100%;
+    margin: 0;
+    font-family: Arial, sans-serif; /* Optional font style */
+    background-color: #f0f0f0; 
+    background-image: url('/img/HBD_001.JPG');
+    background-repeat: no-repeat;
+    background-size: cover;
+}
