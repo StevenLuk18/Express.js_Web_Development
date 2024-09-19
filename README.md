@@ -19,8 +19,10 @@ Setting up a database and designing the structure of the database is essential f
 - Using ***node.js*** with the module ***Express*** to create the needed ***API***.
 
 ### Required Module
-![image](https://github.com/user-attachments/assets/a7683173-c6d5-4a18-ab74-749bb83c3a51)
-
+```
+npm install
+```
+- to get all from package.json
 ## Backend application
 
 ### Login/Registration form
