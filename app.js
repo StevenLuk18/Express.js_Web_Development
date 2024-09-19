@@ -49,20 +49,6 @@ app.get('/api/company', async (req, res) => {
   }
 });
 
-// Get DB collection info
-app.get('/api/alldb', async (req, res) => {
-  try {
-    const client = await MongoClient.connect(mongoUrl);
-    const db = client.db("travel");
-    const collectionNames = await db.listCollections().toArray();
-    res.json(collectionNames.map(c => c.name));
-    await client.close();
-  } catch (error) {
-    console.error('Error fetching enduser data:', error);
-    res.status(500).json({ error: 'Failed to fetch enduser data'});
-  }
-})
-
 // due to the app.listen had been called by bin/www, so no need at here 
 //app.listen(port, () => {
 //  console.log(`Server is running on port ${port}`);
