@@ -26,5 +26,6 @@ module.exports = [
     { route: '/cms-admin-api-package', file: './routes/cms-admin-api-package'},
     { route: '/cms-admin-api-subscription', file: './routes/cms-admin-api-subscription'},
     { route: '/cms-admin-api-company', file: './routes/cms-admin-api-company'},
-    { route: '/cms-admin-api-enduser', file: './routes/cms-admin-api-enduser'}
+    { route: '/cms-admin-api-enduser', file: './routes/cms-admin-api-enduser'},
+    { route: '/forgetpw', file: './routes/forgetpw'}
   ];
