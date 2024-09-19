@@ -96,6 +96,16 @@ router.get('/', (req, res, next) => {
   const db = client.db('travel')
   const data = await db.collection('package').countDocuments()
   res.json(data)
-})
+}).get('/alldb', async (req,res) => {
+    try {
+      await client.connect()
+      const db = client.db("travel");
+      const collectionNames = await db.listCollections().toArray();
+      res.json(collectionNames.map(c => c.name));
+    } catch (error) {
+      console.error('Error fetching enduser data:', error);
+      res.status(500).json({ error: 'Failed to fetch enduser data'});
+    } 
+});
 
 module.exports = router;

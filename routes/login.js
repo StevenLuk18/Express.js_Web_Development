@@ -48,9 +48,6 @@ router.get('/', (req,res, next) => {
             userTrans: req.session.userTrans,
             imagePath: req.session.imagePath
           });
-        
-      /*   res.json(req.session.userCities);
-        res.json(req.session.userTrans); */
 
     } else {
 

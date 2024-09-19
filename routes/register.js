@@ -8,9 +8,8 @@ const MongoClient = require('mongodb').MongoClient;
 const url = "mongodb://localhost:27017/";
 const client = new MongoClient(url);
 
-// Insrt date time
-const datetime = new Date()
-const hongKongTime = new Date(datetime.getTime() + (8 * 60 * 60 * 1000));
+// Insert date time
+const hongKongTime = new Date(new Date().getTime() + (8 * 60 * 60 * 1000));
 
 let schema = {
 type: 'object',
@@ -25,11 +24,7 @@ additionalProperties: false
 };
 
 
-router.get('/', async (req, res, next) => {
-    if (req.session.regUser) res.render('/');
-    else res.render('/');
-
-}).post('/', async (req, res, next) => {
+router.post('/', async (req, res, next) => {
 
     const {mpusername, mpemail, mppswd} = req.body;
 
@@ -50,7 +45,7 @@ router.get('/', async (req, res, next) => {
             res.send('<script>history.back(); alert("Sorry, your username or email has been taken!!!");</script>');
         } else {
             req.session.regUser = [req.body.mpemail, req.body.mpusername, req.body.mppswd];
-            await client.db("travel").collection('member').insertOne({mpemail:mpemail,mppswd:mppswd,mpusername:mpusername,mpjoindate:hongKongTime});
+            await client.db("travel").collection('member').insertOne({mpemail:mpemail,mppswd:mppswd,mpusername:mpusername,mpjoindate:hongKongTime.toISOString()});
             res.redirect('/');
         }
 
