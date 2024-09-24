@@ -11,18 +11,19 @@ Disclaimer:
 Main color for our website is: `#86B817`
 
 # Table of contents
-[Backend application](#Backend-application)
+[Backend Application](#Backend-application)
 - [Login Form](#LoginForm)
 - [Registration Form](#RegistrationForm)
 - [Forget Password Form](#Forget-Password)
 
 [EJS](#EJS)  
-- [Added feature of using EJS](#Added-feature-of-using-EJS)
+- [Added Feature Of Using EJS](#Added-feature-of-using-EJS)
 - [My Profile Edition](#My-Profile-Edition)
 - [Testimonial](#Testimonial)
 
 [CMS Login System](#CMS-Login-System)
-- [Key-function](#Key-function)
+- [CMS User Structure](#CMS-user-structure)
+- [Key Function](#Key-function)
 - [Search](#Search)
 - [Update](#Update)
 - [Add](#Add)
@@ -45,7 +46,7 @@ npm install
 <a name="Backend-application"></a>
 # Backend application
 
-### Login/Registration/Reset Password form
+### Login/Registration/Reset Password Form
 
 - Design a pop-up Login/Registration form that allows users to log in.
 - If the users don't have one, they can press register to create a new account.
@@ -65,7 +66,7 @@ npm install
 
 ![image](https://github.com/user-attachments/assets/b210e039-c3b7-4242-9176-b585af08c9c7)
 
-#### Send an Email to reset password
+#### Send An Email To Reset Password
 
 ![image](https://github.com/user-attachments/assets/e3564c0a-5389-4a22-9440-d009724fe064)
 
@@ -127,9 +128,9 @@ There are several ejs that created that designated for member view only.
 *Once the users log in, they will go into one of those EJS web pages*
 
 <a name="Added-feature-of-using-EJS"></a>
-### Added feature of using EJS
+### Added Feature Of Using EJS
 
-#### Show the username(Anna) with the EJS 
+#### Show The Username(Anna) With The EJS 
 ![image](https://github.com/user-attachments/assets/120a4b10-530f-4827-8793-cbb3b006adfe)
 
 - **The code**:
@@ -139,7 +140,7 @@ There are several ejs that created that designated for member view only.
 
 ![image](https://github.com/user-attachments/assets/8436f95f-1296-4e2b-bdb9-276a43a6f65a)
 
-#### Show logout and my profile button
+#### Show Logout And My Profile Button
 
 ![image](https://github.com/user-attachments/assets/f50d3dc0-38ff-4a6d-9e4b-0df8417a7264)
 
@@ -224,7 +225,7 @@ npm install handsontable
 ![image](https://github.com/user-attachments/assets/bd6d9033-7c26-40c0-8289-c6d5d12fb67c)
 
 <a name="CMS-user-structure"></a>
-#### CMS user structure
+#### CMS User Structure
 
 *CMS Login User Design*
 
@@ -233,7 +234,7 @@ npm install handsontable
 - *With system level role field that could restrict login user's access*
 
 
-#### Switch case
+#### Switch Case
 ```
 switch (system_level) {
       case 'A':
@@ -282,7 +283,7 @@ switch (system_level) {
   .catch(error => console.error('Error fetching company data:', error));
 ```
 
-**Different HTML webs for differnt functionality**
+**Different HTML webs for different functionality**
 
 ![image](https://github.com/user-attachments/assets/7d8b7ef4-9a8e-47f9-a410-908a6d9f81aa)
 
@@ -295,7 +296,7 @@ switch (system_level) {
 ![image](https://github.com/user-attachments/assets/71114f9d-58a1-4a20-bebf-b97b3c8b0221)
 
 <a name="Key-function"></a>
-#### Key function
+#### Key Functions
 
 - *Search/Update/Add/Delete*
 
