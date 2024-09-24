@@ -10,11 +10,23 @@ Disclaimer:
 
 Main color for our website is: `#86B817`
 
-# Table of highlight
-- [Backend application](#Backend-application)
+# Table of contents
+[Backend application](#Backend-application)
+- [Login Form](#LoginForm)
+- [Registration Form](#RegistrationForm)
+- [Forget Password Form](#Forget-Password)
+
+[EJS](#EJS)  
 - [Added feature of using EJS](#Added-feature-of-using-EJS)
 - [My Profile Edition](#My-Profile-Edition)
-- [CMS Login System](#CMS-Login-System) 
+- [Testimonial](#Testimonial)
+
+[CMS Login System](#CMS-Login-System)
+- [Key-function](#Key-function)
+- [Search](#Search)
+- [Update](#Update)
+- [Add](#Add)
+- [Delete](#Delete)
 
 ## Webpage Structure
 ![image](https://github.com/user-attachments/assets/f48db50a-6922-43b8-9a5f-06dec2249520)
@@ -29,6 +41,8 @@ Setting up a database and designing the structure of the database is essential f
 npm install
 ```
 - to get all from package.json
+
+<a name="Backend-application"></a>
 # Backend application
 
 ### Login/Registration/Reset Password form
@@ -36,14 +50,17 @@ npm install
 - Design a pop-up Login/Registration form that allows users to log in.
 - If the users don't have one, they can press register to create a new account.
 
+<a name="LoginForm"></a>
 **Login**
 
 ![image](https://github.com/user-attachments/assets/d5b779a0-d85d-4519-8007-9807ba245b25)
 
+<a name="RegistrationForm"></a>
 **Registration**
 
 ![image](https://github.com/user-attachments/assets/ddb66027-3c4f-46e2-ae4b-95bbbc377521)
 
+<a name="Forget-Password"></a>
 **Forget Password**
 
 ![image](https://github.com/user-attachments/assets/b210e039-c3b7-4242-9176-b585af08c9c7)
@@ -87,7 +104,8 @@ More Detail in [ [Forget password/ Link encryption feature detail](https://githu
 
 ![image](https://github.com/user-attachments/assets/b309e1b2-4f7a-4a36-848c-f1e3b4316c61)
 
-### EJS
+<a name="EJS"></a>
+# EJS
 
 *If the users login, the API will render the EJS*
 
@@ -106,9 +124,10 @@ There are several ejs that created that designated for member view only.
 
 ![image](https://github.com/user-attachments/assets/d776550c-4617-4c7d-a37a-03ce474ed848)
 
-*Once the users login, they will go into one of those EJS webpages*
+*Once the users log in, they will go into one of those EJS web pages*
 
-# Added feature of using EJS
+<a name="Added-feature-of-using-EJS"></a>
+### Added feature of using EJS
 
 #### Show the username(Anna) with the EJS 
 ![image](https://github.com/user-attachments/assets/120a4b10-530f-4827-8793-cbb3b006adfe)
@@ -120,7 +139,7 @@ There are several ejs that created that designated for member view only.
 
 ![image](https://github.com/user-attachments/assets/8436f95f-1296-4e2b-bdb9-276a43a6f65a)
 
-#### Show logout and myprofile button
+#### Show logout and my profile button
 
 ![image](https://github.com/user-attachments/assets/f50d3dc0-38ff-4a6d-9e4b-0df8417a7264)
 
@@ -132,7 +151,8 @@ There are several ejs that created that designated for member view only.
 
 ![image](https://github.com/user-attachments/assets/2ca7b745-164a-410b-a79a-d2bccb2d1111)
 
-# My Profile Edition
+<a name="My-Profile-Edition"></a>
+### My Profile Edition
 
 - **User can edit and update their personal information**
 
@@ -146,7 +166,7 @@ There are several ejs that created that designated for member view only.
 
 **Special Feature**
 
-- *The user can update their personal image, also preview their profile images*
+- *The user can update their personal image, and preview their profile images*
 
 ```
 npm install multer
@@ -173,19 +193,20 @@ npm install multer
 
 *In my case, it is public/images/member/'FileName'*
 
-**Get the preview image from the path that saved inside the MongoDB**
+**Get the preview image from the path that is saved inside the MongoDB**
 
 ![image](https://github.com/user-attachments/assets/b2e74885-b40f-40e5-b2d4-f440f5764688)
 
-*Get the data from API and insert into the image's src attribute*
+*Get the data from API and insert it into the image's src attribute*
 
 ![image](https://github.com/user-attachments/assets/99982929-9c54-4d77-8ad4-8d05c8f1ae31)
 
 - *imagePath is the session saved from the login API*
 
+<a name="Testimonial"></a>
 ### Testimonial
 
-- This web feature can let the users edit their comment on their travel trip
+- This web feature can let the users edit their comments on their travel trip
 
 ![image](https://github.com/user-attachments/assets/eeca1851-2143-45c4-8722-ea831bf1d758)
 
@@ -195,13 +216,15 @@ npm install multer
 npm install handsontable
 ```
 
+<a name="CMS-Login-System"></a>
 # CMS Login System
 
 - *Designed for simulating backend CMS*
 
 ![image](https://github.com/user-attachments/assets/bd6d9033-7c26-40c0-8289-c6d5d12fb67c)
 
-#### CMS structure
+<a name="CMS-user-structure"></a>
+#### CMS user structure
 
 *CMS Login User Design*
 
@@ -271,6 +294,7 @@ switch (system_level) {
 
 ![image](https://github.com/user-attachments/assets/71114f9d-58a1-4a20-bebf-b97b3c8b0221)
 
+<a name="Key-function"></a>
 #### Key function
 
 - *Search/Update/Add/Delete*
@@ -281,6 +305,7 @@ switch (system_level) {
 
 ![image](https://github.com/user-attachments/assets/ffc5b266-5004-4cd8-b8fe-0e27b60b0302)
 
+<a name="Search"></a>
 ##### Search
 
 *API*
@@ -291,6 +316,7 @@ switch (system_level) {
 
 ![image](https://github.com/user-attachments/assets/b8a7e4b7-4fca-42e0-b622-3651379a8c50)
 
+<a name="Update"></a>
 ##### Update
 
 - Same as the search one but use *replaceOne* in API
@@ -305,6 +331,7 @@ More Detail in [ [Update feature detail](https://github.com/StevenLuk18/backendP
 
 ![image](https://github.com/user-attachments/assets/490e0018-a580-48db-a73f-91340660f765)
 
+<a name="Add"></a>
 ##### Add
 
 ```
@@ -319,7 +346,7 @@ More Detail in [ [Add feature detail](https://github.com/StevenLuk18/backendProj
 
 ![image](https://github.com/user-attachments/assets/c7a3fcdd-bdb5-4e2c-9fc0-a3163744860c)
 
-
+<a name="Delete"></a>
 ##### Delete
 
 ```
