@@ -44,7 +44,7 @@ npm install
 - to get all from package.json
 
 <a name="Backend-application"></a>
-# Backend application
+# Backend Application
 
 ### Login/Registration/Reset Password Form
 
