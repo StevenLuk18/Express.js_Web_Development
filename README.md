@@ -10,6 +10,12 @@ Disclaimer:
 
 Main color for our website is: `#86B817`
 
+# Table of highlight
+- [Backend application](##Backend-application)
+- [Added feature of using EJS](###Added-feature-of-using-EJS)
+- [My Profile Edition](###My-Profile-Edition)
+- [CMS Login System](###CMS-Login-System) 
+
 ## Webpage Structure
 ![image](https://github.com/user-attachments/assets/f48db50a-6922-43b8-9a5f-06dec2249520)
 
@@ -25,7 +31,7 @@ npm install
 - to get all from package.json
 ## Backend application
 
-### Login/Registration form
+### Login/Registration/Reset Password form
 
 - Design a pop-up Login/Registration form that allows users to log in.
 - If the users don't have one, they can press register to create a new account.
@@ -38,11 +44,48 @@ npm install
 
 ![image](https://github.com/user-attachments/assets/ddb66027-3c4f-46e2-ae4b-95bbbc377521)
 
+**Forget Password**
+
+![image](https://github.com/user-attachments/assets/b210e039-c3b7-4242-9176-b585af08c9c7)
+
+#### Send an Email to reset password
+
+![image](https://github.com/user-attachments/assets/e3564c0a-5389-4a22-9440-d009724fe064)
+
+![image](https://github.com/user-attachments/assets/6a22a539-40e7-43a2-bd04-fd51b823b424)
+
+Module used: *nodemailer*
+
+```
+npm i nodemailer
+```
+
+- Set a random Token to encrypt the API link
+
+```
+npm i crypto crypto-js
+```
+
+ **In database**
+ 
+![image](https://github.com/user-attachments/assets/06f84beb-bc97-48f3-adaf-da2fc9db785a)
+
+
+- Set expiration
+  
+![image](https://github.com/user-attachments/assets/34e78e98-5f13-428d-9a48-3aa471e7ae12)
+
+**The Reset Password API (If the encrypted Token match)** 
+
+More Detail in [ [Forget password/ Link encryption feature detail](https://github.com/StevenLuk18/Express.js_Web_Development/blob/main/routes/forgetpw.js) ]
+
+![image](https://github.com/user-attachments/assets/dde27c2b-1325-4fce-909b-260eb734a02c)
+
 #### API
 
  - **Create different APIs for different functionality**
 
-![image](https://github.com/user-attachments/assets/37b1bdd3-4f78-4d8f-8419-ea381a24c79a)
+![image](https://github.com/user-attachments/assets/b309e1b2-4f7a-4a36-848c-f1e3b4316c61)
 
 ### EJS
 
@@ -67,7 +110,7 @@ There are several ejs that created that designated for member view only.
 
 ### Added feature of using EJS
 
-#### Show the username inside the EJS web
+#### Show the username(Anna) with the EJS 
 ![image](https://github.com/user-attachments/assets/120a4b10-530f-4827-8793-cbb3b006adfe)
 
 - **The code**:
