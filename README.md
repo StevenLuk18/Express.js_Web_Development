@@ -11,10 +11,10 @@ Disclaimer:
 Main color for our website is: `#86B817`
 
 # Table of highlight
-- [Backend application](##Backend-application)
-- [Added feature of using EJS](###Added-feature-of-using-EJS)
-- [My Profile Edition](###My-Profile-Edition)
-- [CMS Login System](###CMS-Login-System) 
+- [Backend application](#Backend-application)
+- [Added feature of using EJS](#Added-feature-of-using-EJS)
+- [My Profile Edition](#My-Profile-Edition)
+- [CMS Login System](#CMS-Login-System) 
 
 ## Webpage Structure
 ![image](https://github.com/user-attachments/assets/f48db50a-6922-43b8-9a5f-06dec2249520)
@@ -29,7 +29,7 @@ Setting up a database and designing the structure of the database is essential f
 npm install
 ```
 - to get all from package.json
-## Backend application
+# Backend application
 
 ### Login/Registration/Reset Password form
 
@@ -108,7 +108,7 @@ There are several ejs that created that designated for member view only.
 
 *Once the users login, they will go into one of those EJS webpages*
 
-### Added feature of using EJS
+# Added feature of using EJS
 
 #### Show the username(Anna) with the EJS 
 ![image](https://github.com/user-attachments/assets/120a4b10-530f-4827-8793-cbb3b006adfe)
@@ -132,7 +132,7 @@ There are several ejs that created that designated for member view only.
 
 ![image](https://github.com/user-attachments/assets/2ca7b745-164a-410b-a79a-d2bccb2d1111)
 
-### My Profile Edition
+# My Profile Edition
 
 - **User can edit and update their personal information**
 
@@ -195,7 +195,7 @@ npm install multer
 npm install handsontable
 ```
 
-### CMS Login System
+# CMS Login System
 
 - *Designed for simulating backend CMS*
 
