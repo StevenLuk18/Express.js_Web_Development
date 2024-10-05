@@ -305,11 +305,11 @@ switch (system_level) {
 
 *API*
 
-![image](https://github.com/user-attachments/assets/3c797df1-70ed-4005-abc0-bcfec867d89a)
+![image](https://github.com/user-attachments/assets/044f5c99-1786-49e0-b0a3-27187adac17d)
 
 *Actual effect*
 
-![image](https://github.com/user-attachments/assets/b8a7e4b7-4fca-42e0-b622-3651379a8c50)
+![image](https://github.com/user-attachments/assets/d006ad69-bcf7-4283-a73a-b13d52f4249f)
 
 <a name="Update"></a>
 ##### Update
@@ -378,7 +378,7 @@ return response.json().then(data => {
 
 *The preview image effect*
 
-![image](https://github.com/user-attachments/assets/fb3f59cc-cd54-453f-8efe-b00fdbff56f5)
+![image](https://github.com/user-attachments/assets/a6c21872-c03b-473b-9339-ca4a4894bd70)
 
 ## Credit
 
