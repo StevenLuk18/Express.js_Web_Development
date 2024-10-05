@@ -55,12 +55,12 @@ npm install
 <a name="LoginForm"></a>
 **Login**
 
-![image](https://github.com/user-attachments/assets/d5b779a0-d85d-4519-8007-9807ba245b25)
+![image](https://github.com/user-attachments/assets/5d86898c-cc6d-4328-a143-ab2df8da8f75)
 
 <a name="RegistrationForm"></a>
 **Registration**
 
-![image](https://github.com/user-attachments/assets/ddb66027-3c4f-46e2-ae4b-95bbbc377521)
+![image](https://github.com/user-attachments/assets/208a26ad-9d17-44a4-b042-5e87da94e535)
 
 <a name="Forget-Password"></a>
 **Forget Password**
@@ -119,12 +119,11 @@ More Detail in [ [Forget password/ Link encryption feature detail](https://githu
 Save the username in ***u_name*** which in the position 2 of the session
 >{ u_name : user_name[2]}
 
-![image](https://github.com/user-attachments/assets/d4ee83d5-a184-48c4-9412-5412199e313e)
+![image](https://github.com/user-attachments/assets/efcb6c0c-9a28-4e83-a15b-bdadede2ce1b)
 
+Several EJS were created that were designated for member view only.
 
-There are several ejs that created that designated for member view only.
-
-![image](https://github.com/user-attachments/assets/d776550c-4617-4c7d-a37a-03ce474ed848)
+![image](https://github.com/user-attachments/assets/08f13ee0-df69-4a89-b1f1-930789f24d60)
 
 *Once the users log in, they will go into one of those EJS web pages*
 
@@ -132,39 +131,32 @@ There are several ejs that created that designated for member view only.
 ### Added Feature Of Using EJS
 
 #### Show The Username(Anna) With The EJS 
-![image](https://github.com/user-attachments/assets/120a4b10-530f-4827-8793-cbb3b006adfe)
-
-- **The code**:
-![image](https://github.com/user-attachments/assets/64561853-fdf3-4feb-a98f-1251747cf369)
+![image](https://github.com/user-attachments/assets/f949ff29-ec47-4a02-9b45-9085ba7d046b)
 
 - *Before login*
 
-![image](https://github.com/user-attachments/assets/8436f95f-1296-4e2b-bdb9-276a43a6f65a)
+![image](https://github.com/user-attachments/assets/91d0cf06-835d-4adb-8e0c-39d5ccf0d080)
 
 #### Show Logout And My Profile Button
 
-![image](https://github.com/user-attachments/assets/f50d3dc0-38ff-4a6d-9e4b-0df8417a7264)
-
-- **The code**:
-
-![image](https://github.com/user-attachments/assets/372a48b4-ab51-4400-a9a4-1f965c86f3c2)
+![image](https://github.com/user-attachments/assets/b00b9788-4e1b-42ca-8eae-9d0313892ef2)
 
 - *Before login* 
 
-![image](https://github.com/user-attachments/assets/2ca7b745-164a-410b-a79a-d2bccb2d1111)
+![image](https://github.com/user-attachments/assets/ad2976bd-0d80-402e-ae9c-cefd783da9c3)
 
 <a name="My-Profile-Edition"></a>
 ### My Profile Edition
 
 - **User can edit and update their personal information**
 
-![image](https://github.com/user-attachments/assets/f8b269b1-587a-468a-a9d2-004709e7ca63)
+![image](https://github.com/user-attachments/assets/3c0f1764-c08e-4194-ad78-25e7773f5ec2)
 
-![image](https://github.com/user-attachments/assets/e69b50c1-39a8-4d85-846e-95968995d154)
+![image](https://github.com/user-attachments/assets/6b131563-e25d-4181-9aba-319206c464c3)
 
-![image](https://github.com/user-attachments/assets/a09d2619-79cc-4ec4-8fe1-75fe304d0076)
+![image](https://github.com/user-attachments/assets/322f1c18-d0e9-4210-b317-f5c15ff8ca4a)
 
-![image](https://github.com/user-attachments/assets/241a9ee0-37b5-4e02-b421-540b71805c87)
+![image](https://github.com/user-attachments/assets/23aafd59-f425-4283-889e-9ae0796da420)
 
 **Special Feature**
 
@@ -174,34 +166,33 @@ There are several ejs that created that designated for member view only.
 npm install multer
 ```
 
-![image](https://github.com/user-attachments/assets/ddd448b7-2064-4f8a-b1c4-c8241a4d0746)
-
+![image](https://github.com/user-attachments/assets/583a9dbf-a15b-4710-9d21-b97d320e12fd)
 
 **The code**:
 
 *Preview image*
 
-![image](https://github.com/user-attachments/assets/5477d879-7fa9-46fb-94b7-6d4bcdb61f56)
+![image](https://github.com/user-attachments/assets/13c5e165-6f7e-476b-afe8-4e887ed2ac62)
 
 - *Third-party module -- multer*
 
 *Multer Set-up (After installation)*
 
-![image](https://github.com/user-attachments/assets/6fb0defd-69a9-4e8b-ab4f-44c026c62518)
+![image](https://github.com/user-attachments/assets/cf39a7c4-e2f4-42ab-9e6e-02f43fe15246)
 
 **Upload the image to the designated folder**
 
-![image](https://github.com/user-attachments/assets/2c063897-ef96-4188-8db8-16a7da15aa57)
+![image](https://github.com/user-attachments/assets/90c51b85-7b5b-4ea0-9154-84b78283e382)
 
 *In my case, it is public/images/member/'FileName'*
 
 **Get the preview image from the path that is saved inside the MongoDB**
 
-![image](https://github.com/user-attachments/assets/b2e74885-b40f-40e5-b2d4-f440f5764688)
+![image](https://github.com/user-attachments/assets/0ec6bbb4-6ae8-47de-825f-57fc5e53fbd4)
 
 *Get the data from API and insert it into the image's src attribute*
 
-![image](https://github.com/user-attachments/assets/99982929-9c54-4d77-8ad4-8d05c8f1ae31)
+![image](https://github.com/user-attachments/assets/9aef3668-681c-493a-8626-a92ffb73b8dc)
 
 - *imagePath is the session saved from the login API*
 
@@ -210,9 +201,9 @@ npm install multer
 
 - This web feature can let the users edit their comments on their travel trip
 
-![image](https://github.com/user-attachments/assets/eeca1851-2143-45c4-8722-ea831bf1d758)
+![image](https://github.com/user-attachments/assets/0db050b1-157b-4ccf-8d95-abaf1db5dd49)
 
-![image](https://github.com/user-attachments/assets/5a896f97-1cfd-47ef-be3d-9f94cbcbce05)
+![image](https://github.com/user-attachments/assets/b5d8a80a-6a18-405e-a34d-965f088163d7)
 
 ```
 npm install handsontable
@@ -223,14 +214,14 @@ npm install handsontable
 
 - *Designed for simulating backend CMS*
 
-![image](https://github.com/user-attachments/assets/bd6d9033-7c26-40c0-8289-c6d5d12fb67c)
+![image](https://github.com/user-attachments/assets/34e25e1e-8d2e-4b37-b209-27859ac3a72e)
 
 <a name="CMS-user-structure"></a>
 #### CMS User Structure
 
 *CMS Login User Design*
 
-![image](https://github.com/user-attachments/assets/6dac7c5e-ba18-4abc-8898-c691698e2ff2)
+![image](https://github.com/user-attachments/assets/f5d1285b-9d73-4c2e-9001-c4db9d32b31e)
 
 - *With system level role field that could restrict login user's access*
 
@@ -286,15 +277,17 @@ switch (system_level) {
 
 **Different HTML webs for different functionality**
 
-![image](https://github.com/user-attachments/assets/7d8b7ef4-9a8e-47f9-a410-908a6d9f81aa)
+![image](https://github.com/user-attachments/assets/32983ef2-0b6f-42fc-9fc7-e803916c877b)
+
 
 **With relative API**
 
-![image](https://github.com/user-attachments/assets/3c632bce-c835-44eb-80b7-2bbb42fc254e)
+![image](https://github.com/user-attachments/assets/b03a67c1-ccbe-41a6-a924-0050351de7f2)
+
 
 **The main page of Backend CMS**
 
-![image](https://github.com/user-attachments/assets/71114f9d-58a1-4a20-bebf-b97b3c8b0221)
+![image](https://github.com/user-attachments/assets/e9494499-cad2-458b-82a7-1cc100bcd5ac)
 
 <a name="Key-function"></a>
 #### Key Functions
