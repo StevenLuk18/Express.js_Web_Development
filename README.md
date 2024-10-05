@@ -30,7 +30,8 @@ Main color for our website is: `#86B817`
 - [Delete](#Delete)
 
 ## Webpage Structure
-![image](https://github.com/user-attachments/assets/f48db50a-6922-43b8-9a5f-06dec2249520)
+
+![image](https://github.com/user-attachments/assets/655a9755-cefe-4952-a3d8-f13de443cae5)
 
 ## Set-up
 
